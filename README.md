@@ -9,5 +9,5 @@
 <br>
 <br>
 <p align="center">
-Web solution aimed at optimizing the efficiency of internal services, the relationship with corporate customers and their partners with<b> Angular, Core .NE, Angular, Chart.js, Advanced Pie Chart, angular-calendar, bootstrap, ionic, Sql, iTextSharp, c#, EntityFrameworkCore, Linq, AutoMapper, SmartGit, MariaDB…….</b>
+Web solution aimed at optimizing the efficiency of internal services, the relationship with corporate customers and their partners with<b> Angular, Core .NET, Chart.js, Advanced Pie Chart, angular-calendar, bootstrap, ionic, Sql, iTextSharp, c#, EntityFrameworkCore, Linq, AutoMapper, SmartGit, MariaDB…….</b>
 </p>
