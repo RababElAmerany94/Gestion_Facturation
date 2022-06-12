@@ -1,0 +1,115 @@
+<!-- begin:: Content -->
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+    <div class="d-flex flex-row-reverse align-items-center bd-highlight">
+
+        <button mat-icon-button [matMenuTriggerFor]="menu2" >
+            <mat-icon>filter_list</mat-icon>
+        </button>
+
+        <div>
+            {{ dashboardFilterOption.dateFrom | date:'shortDate' }} - {{ dashboardFilterOption.dateTo | date:'shortDate' }}
+        </div>
+
+        <mat-menu #menu2="matMenu">
+            <div class="px-3 pt-2 pb-1">
+
+                <!-- filter by period-->
+                <kt-custom-drop-down
+                    class="custom"
+                    (click)="$event.stopPropagation()"
+                    [showAny]="false"
+                    [inputName]="'period'"
+                    [data]="PeriodeComptable"
+                    [label]="'LABELS.PERIOD_FILTER' | translate"
+                    [formInstant]="form">
+                </kt-custom-drop-down>
+
+                <!-- filtre by date minimal-->
+                <kt-custom-date-picker
+                    class="custom"
+                    (click)="$event.stopPropagation()"
+                    [formInstant]="form"
+                    [inputName]="'dateFrom'"
+                    [label]="'LABELS.DATE_MINIMAL' | translate">
+                </kt-custom-date-picker>
+
+                <!-- filtre by date maximal-->
+                <kt-custom-date-picker
+                    class="custom"
+                    (click)="$event.stopPropagation()"
+                    [formInstant]="form"
+                    [inputName]="'dateTo'"
+                    [label]="'LABELS.DATE_MAXIMAL' | translate">
+                </kt-custom-date-picker>
+
+                <kt-categorie-produit-dropdown
+                    class="custom"
+                    (click)="$event.stopPropagation()"
+                    [label]="'LABELS.CATEGORIE' | translate"
+                    [inputName]="'categoryId'"
+                    [formInstant]="form" >
+                </kt-categorie-produit-dropdown>
+
+
+                <ng-container *ktHasRole="[userProfile.Admin]">
+                    <kt-dropdown-agence
+                        class="custom"
+                        (click)="$event.stopPropagation()"
+                        [label]="'LABELS.AGENCE' | translate"
+                        [inputName]="'agenceId'"
+                        [formInstant]="form">
+                    </kt-dropdown-agence>
+                </ng-container>
+
+                <kt-drop-down-users
+                    class="custom"
+                    (click)="$event.stopPropagation()"
+                    [types]="[userProfile.Commercial,userProfile.Technicien]"
+                    [label]="'LABELS.USER' | translate"
+                    [inputName]="'userId'"
+                    [formInstant]="form">
+                </kt-drop-down-users>
+
+                <div class="d-flex flex-row-reverse custom" >
+                    <button mat-raised-button (click)="search()" color="primary">
+                        {{ 'LABELS.SEARCH' | translate }}
+                    </button>
+                </div>
+            </div>
+        </mat-menu>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-6">
+            <kt-ventilation-ca-commerciaux
+                [dataChart]="ventilationChiffreAffairesCommercial">
+            </kt-ventilation-ca-commerciaux>
+        </div>
+
+        <div class="col-xl-6">
+            <kt-repartition-dossier-technicien
+                [dataChart]="repartitionDossiersTechnicien">
+            </kt-repartition-dossier-technicien>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <kt-repartition-type-travaux-technicien
+                [dataChart]="repartitionTypesTravauxParTechnicien">
+            </kt-repartition-type-travaux-technicien>
+        </div>
+
+        <div class="col-xl-6">
+            <kt-ventilation-vente-category
+                [dataChart]="facturesArticlesByCategory">
+            </kt-ventilation-vente-category>
+        </div>
+
+    </div>
+
+</div>

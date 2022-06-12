@@ -1,0 +1,53 @@
+<!--begin::Body-->
+<div class="kt-login__body">
+	<!--begin::Signin-->
+	<div class="kt-login__form">
+		<!--<div class="kt-login__title">
+			<h3> {{ 'LABELS.APP_GESTION' |translate}}</h3>
+		</div>-->
+
+		<!--begin::Form-->
+		<form class="kt-form" [formGroup]="loginForm" autocomplete="off">
+
+			<div class="form-group">
+                <kt-custom-input
+					[inputName]="'userName'"
+					[label]="'LABELS.ENTER_USERNAME' | translate"
+                    [formInstant]="loginForm"
+                    >
+				</kt-custom-input>
+			</div>
+
+			<div class="form-group">
+				<kt-custom-input-password
+					[inputName]="'password'"
+					[label]="'LABELS.ENTER_PASSWORD' | translate"
+                    [formInstant]="loginForm">
+				</kt-custom-input-password>
+			</div>
+
+            <!--begin::Action-->
+            <div class="row kt-login__extra">
+			<div class="col kt-align-right">
+				<a href="javascript:;" routerLink="/auth/forgot-password" class="kt-login__link">
+					{{ 'LABELS.FORGET_PASSWORD' | translate }}
+                </a>
+            </div>
+        </div>
+            <div class="kt-login__actions">
+                <button
+                    ktDebounceClick
+                    (debounceClick)="submit()"
+					[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}"
+					id="kt_login_signin_submit"
+                    class="btn btn-brand btn-pill kt-login__btn-primary">{{ 'LABELS.LOGIN' | translate }}
+                </button>
+			</div>
+
+			<!--end::Action-->
+		</form>
+		<!--end::Form-->
+	</div>
+	<!--end::Signin-->
+</div>
+<!--end::Body-->

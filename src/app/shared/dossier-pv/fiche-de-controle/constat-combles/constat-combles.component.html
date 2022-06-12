@@ -1,0 +1,118 @@
+<form [formGroup]="form">
+
+    <!-- charge poste Type -->
+    <kt-custom-drop-down
+        [inputName]="'posteType'"
+        [label]="'LABELS.POSTE_TYPE' | translate"
+        [data]="posteType"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- surface Isolant Prevue -->
+    <kt-custom-input
+        [type]="'number'"
+        [inputName]="'surfaceIsolantPrevue'"
+        [label]="'LABELS.SURFACE_ISOLANT_PREVUE' | translate"
+        [formInstant]="form">
+    </kt-custom-input>
+
+    <!-- surface Isolant Pose -->
+    <kt-custom-input
+        [type]="'number'"
+        [inputName]="'surfaceIsolantPose'"
+        [label]="'LABELS.SURFACE_ISOLANT_POSE' | translate"
+        [formInstant]="form">
+    </kt-custom-input>
+
+    <!-- surface Estime Depuis -->
+    <kt-custom-input
+        [inputName]="'surfaceEstimeDepuis'"
+        [label]="'LABELS.SURFACE_ESTIME_DEPUIS' | translate"
+        [formInstant]="form">
+    </kt-custom-input>
+
+    <!-- surface Isolant Retenue-->
+    <kt-custom-input
+        [inputName]="'surfaceIsolantRetenue'"
+        [type]="'number'"
+        [label]="'LABELS.SURFACE_ISOLANTE_RETENUE' | translate"
+        [formInstant]="form">
+    </kt-custom-input>
+
+    <!-- rehausse Ou Protection Installations Electriques-->
+    <kt-custom-drop-down
+        [inputName]="'rehausseOuProtectionInstallationsElectriques'"
+        [label]="'LABELS.REHAUSSE_OU_PROTECTION_INSTALLATION_ELECTRIQUES' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- reperage Boites Electriques -->
+    <kt-custom-drop-down
+        [inputName]="'reperageBoitesElectriques'"
+        [label]="'LABELS.REPERAGE_BOITES_ELECTRIQUES' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- presence Ecart Au Feu Ou Conduits Evacuation Fumees-->
+    <kt-custom-drop-down
+        [inputName]="'presenceEcartAuFeuOuConduitsEvacuationFumees'"
+        [label]="'LABELS.PRESENCE_ECART_AU_FEU_OU_CONDUITS_EVACUATION_FUMEES' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- presence Coffrage Trappe Visite -->
+    <kt-custom-drop-down
+        [inputName]="'presenceCoffrageTrappeVisite'"
+        [label]="'LABELS.PRESENCE_COFFRAGE_TRAPPE_VISITE' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- trkte Visite Isolee -->
+    <kt-custom-drop-down
+        [inputName]="'trappeVisiteIsolee'"
+        [label]="'LABELS.TRAPPE_VISITE_ISOLEE' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- presence Protection Points Lumineux Type Spots -->
+    <kt-custom-drop-down
+            [inputName]="'presenceProtectionPointsLumineuxTypeSpots'"
+            [label]="'LABELS.PRESENCE_PROTECTION_POINTS_LUMINEUX_TYPE_SPOTS' | translate"
+            [data]="ficheControleStatusItem"
+            [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!--presence Pige Reperage Hauteur Isolant -->
+    <kt-custom-drop-down
+            [inputName]="'presencePigeReperageHauteurIsolant'"
+            [label]="'LABELS.PRESENCE_PIGE_REPERAGE_HAUTEUR_ISOLANT' | translate"
+            [data]="ficheControleStatusItem"
+            [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- conclusion Epaisseur -->
+    <kt-custom-checkbox
+        [label]="'LABELS.CONCLUSION_EPAISSEUR' | translate"
+        [formInstant]="form"
+        [inputName]="'conclusionEpaisseur'">
+    </kt-custom-checkbox>
+
+    <!-- homogeneite Couche Isolant -->
+    <kt-custom-checkbox
+        [label]="'LABELS.HOMOGENEITE_COUCHE_ISOLANT' | translate"
+        [formInstant]="form"
+        [inputName]="'homogeneiteCoucheIsolant'">
+    </kt-custom-checkbox>
+
+    <!-- is Ecart Surface Prevue And Pose Ok-->
+    <kt-custom-checkbox
+        [label]="'LABELS.IS_ECART_SURFACE_PREVUE_AND_POSE_OK' | translate"
+        [formInstant]="form"
+        [inputName]="'isEcartSurfacePrevueAndPoseOk'">
+    </kt-custom-checkbox>
+</form>

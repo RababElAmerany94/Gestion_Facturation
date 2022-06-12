@@ -1,0 +1,31 @@
+<kt-custom-modal
+    [title]="'ADDRESS.ADD_ADDRESS' | translate">
+    <div mat-dialog-content class="dialog-body">
+        <div class="d-flex p-2 flex-column" >
+            <kt-address-dropdown
+                [inputName]="'adresse'"
+                [formInstant]="formAddress"
+                [label]="'ADDRESS.TITLE' | translate"
+                [addresses]="adresses"
+                (changeEvent)="setAddress($event)">
+            </kt-address-dropdown>
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="save()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.ADD'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.ADD' | translate }}</button>
+    </div>
+
+</kt-custom-modal>

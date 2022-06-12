@@ -1,0 +1,40 @@
+<kt-custom-modal [title]="title">
+    <div mat-dialog-content class="dialog-body">
+        <form [formGroup]="form">
+
+            <div class="row">
+
+                <!-- name-->
+                <kt-custom-input
+                    class="col-md-12"
+                    [inputName]="'name'"
+                    [label]="'LABELS.FIRSTNAME' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+            </div>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            *ngIf="!modeShow"
+            (debounceClick)="save()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}</button>
+
+    </div>
+
+</kt-custom-modal>

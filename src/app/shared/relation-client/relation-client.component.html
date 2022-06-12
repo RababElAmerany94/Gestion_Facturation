@@ -1,0 +1,75 @@
+<kt-portlet [class]="clientRelation?.length > 0 ? 'mb-2' : ''">
+    <kt-portlet-header
+        [icon]="'flaticon2-location'"
+        [sticky]="true"
+        [title]="title | translate"
+        [class]="'kt-portlet__head--lg'">
+        <ng-container ktPortletTools>
+            <button
+               *ngIf="mode!=modes.Show"
+                mat-mini-fab
+                color="primary"
+                [matTooltip]="'RELATION_CLIENT.ADD_RELATION_CLIENT' | translate"
+                (click)="addclientRelationDialog()">
+                <i class="material-icons"> add </i>
+            </button>
+        </ng-container>
+    </kt-portlet-header>
+
+</kt-portlet>
+
+<div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3" *ngFor="let item of clientRelation;let i = index">
+        <div class="kt-portlet kt-portlet--height-fluid">
+            <div class="kt-portlet__head  kt-portlet__head--noborder">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit-y">
+                <!--begin::Widget -->
+                <div class="kt-widget kt-widget--user-profile-1">
+                    <div class="kt-widget__head">
+                        <div class="kt-widget__content pl-0">
+                            <div class="kt-widget__section">
+                                <span class="kt-widget__username">
+                                    {{ 'LABELS.RELATION_N' | translate }}
+                                    {{ i+1 }}
+                                </span>
+                            </div>
+
+                            <div class="kt-widget__action" *ngIf="mode!=modes.Show">
+                                <button
+                                    type="button"
+                                    class="btn btn-info btn-sm"
+                                    (click)="editclientRelationDialog(i)">
+                                    {{'LABELS.EDIT'|translate}}
+                                </button>&nbsp;
+                                <button
+                                    type="button"
+                                    class="btn btn-success btn-sm"
+                                    (click)="deleteclientRelation(i)">
+                                    {{'LABELS.DELETE'|translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-widget__body">
+                        <div class="kt-widget__content">
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{ 'LABELS.AVEC' | translate }}:</span>
+                                <span href="#" class="kt-widget__data">{{ item?.client?.fullName }}</span>
+                            </div>
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{ 'LABELS.TYPE' | translate }}:</span>
+                                <span href="#" class="kt-widget__data">{{ 'CLIENT_RELATION_TYPE.'+item?.type | translate }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Widget -->
+        </div>
+    </div>
+</div>

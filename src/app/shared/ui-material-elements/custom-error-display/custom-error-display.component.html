@@ -1,0 +1,8 @@
+<ng-container *ngIf="control && control.errors && (control.dirty || control.touched)">
+    <ng-container *ngIf="control.errors['required']">{{ 'ERRORS.REQUIRED' | translate }}</ng-container>
+    <ng-container *ngIf="control.errors['unique']">{{ 'ERRORS.CHECK_UNIQUE' | translate }}</ng-container>
+    <ng-container *ngIf="control.errors['lessThen']">{{ 'ERRORS.MIN_LENGTH' | translate }}</ng-container>
+    <ng-container *ngIf="control.errors['pattern']">{{ 'ERRORS.PATTERN' | translate }}</ng-container>
+    <ng-container *ngIf="control.errors['minlength']">{{ 'ERRORS.MIN_LENGTH'  | translate:{number:control.errors['minlength'].requiredLength} }}</ng-container>
+    <ng-container *ngIf="control.errors['checkValidAmount']">{{ 'ERRORS.INVALID_AMOUNT' | translate }}</ng-container>
+</ng-container>

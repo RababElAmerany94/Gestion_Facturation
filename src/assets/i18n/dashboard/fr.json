@@ -1,0 +1,20 @@
+{
+    "TITLE": "Tableau de bord",
+    "CHART": {
+        "EVOLUTION_CHIFFRE_AFFAIRE": "Évolution du chiffre d'affaires",
+        "TOP_10_CLIENT": "Top 10 CA par client",
+        "TOP_10_ARTICLE": "Top 10 CA par article",
+        "TOP_10_CATEGORIE_ARTICLE_COMMANDE": "Top 10 CA par catégorie d'article",
+        "TOP_10_ARTICLE_COMMANDE_QTE": "Top 10 articles commandés(Qte)",
+        "VENTILATION_CA_COMMERCIAUX": "Ventilation du CA par Commerciaux",
+        "REPARTITION_DOSSIER_TECHNICIEN": "Répartitions Des Dossiers par Technicien",
+        "VENTILATION_DES_VENTES_PAR_CATEGORIE": "Ventilation des ventes par catégorie",
+        "VENTILATION_DES_TYPES_TRAVAUX_PAR_TECHNICIEN": "Répartition des types travaux par technicien"
+    },
+    "LABELS": {
+        "NOTIFICATION": "Notifications",
+        "NOTIFICATION_IS_SEEN": "Notification est vue",
+        "NOTIFICATION_IS_NOT_SEEN": "Notification n'est pas vue ",
+        "MARQUER_ALL_SEEN": "Marquer tout comme lu"
+    }
+}

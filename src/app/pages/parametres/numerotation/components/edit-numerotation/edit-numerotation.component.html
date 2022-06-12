@@ -1,0 +1,72 @@
+<kt-custom-modal
+    [title]="'NUMERATION.DIALOG_TITLE' | translate">
+
+    <div mat-dialog-content class="dialog-body">
+            <div class="row" [formGroup]="form">
+
+                <kt-custom-input
+                    class="col-md-12"
+                    [inputName]="'root'"
+                    [label]="'LABELS.ROOT' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-drop-down
+                    class="col-md-12"
+                    [showAny]="false"
+                    [data]="dateFormats"
+                    [inputName]="'dateFormat'"
+                    [label]="'LABELS.FORMAT_DATE' | translate"
+                    [formInstant]="form">
+                </kt-custom-drop-down>
+
+                <kt-custom-input
+                    class="col-md-12"
+                    [type]="'number'"
+                    [inputName]="'counter'"
+                    [label]="'LABELS.COUNT' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-12"
+                    [type]="'number'"
+                    [inputName]="'counterLength'"
+                    [label]="'LABELS.COUNT_LENGTH' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+            </div>
+
+            <div class="row" [formGroup]="formPreview" >
+
+                <kt-custom-input
+                    class="col-md-12"
+                    [inputName]="'preview'"
+                    [label]="'LABELS.PREVIEW_REFERNCE' | translate"
+                    [formInstant]="formPreview">
+                </kt-custom-input>
+
+            </div>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="save()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}</button>
+
+    </div>
+</kt-custom-modal>

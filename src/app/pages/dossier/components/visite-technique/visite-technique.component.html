@@ -1,0 +1,130 @@
+<!-- .......................................................................................... -->
+<kt-portlet>
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'TITLES.INFO_VISITE_TECHNIQUE' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+
+            <button
+                ktDebounceClick
+                mat-mini-fab
+                color="warn"
+                *ngIf="isAddMode() || isEditMode()"
+                matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+                (debounceClick)="save()">
+                <i class="material-icons">save</i>
+            </button>
+
+            <button
+                *ngIf="isAddMode()"
+                mat-mini-fab
+                class="ml-1"
+                color="primary"
+                matTooltip="{{ 'LABELS.ADD'| translate }}"
+                (click)="addClick()">
+                <i class="material-icons">add</i>
+            </button>
+
+            <button
+                *ngIf="isShowMode()"
+                mat-mini-fab
+                class="ml-1"
+                color="primary"
+                matTooltip="{{ 'LABELS.EDIT'| translate }}"
+                (click)="editClick()">
+                <i class="material-icons">edit</i>
+            </button>
+
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <form class="kt-form" [formGroup]="form">
+            <ng-container *ngIf="typeVisiteTechnique != null">
+
+                <div class="row">
+
+                    <!-- the number of piece of visite technique -->
+                    <kt-custom-input
+                        class="col-md-3"
+                        [label]="( typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles ? 'LABELS.NOMBRE_PIECE' : 'LABELS.NOMBRE_COMBLES' ) | translate"
+                        [inputName]="'nombrePiece'"
+                        [readOnly]="true"
+                        [formInstant]="form">
+                    </kt-custom-input>
+
+                    <button
+                        *ngIf="!isShowMode()"
+                        mat-mini-fab
+                        class="ml-1"
+                        color="primary"
+                        (click)="addForm()">
+                        <i class="material-icons"> add </i>
+                    </button>
+
+                    <!-- the surface total a isoler of visite technique -->
+                    <kt-custom-input
+                        class="col-md-3"
+                        [type]="'number'"
+                        [label]="'LABELS.SURFACE_TOTAL_A_ISOLER' | translate"
+                        [inputName]="'surfaceTotaleAIsoler'"
+                        [formInstant]="form">
+                    </kt-custom-input>
+
+                    <!-- the classement technique of visite technique -->
+                    <kt-custom-drop-down
+                        class="col-md-3"
+                        [showAny]="false"
+                        [inputName]="'classementTechnique'"
+                        [data]="classementTechnique"
+                        [label]="'LABELS.CLASSEMENT_TECHNIQUE' | translate"
+                        [formInstant]="form">
+                    </kt-custom-drop-down>
+
+                </div>
+
+                <div class="row" *ngIf="formulaires?.length > 0">
+                    <div class="col-md-12">
+                        <div class="kt-section">
+                            <div class="kt-section__content kt-section__content--border kt-section__content--fit">
+                                <ul class="kt-nav">
+                                    <li class="kt-nav__head">
+                                        {{  'LABELS.FORMULAIRES' | translate }}
+                                    </li>
+                                    <li class="kt-nav__separator"></li>
+                                    <li class="kt-nav__item" *ngFor="let item of formulaires;let i = index">
+                                        <a class="kt-nav__link">
+                                            <i class="kt-nav__link-icon flaticon2-sheet"></i>
+                                            <span class="kt-nav__link-text">{{ 'LABELS.FORMULAIRES_N' | translate }} {{ i+1 }}</span>
+                                            <span class="kt-nav__link-badge">
+                                                <ng-container *ngIf="!isShowMode()">
+                                                    <span class="kt-badge kt-badge--danger" (click)="removeForm(i)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </span>&nbsp;
+                                                    <span class="kt-badge kt-badge--success" (click)="editForm(i)">
+                                                        <i class="fa fa-check"></i>
+                                                    </span>&nbsp;
+                                                </ng-container>
+                                                <span class="kt-badge kt-badge--primary" (click)="openForm(i)">
+                                                    <i class="fa fa-eye"></i>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+        </form>
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- .......................................................................................... -->

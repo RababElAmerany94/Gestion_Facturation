@@ -1,0 +1,137 @@
+<kt-filter-search (searchEvent)="searchEvent()">
+    <ng-container class="filters">
+
+        <!-- filtre by date minimal-->
+        <kt-custom-date-picker
+            class="col-md-3"
+            [formInstant]="form"
+            [inputName]="'dateFrom'"
+            [label]="'LABELS.DATE_MINIMAL' | translate">
+        </kt-custom-date-picker>
+
+            <!-- filtre by date maximal-->
+        <kt-custom-date-picker
+            class="col-md-3"
+            [formInstant]="form"
+            [inputName]="'dateTo'"
+            [label]="'LABELS.DATE_MAXIMAL' | translate">
+        </kt-custom-date-picker>
+
+        <!-- filter by status-->
+        <kt-custom-drop-down
+            class="col-md-3"
+            [inputName]="'status'"
+            [label]="'LABELS.STATUS' | translate"
+            [formInstant]="form"
+            [data]="facturesStatus">
+        </kt-custom-drop-down>
+
+    </ng-container>
+</kt-filter-search>
+
+<kt-data-table
+    [data]="factures"
+    [columns]="columns"
+    [name]="routeName.Facture"
+    [title]="'LIST.TITLE' | translate"
+    (changeEvent)="changeFiltersEvent($event)">
+
+    <ng-template #statusTemplate let-status="status">
+        <kt-facture-status
+            [status]="status" >
+        </kt-facture-status>
+    </ng-template>
+
+    <ng-template #actionsTemplate let-element="element">
+
+        <ng-container *ngIf="element.isModify">
+
+            <button
+                mat-icon-button
+                color="warn"
+                type="button"
+                *ngIf="canDelete()"
+                (click)="deleteClick(element?.id)"
+                [matTooltip]="'LABELS.DELETE' | translate">
+                <mat-icon>delete</mat-icon>
+            </button>
+
+            <button
+                type="button"
+                mat-icon-button
+                color="primary"
+                *ngIf="canUpdate()"
+                (click)="editClick(element)"
+                [matTooltip]="'LABELS.EDIT' | translate">
+                <mat-icon>edit</mat-icon>
+            </button>
+
+        </ng-container>
+
+        <button
+            mat-icon-button
+            color="accent"
+            type="button"
+            *ngIf="canRead()"
+            (click)="showClick(element)"
+            [matTooltip]="'LABELS.SHOW' | translate">
+            <mat-icon>remove_red_eye</mat-icon>
+        </button>
+
+        <button
+            type="button"
+            mat-icon-button
+            class="devis"
+            *ngIf="canCreate()"
+            (click)="dupliquer(element?.id)"
+            [matTooltip]="'LABELS.DUPLIQUER' | translate">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+
+        <button
+            type="button"
+            *ngIf="canAnnuler(element?.status, element?.id) && canUpdate()"
+            mat-icon-button
+            class="assigne"
+            (click)="cancelFacture(element?.id)"
+            [matTooltip]="'LABELS.CANCEL' | translate">
+            <mat-icon>cancel</mat-icon>
+        </button>
+
+    </ng-template>
+
+    <ng-container class="dataTables-actions" >
+
+        <button
+            [matTooltip]="'ADD.EXPORT_RELEVE_FACTURE' | translate"
+            mat-mini-fab
+            color="success"
+            class="ml-1"
+            *ngIf="canRead()"
+            (click)="ExportReleveFacture()">
+            <i class="material-icons"> exit_to_app </i>
+        </button>
+
+        <button
+            [matTooltip]="'ADD.TITLE' | translate"
+            mat-mini-fab
+            color="primary"
+            class="ml-1"
+            *ngIf="canCreate()"
+            (click)="addClick()">
+            <i class="material-icons"> add </i>
+        </button>
+
+        <button
+            [matTooltip]="'ADD.FACTURE_GROUPEE' | translate"
+            mat-mini-fab
+            color="warn"
+            class="ml-1"
+            *ngIf="canCreate()"
+            (click)="AddFactureGroup()">
+            <i class="material-icons"> view_headline </i>
+        </button>
+
+    </ng-container>
+
+</kt-data-table>

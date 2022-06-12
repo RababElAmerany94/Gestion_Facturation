@@ -1,0 +1,16 @@
+{
+    "LABELS": {
+        "APP_GESTION": "APPLICATION DE GESTION",
+        "LOGIN": "Se connecter",
+        "NAME_APP": "Xtreme color",
+        "BIENVENU": "Bienvenue sur my_company ISOLATION",
+        "SUBTITLE": "Spécialiste de l’isolation dans plus de 14 départements, my_company vous assure un travail de qualité dans des délais courts afin de vous garantir un confort optimal au sein de votre habitation. Nous utilisons les matériaux les plus performants du marché tels que : Fibre de bois, ouate de cellulose, laine de verre, laine minérale, billes de carbone . Nous vous accompagnerons dans le choix de votre isolation.",
+        "FORGET_PASSWORD": "Mot de passe oublié",
+        "ENTER_PASSWORD": "MOT DE PASSE *",
+        "ENTER_USERNAME": "NOM D'UTILISATEUR *",
+        "BACK_BUTTON": "Retour",
+        "SUBMIT_BUTTON": "Envoyer",
+        "EMAIL": "EMAIL",
+        "ISACTIF": "Actif"
+    }
+}

@@ -1,0 +1,33 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'PERIOD_COMPTABLE.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"
+            [ngClass]="{'active': !isListMode()}">
+            <ng-container *ngIf="isListMode()">
+                {{ 'LABELS.LIST' | translate }}
+            </ng-container>
+            <ng-container *ngIf="!isListMode()">
+                <a href="javascript:void(0);" (click)="modeList()" >
+                    {{ 'LABELS.LIST' | translate }}
+                </a>
+            </ng-container>
+        </li>
+    </ol>
+</nav>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-peripd-comptable
+        [data]="periodesComptable"
+        (filters)="getPeriodsComptable($event)"
+        (addEvent)="addEvent()"
+        (ClosingPeriodEvent)="cloturePeriodEvent($event)"
+        (editEvent)="editEvent($event)">
+    </kt-index-peripd-comptable>
+</ng-container>
+<!-- end list -->

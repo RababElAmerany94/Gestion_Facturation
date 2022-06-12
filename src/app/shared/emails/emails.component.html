@@ -1,0 +1,46 @@
+<kt-portlet >
+    <kt-portlet-header
+        [icon]="'flaticon-mail'"
+        [sticky]="true"
+        [title]="title | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+            <button
+               *ngIf="!readonly"
+                mat-mini-fab
+                ktDebounceClick
+                color="primary"
+                [matTooltip]="getTitle() | translate"
+                (debounceClick)="sendEmail()">
+                <i class="material-icons"> add </i>
+            </button>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <div class="kt-list-timeline">
+            <div class="kt-list-timeline__items">
+
+                <div *ngFor="let email of emails" class="kt-list-timeline__item mb-2">
+                    <span class="kt-list-timeline__badge"></span>
+                    <span class="kt-list-timeline__text">
+                        <p class="mb-0 kt-link kt-link--brand kt-font-bolder" >{{ email?.userId | GetNameOfUserById }}</p>
+                        <div class="mb-0" >
+                            {{ 'LABELS.A_ACCENT' | translate }} :
+                            <ul><li *ngFor="let item of email?.emailTo" >{{ item }}</li></ul>
+                        </div>
+                        <p class="mb-0" >{{ 'LABELS.OBJET' | translate }} : {{ email?.subject }}</p>
+                        <p class="mb-0" >{{ 'LABELS.MESSAGE' | translate }} : <span [innerHTML]="email?.body" ></span></p>
+                    </span>
+                    <span class="kt-list-timeline__time">{{ email?.dateCreation | date:'shortDate' }}</span>
+                </div>
+
+            </div>
+        </div>
+
+    </kt-portlet-body>
+
+</kt-portlet>

@@ -1,0 +1,14 @@
+<!-- anomalie image-->
+<div class="kt-section" *ngFor="let item of anomalies;let i=index;">
+    <div class="kt-section__content">
+
+        <ng-container *ngIf="parseImage(item.image)?.name != null;else imageServer" >
+            <img [src]="parseImage(item.image)?.pieceJoin.file">
+        </ng-container>
+
+        <ng-template #imageServer >
+            <img [src]="parseImage(item.image)?.name  | GetImageBase64ByName">
+        </ng-template>
+
+    </div>
+</div>

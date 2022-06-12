@@ -1,0 +1,23 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'MODELE_SMS.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event" >
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-modele-sms
+        [data]="modelesSMS"
+        (filters)="getModeleSMS($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteEvent($event)"
+        (showEvent)="showEvent($event)">
+    </kt-index-modele-sms>
+</ng-container>
+<!-- end list -->

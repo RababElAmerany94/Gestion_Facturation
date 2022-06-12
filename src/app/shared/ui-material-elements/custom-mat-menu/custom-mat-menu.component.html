@@ -1,0 +1,13 @@
+<ng-container *ngFor="let item of items" >
+    <ng-container *ngIf="item.appear" >
+        <button
+            mat-menu-item
+            ktDebounceClick
+            (debounceClick)="item.action()">
+            <ng-container *ngIf="item.icon && item.icon!=''">
+                <mat-icon>{{ item.icon }}</mat-icon>
+            </ng-container>
+            {{ item.title | translate}}
+        </button>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,33 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'MODE_REGLEMENT.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"
+            [ngClass]="{'active': !isListMode()}">
+            <ng-container *ngIf="isListMode()">
+                {{ 'LABELS.LIST' | translate }}
+            </ng-container>
+            <ng-container *ngIf="!isListMode()">
+                <a href="javascript:void(0);" (click)="modeList()" >
+                    {{ 'LABELS.LIST' | translate }}
+                </a>
+            </ng-container>
+        </li>
+    </ol>
+</nav>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-regulation
+        [data]="regulationModes"
+        (filters)="getRegulationModes($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteRegulationMode($event)">
+    </kt-index-regulation>
+</ng-container>
+<!-- end list -->

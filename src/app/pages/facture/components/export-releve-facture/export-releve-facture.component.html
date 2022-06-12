@@ -1,0 +1,97 @@
+<kt-custom-modal
+    [title]="'ADD.EXPORT_RELEVE_FACTURE' | translate">
+
+    <!-- step 1 -->
+    <div mat-dialog-content class="dialog-body" *ngIf="stepOne">
+        <form [formGroup]="form">
+            <div class="row">
+
+                <!-- filtre by date minimal-->
+                <kt-custom-date-picker
+                    class="col-md-12"
+                    [formInstant]="form"
+                    [inputName]="'dateFrom'"
+                    [label]="'LABELS.DATE_MINIMAL' | translate">
+                </kt-custom-date-picker>
+
+                <!-- filtre by date maximal-->
+                <kt-custom-date-picker
+                    class="col-md-12"
+                    [formInstant]="form"
+                    [inputName]="'dateTo'"
+                    [label]="'LABELS.DATE_MAXIMAL' | translate">
+                </kt-custom-date-picker>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- step 2 -->
+    <div mat-dialog-content
+        class="dialog-body"
+        *ngIf="stepTwo">
+        <form [formGroup]="form" class="row">
+
+            <!-- dropdown client-->
+            <ng-container *ngIf="forClient">
+                <kt-client-dropdown
+                    class="col-md-12"
+                    [isShow]="false"
+                    [inputName]="'clientId'"
+                    [label]="'LABELS.CLIENT' | translate"
+                    [formInstant]="form">
+                </kt-client-dropdown>
+            </ng-container>
+
+        </form>
+    </div>
+
+    <!-- step 3 -->
+    <div mat-dialog-content
+        class="dialog-body"
+        *ngIf="stepThree">
+        <form [formGroup]="form" class="row">
+
+            <!-- if facture payé or not-->
+            <kt-custom-drop-down
+                class="col-md-12"
+                [inputName]="'isUnpaid'"
+                [data]="ReleveFactureType"
+                [label]="'LABELS.TYPE_EXPORT' | translate"
+                [formInstant]="form">
+            </kt-custom-drop-down>
+
+            <!-- isUnpaid-->
+            <kt-custom-checkbox
+                class="col-md-12"
+                [label]="'LABELS.UNCLUDE_FACTURE' | translate"
+                [inputName]="'includeFactures'"
+                [formInstant]="form">
+            </kt-custom-checkbox>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button
+            *ngIf="stepOne || stepTwo || stepThree"
+            mat-raised-button
+            mat-dialog-close
+            >{{ 'LABELS.CLOSE' | translate }}
+        </button>
+        <button
+            *ngIf="stepOne || stepTwo"
+            mat-raised-button
+            color="primary"
+            (click)="next()">{{ 'LABELS.NEXT' | translate }}
+        </button>
+        <button
+            *ngIf="stepThree"
+            mat-raised-button
+            ktDebounceClick
+            color="warn"
+            (debounceClick)="exportClick()">{{ 'ADD.EXPORT_RELEVE_FACTURE' | translate }}
+        </button>
+    </div>
+
+</kt-custom-modal>

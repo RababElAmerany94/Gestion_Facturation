@@ -1,0 +1,80 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'LABELS.AGENDA' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event" >
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-agenda-tabs
+        [selectedTab]="selectedTabs"
+        (changeSelected)="selectedTabs=$event">
+
+        <kt-index-agenda-config
+            TacheType
+            [data]="agendaConfigs"
+            *ngIf="selectedTabs == selectedTabsTpe.TacheType"
+            [type]="selectedTabs"
+            (filters)="getAgendaEvenement($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event)"
+            (deleteEvent)="deleteAgendaEvenement($event)"
+            (showEvent)="showEvent($event)">
+        </kt-index-agenda-config>
+
+        <kt-index-agenda-config
+            RdvType
+            [data]="agendaConfigs"
+            *ngIf="selectedTabs == selectedTabsTpe.RdvType"
+            [type]="selectedTabs"
+            (filters)="getAgendaEvenement($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event)"
+            (deleteEvent)="deleteAgendaEvenement($event)"
+            (showEvent)="showEvent($event)">
+        </kt-index-agenda-config>
+
+        <kt-index-agenda-config
+            EvenementCategorie
+            [data]="agendaConfigs"
+            *ngIf="selectedTabs == selectedTabsTpe.EvenementCategorie"
+            [type]="selectedTabs"
+            (filters)="getAgendaEvenement($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event)"
+            (deleteEvent)="deleteAgendaEvenement($event)"
+            (showEvent)="showEvent($event)">
+        </kt-index-agenda-config>
+
+        <kt-index-agenda-config
+            AppelType
+            [data]="agendaConfigs"
+            *ngIf="selectedTabs == selectedTabsTpe.AppelType"
+            [type]="selectedTabs"
+            (filters)="getAgendaEvenement($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event)"
+            (deleteEvent)="deleteAgendaEvenement($event)"
+            (showEvent)="showEvent($event)">
+        </kt-index-agenda-config>
+
+        <kt-index-agenda-config
+            SourceRDV
+            [data]="agendaConfigs"
+            *ngIf="selectedTabs == selectedTabsTpe.SourceRDV"
+            [type]="selectedTabs"
+            (filters)="getAgendaEvenement($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event)"
+            (deleteEvent)="deleteAgendaEvenement($event)"
+            (showEvent)="showEvent($event)">
+        </kt-index-agenda-config>
+
+    </kt-agenda-tabs>
+</ng-container>
+<!-- end list -->

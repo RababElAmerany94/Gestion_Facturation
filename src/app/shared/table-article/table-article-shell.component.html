@@ -1,0 +1,300 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [icon]="'flaticon2-shopping-cart-1'"
+        [sticky]="false"
+        [title]="'LABELS.ARTICLES' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container
+            *ngIf="!readOnly"
+            ktPortletTools>
+
+            <button
+                mat-mini-fab
+                color="primary"
+                [matTooltip]="'TABLE_ARTICLE.LIST_ARTICLE' | translate"
+                (click)="openSelectArticles(articleType.Produit)">
+                <i class="material-icons"> list </i>
+            </button>
+
+            <button
+                mat-mini-fab
+                class="ml-1"
+                color="accent"
+                *ngIf="mode == modes.Euro || mode == modes.Reduction"
+                [matTooltip]="'TABLE_ARTICLE.LIST_ARTICLE_SPECIAL' | translate"
+                (click)="openSelectArticles(articleType.SpecialArticle)">
+                <i class="material-icons"> list </i>
+            </button>
+
+            <button
+                class="ml-1"
+                mat-mini-fab
+                color="warn"
+                [matTooltip]="'TABLE_ARTICLE.ADD' | translate"
+                (click)="addArticle()">
+                <i class="material-icons"> add </i>
+            </button>
+
+            <button
+                mat-mini-fab
+                class="ml-1"
+                color="success"
+                [matTooltip]="'LABELS.ADD_LIGNE' | translate"
+                (click)="addLigne()">
+                <i class="material-icons"> view_headline </i>
+            </button>
+
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="text-center">
+                        <ng-container *ngFor="let column of getColumns();let i=index">
+                            <th *ngIf="readOnly ? i!=(getColumns()?.length-1) : true">
+                                {{ column | translate  }}
+                            </th>
+                        </ng-container>
+                    </tr>
+                </thead>
+
+                <tbody
+                    cdkDropList
+                    [cdkDropListDisabled]="readOnly"
+                    (cdkDropListDropped)="onDrop($event)">
+
+                    <tr *ngFor="let article of articles;let i= index" cdkDrag cdkDragLockAxis="y">
+
+                        <td>
+                            <ng-container [ngTemplateOutlet]="dragHandleTmpl" *ngIf="!readOnly">
+                            </ng-container>
+                            {{article?.designation}}
+                        </td>
+
+                        <td class="text-right text-nowrap">
+                            {{article?.qte | RoundingNumber}}
+                        </td>
+
+                        <td class="text-right text-nowrap">
+                            {{ article.prixHT | RoundingNumber | Currency }}
+                        </td>
+
+                        <td class="text-right text-nowrap"
+                            *ngIf="!isAllWithoutRemise()">
+                            <ng-container *ngIf="article?.remise > 0">
+                                <p *ngIf="isCurrencyRemise(article?.remiseType)">
+                                    {{ article?.remise | RoundingNumber | Currency }}
+                                </p>
+                                <p *ngIf="!isCurrencyRemise(article?.remiseType )">
+                                    {{ article?.remise | RoundingNumber }} %
+                                </p>
+                            </ng-container>
+                        </td>
+
+                        <td class="text-right text-nowrap">
+                            {{ article.totalHT | RoundingNumber | Currency }}
+                        </td>
+
+                        <td class="text-right text-nowrap">
+                            {{ article.tva | RoundingNumber}}
+                        </td>
+
+                        <td class="text-right text-nowrap">
+                            {{ article.totalTTC | RoundingNumber | Currency }}
+                        </td>
+
+                        <td class="text-center" *ngIf="!readOnly">
+                            <div class="btn-group btn-group-sm" role="group">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-primary btn-icon"
+                                    *ngIf="article.type != articleType.SpecialArticle && article.type != articleType.Ligne"
+                                    (click)="detailArticle(i)"
+                                    [matTooltip]="'LABELS.EDIT'| translate">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    (click)="deleteArticle(i)"
+                                    class="btn btn-danger btn-icon"
+                                    [matTooltip]="'LABELS.DELETE'| translate">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+                <tr *ngIf="articles?.length === 0">
+                    <td [attr.colspan]="getColumns()?.length" class="text-center">
+                        {{ 'LABELS.EMPTY_TABLE' | translate }}
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <ng-container *ngIf="!showTotals">
+
+            <!-- totals + calculation ventilation -->
+            <div class="row">
+
+                <!-- tva -->
+                <div class="col-md-6">
+                    <ng-container *ngIf="resultCalculation?.calculationTva?.length > 0">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr class="text-center">
+                                    <th>{{ 'LABELS.RATE_TVA' | translate }}</th>
+                                    <th>{{ 'LABELS.AMOUNT_HT' | translate}}</th>
+                                    <th>{{ 'LABELS.AMOUNT_TVA' | translate}}</th>
+                                    <th>{{ 'LABELS.AMOUNT_TTC' | translate}}</th>
+                                </tr>
+                                <ng-container *ngFor="let item of resultCalculation?.calculationTva">
+                                    <tr *ngIf="item.tva > 0">
+                                        <td class="text-right text-nowrap">
+                                            {{ item.tva |  RoundingNumber}}
+                                        </td>
+                                        <td class="text-right text-nowrap">
+                                            {{ item.totalHT | RoundingNumber | Currency}}
+                                        </td>
+                                        <td class="text-right text-nowrap">
+                                            {{ item.totalTVA | RoundingNumber | Currency}}
+                                        </td>
+                                        <td class="text-right text-nowrap">
+                                            {{ item.totalTTC | RoundingNumber | Currency}}
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </table>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- totals -->
+                <div class="col-md-6">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+
+                            <!-- TOTAL HT -->
+                            <tr>
+                                <th>
+                                    {{ 'LABELS.TOTAL_HT' | translate }}
+                                </th>
+                                <td class="text-right text-nowrap">
+                                    {{ resultCalculation?.totalHT | RoundingNumber | Currency}}
+                                </td>
+                            </tr>
+
+                            <!-- discount + type of discount -->
+                            <tr *ngIf="!disableRemiseGlobal">
+                                <th>{{ 'LABELS.REMISE_GLOBAL_HT' | translate}}</th>
+                                <td class="text-right">
+
+                                    <div
+                                        class="form-inline float-right"
+                                        *ngIf="!readOnly"
+                                        [formGroup]="formTotals">
+
+                                        <input [formControlName]="'remise'" type="number" class="form-control text-right" />
+
+                                        <select [formControlName]="'remiseType'" class="form-control" [disabled]="readOnly">
+                                            <ng-container *ngFor="let item of remiseTypes">
+                                                <option [value]="item.value">{{item.text}}</option>
+                                            </ng-container>
+                                        </select>
+
+                                    </div>
+
+                                    <span *ngIf="readOnly" class="text-nowrap">
+                                        <p *ngIf="isCurrencyRemise(remiseType)"> {{ remise | RoundingNumber | Currency }}
+                                        </p>
+                                        <p *ngIf="!isCurrencyRemise(remiseType)"> {{ remise | RoundingNumber }} % </p>
+                                    </span>
+
+                                </td>
+                            </tr>
+
+                            <!-- if discount great than 0 calculation the new total ht -->
+                            <tr *ngIf="remise > 0">
+                                <th>{{ 'LABELS.NEW_TOTAL_HT' | translate }}</th>
+                                <td class="text-right text-nowrap">
+                                    {{ resultCalculation?.totalHTRemise | RoundingNumber | Currency}}
+                                </td>
+                            </tr>
+
+                            <!-- total ttc -->
+                            <tr>
+                                <th>{{ 'LABELS.TOTAL_TTC' | translate }}</th>
+                                <td class="text-right text-nowrap">
+                                    <ng-container *ngIf="mode != modes.Normal && !readOnly;then editTotalTTC else showTotalTTC" ></ng-container>
+                                    <ng-template #showTotalTTC>
+                                        {{ resultCalculation?.totalTTC | RoundingNumber | Currency}}
+                                    </ng-template>
+                                    <ng-template #editTotalTTC>
+                                        <input [formControl]="formControlTotalTTC" type="number" class="form-control text-right" />
+                                    </ng-template>
+                                </td>
+                            </tr>
+
+                            <ng-container *ngIf="mode != modes.Normal">
+
+                                <!-- total primeCEE EDF -->
+                                <tr>
+                                    <th>{{ primeCEEEDF ? primeCEEEDF : 'LABELS.PRIME_CEE_EDF' | translate }}</th>
+                                    <td class="text-right text-nowrap" [formGroup]="formTotals">
+                                        <ng-container *ngIf="readOnly || mode == modes.Euro;then showReduction else editReduction"></ng-container>
+                                        <ng-template #showReduction >
+                                            <span>{{ resultCalculation?.totalReduction | RoundingNumber | Currency}}</span>
+                                        </ng-template>
+                                        <ng-template #editReduction >
+                                            <input [formControlName]="'totalReduction'" type="number" class="form-control text-right" />
+                                        </ng-template>
+                                    </td>
+                                </tr>
+
+                                <!-- total total du -->
+                                <tr>
+                                    <th>{{ 'LABELS.TOTAL_DU' | translate }}</th>
+                                    <td class="text-right text-nowrap">
+                                        {{ resultCalculation?.totalPaid | RoundingNumber | Currency}}
+                                    </td>
+                                </tr>
+
+                            </ng-container>
+
+                        </table>
+                    </div>
+
+                    <ng-content select="[underTotals]"></ng-content>
+
+                </div>
+
+            </div>
+
+        </ng-container>
+
+    </kt-portlet-body>
+
+</kt-portlet>
+
+<ng-template #dragHandleTmpl>
+	<svg class="bi bi-list handle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+		xmlns="http://www.w3.org/2000/svg">
+		<path fill-rule="evenodd"
+			d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"
+			clip-rule="evenodd" />
+	</svg>
+</ng-template>

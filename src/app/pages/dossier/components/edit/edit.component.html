@@ -1,0 +1,294 @@
+<!-- .......................................................................................... -->
+<kt-portlet>
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'TITLES.INFO_DOSSIER' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container *ngIf="isShowMode()" ktPortletTools>
+            <kt-dossier-status
+                [status]="currentStatus">
+            </kt-dossier-status>
+            <button
+                mat-mini-fab
+                *ngIf="canPerdu(this.dossier?.status) || canAssigne() || canEditOrDelete()"
+                color="primary"
+                class="ml-1"
+                [matTooltip]="'LABELS.ACTIONS' | translate"
+                [matMenuTriggerFor]="menu">
+                <i class="flaticon-more"></i>
+            </button>
+            <mat-menu #menu="matMenu" class="custom-material-menu" >
+                <kt-custom-mat-menu [items]="menuItems" ></kt-custom-mat-menu>
+            </mat-menu>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+            <div class="row">
+
+                <!-- the reference of dossier -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [inputName]="'reference'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!--the client of dossier -->
+                <kt-client-dropdown
+                    class="col-md-4"
+                    [isShow]="isShowMode()"
+                    [inputName]="'clientId'"
+                    [client]="selectedClient"
+                    (changeEvent)="setClient($event)"
+                    [types]="[clientType.Particulier,clientType.Professionnel]"
+                    [showAdd]="!isShowMode()"
+                    [label]="'LABELS.CLIENT' | translate"
+                    [formInstant]="form">
+                </kt-client-dropdown>
+
+                <!-- the commercial of dossier-->
+                <ng-container *ngIf="isShowMode()">
+                    <kt-custom-input
+                        class="col-md-4"
+                        [label]="'LABELS.COMMERCIAL' | translate"
+                        [inputName]="'commercial'"
+                        [formInstant]="form">
+                    </kt-custom-input>
+                </ng-container>
+
+                <!--the first appointment of dossier -->
+                <ng-container *ngIf="isShowMode()">
+                    <kt-custom-input
+                        class="col-md-4"
+                        [formInstant]="form"
+                        [inputName]="'dateRDV'"
+                        [label]="'LABELS.DATE_RDV' | translate">
+                    </kt-custom-input>
+                </ng-container>
+
+                <!--the date pose of dossier -->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'datePose'"
+                    [label]="'LABELS.DATE_POSE' | translate">
+                </kt-custom-date-picker>
+
+                <!--the date creation dossier -->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateCreation'"
+                    [label]="'LABELS.CREATION_DATE' | translate">
+                </kt-custom-date-picker>
+
+                <!--the date expiration dossier -->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateExpiration'"
+                    [label]="'LABELS.DATE_EXPIRATION' | translate">
+                </kt-custom-date-picker>
+
+                <!-- select address -->
+                <kt-address-dropdown
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'siteIntervention'"
+                    [readOnly]="isShowMode()"
+                    [selectedAddress]="siteIntervention"
+                    [addresses]="selectedClient?.addresses"
+                    [label]="'ADDRESS.TITLE_SITE_INTERVENTION' | translate"
+                    (changeEvent)="setSiteIntervention($event)">
+                </kt-address-dropdown>
+
+                <!-- select contact -->
+                <kt-contact-dropdown
+                    class="col-md-4"
+                    [readOnly]="isShowMode()"
+                    [label]="'CONTACTS.TITLE' | translate"
+                    [SelectContact]="contact"
+                    [Contact]="selectedClient?.contacts"
+                    (changeEvent)="setContact($event)">
+                </kt-contact-dropdown>
+
+                <!-- the first phoneNumber of dossier -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type= number
+                    [label]="'LABELS.PHONE_NUMBER_1' | translate"
+                    [inputName]="'firstPhoneNumber'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the second phoneNumber of dossier -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type= number
+                    [label]="'LABELS.PHONE_NUMBER_2' | translate"
+                    [inputName]="'secondPhoneNumber'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<kt-info-site-installation
+    *ngIf="isAddMode() || dossier"
+    (informationsSupplementaireEvent)="setInformationsSupplementaire($event)"
+    [showInformationsSupplementaire]="true"
+    [informationsSupplementaire]="informationsSupplementaire"
+    [readOnly]="isShowMode()"
+    [form]="form">
+</kt-info-site-installation>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<ng-container *ngIf="isShowMode() && canShowDocumentsAssociate()">
+    <kt-documents-associate
+        (addDocumentsEvent)="addDocument($event)"
+        (deleteDevisEvent)="deleteDevisEvent.emit($event)"
+        (deleteBonCommandeEvent)="deleteBonCommandeEvent.emit($event)"
+        [documentsAssociate]="dossier?.documentAssociates"
+        [dossier]="dossier"
+    ></kt-documents-associate>
+</ng-container>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<ng-container *ngIf="isShowMode()">
+    <kt-dossier-installaton
+        [mode]="mode"
+        [DossierInstallation]="dossier?.dossierInstallations">
+    </kt-dossier-installaton>
+</ng-container>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<ng-container *ngIf="isShowMode() && dossierPV?.length > 0">
+    <kt-dossier-pv [DossierPV]="dossierPV"></kt-dossier-pv>
+</ng-container>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<kt-portlet>
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-more-v4'"
+        [title]="'TITLES.OTHER' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <form class="kt-form" [formGroup]="form">
+
+            <div class="row">
+                <!-- the note of dossier -->
+                <kt-custom-textarea
+                    class="col-md-12"
+                    [inputName]="'note'"
+                    [label]="'LABELS.NOTE' | translate"
+                    [formInstant]="form">
+                </kt-custom-textarea>
+            </div>
+
+        </form>
+    </kt-portlet-body>
+</kt-portlet>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<kt-portlet *ngIf="dossier?.status === status?.Perdu && isShowMode()">
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon2-cancel'"
+        [title]="'LABELS.RAISON_ANNULER' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <form class="kt-form" [formGroup]="form" >
+
+            <div class="row">
+                <!-- raison annuler -->
+                <kt-custom-input
+                    class="col-md-12"
+                    [label]="'LABELS.RAISON_ANNULER' | translate"
+                    [inputName]="'raisonAnnulation'"
+                    [formInstant]="form">
+                </kt-custom-input>
+            </div>
+
+        </form>
+    </kt-portlet-body>
+</kt-portlet>
+<!-- ....................................................................................... -->
+
+<!-- .......................................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <div class="kt-section__content kt-section__content--solid">
+            <div class="btn-group" role="group">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary btn-small mr-1"
+                    (click)="cancel()">
+                    <i class="fas fa-times"></i>  {{ 'LABELS.CANCEL' | translate }}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    type="button"
+                    class="btn btn-primary btn-small"
+                    *ngIf="canEnAttend()"
+                    (debounceClick)="save(status.EnAttente)">
+                    <i class="fas fa-edit"></i> {{'STATUS.ENATTENTE' |translate}}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    type="button"
+                    class="btn btn-brand btn-small"
+                    *ngIf="canAssigne()"
+                    (debounceClick)="save(status.Assigne)">
+                    <i class="fas fa-check"></i> {{'STATUS.ASSIGNE' |translate}}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    *ngIf="canValider()"
+                    (debounceClick)="valide(status.Assigne)"
+                    type="button"
+                    class="btn btn-info btn-small">
+                    <i class="fas fa-spinner"></i> {{'STATUS.VALIDER' |translate}}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    type="button"
+                    class="btn btn-dark btn-small"
+                    *ngIf="markDossierPerduEvent?.emit(this.dossier?.id),"
+                    (debounceClick)="save(status.Perdu)">
+                    <i class="fas fa-trash-alt"></i> {{'STATUS.PERDU' |translate}}
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- .......................................................................................... -->

@@ -1,0 +1,114 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-customer'"
+        [title]="'LABELS.INFOGENERAL' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+            <div class="row">
+
+                <!-- reference -->
+                <kt-custom-input
+                class="col-md-4"
+                [inputName]="'reference'"
+                [label]="'LABELS.REFERENCE' | translate"
+                [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- raison social -->
+                <kt-custom-input
+                class="col-md-4"
+                [inputName]="'raisonSociale'"
+                [label]="'LABELS.RAISONSOCIAL' | translate"
+                [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- siret-->
+                <kt-custom-input
+                class="col-md-4"
+                [inputName]="'siret'"
+                [label]="'LABELS.SIRET' | translate"
+                [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- phoneNumber-->
+                <kt-custom-input
+                class="col-md-4"
+                type="number"
+                [inputName]="'phoneNumber'"
+                [label]="'LABELS.PHONE_NUMBER' | translate"
+                [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- email-->
+                <kt-custom-input
+                class="col-md-4"
+                [inputName]="'email'"
+                [label]="'CONTACTS.EMAIL' | translate"
+                [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- website -->
+                <kt-custom-input
+                class="col-md-4"
+                [inputName]="'webSite'"
+                [label]="'LABELS.WEBSITE' | translate"
+                [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- codeComptable-->
+                <kt-custom-input
+                class="col-md-4"
+                [inputName]="'codeComptable'"
+                [label]="'LABELS.CODE_COMPTABLE' | translate"
+                [formInstant]="form">
+                </kt-custom-input>
+
+            </div>
+        </form>
+
+    </kt-portlet-body>
+</kt-portlet>
+
+<!----------------------------------- display contact -------------------------------------------->
+<kt-contacts
+    (changeContact)="setContact($event)"
+    [contacts]="contacts"
+    [mode]="mode">
+</kt-contacts>
+<!------------------------------------------------------------------------------->
+
+<!----------------------------------- display address -------------------------------------------->
+<kt-addresses
+    (changeAddress)="setAddress($event)"
+    [addresses]="address"
+    [mode]="mode">
+</kt-addresses>
+<!------------------------------------------------------------------------------->
+
+<!-- ....................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()"
+            *ngIf="isAddMode()">
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()"
+            *ngIf="isEditMode()">
+            {{ 'LABELS.EDIT' | translate }}
+        </button>
+        <button class="btn btn-secondary" (click)="cancel()">{{ 'LABELS.CANCEL' | translate }}</button>
+    </div>
+</div>
+<!-- ....................................................................... -->

@@ -1,0 +1,68 @@
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="modeChangeEvent($event)"
+    (cancelEvent)="setModeList()">
+</kt-breadcrumb-list>
+
+<ng-container *ngIf="isListMode()">
+    <kt-index-bon-commande
+        [data]="bonCommandePagedResult"
+        (filters)="getBonCommande($event)"
+        (addEvent)="isDupliquer=false;addEvent()"
+		(editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteBonCommande($event)"
+        (showEvent)="showEvent($event.id)"
+        (transferToDevisEvent)="transferBonCommandeToDevis($event)"
+        (markBonCommandeAnnulerEvent)="markBonCommandeAnnuler($event)">
+    </kt-index-bon-commande>
+</ng-container>
+
+<ng-container *ngIf="isAddMode() || isEditMode()">
+    <kt-edit-bon-commande
+        [mode]="mode"
+        [form]="form"
+        [BonCommande]="bonCommande"
+        [Type]="type"
+        [Dossier]="dossier"
+        (addEvent)="addBonCommande($event)"
+        (editEvent)="updateBonCommande($event)">
+    </kt-edit-bon-commande>
+</ng-container>
+
+<ng-container *ngIf="isShowMode()">
+    <kt-detail>
+
+        <kt-edit-bon-commande
+            info
+            [mode]="mode"
+            [form]="form"
+            [BonCommande]="bonCommande"
+            [Type]="type"
+            [Dossier]="dossier"
+            (printBonCommandeEvent)="printBonCommande()"
+            (downloadEvent)="downloadPdfEvent()"
+            (dupliquerEvent)="dupliquer($event)"
+            (enPerduBonCommandeEvent)="updateBonCommande($event)"
+            (markBonCommandeAnnulerEvent)="markBonCommandeAnnuler($event)"
+            (transferToDevisEvent)="transferBonCommandeToDevis($event)"
+            (displayFileEvent)="visualizationPDFBonCommande($event)"
+            (signeBonCommandeEvent)="updateBonCommande($event)">
+        </kt-edit-bon-commande>
+
+        <kt-emails
+            email
+            [canRevive]="true"
+            [type]="documentType"
+            [Emails]="bonCommande?.emails"
+            [contacts]="bonCommande?.client?.contacts"
+            (addEmailEvent)="sendEmail($event)">
+        </kt-emails>
+
+        <kt-historiques
+            historique
+            [Historique]="bonCommande?.historique">
+        </kt-historiques>
+
+    </kt-detail>
+</ng-container>

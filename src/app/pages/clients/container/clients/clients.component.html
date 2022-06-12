@@ -1,0 +1,116 @@
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+
+<ng-container *ngIf="isListMode()">
+    <kt-client-tabs
+        [selectedTab]="selectedTabs"
+        (changeSelected)="selectedTabs=$event" >
+
+        <kt-client-index
+            Particulier
+            *ngIf="selectedTabs == clientType.Particulier"
+            [tabType]="clientType.Particulier"
+            [data]="clients"
+            (filters)="getClients($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event.id)"
+            (deleteEvent)="deleteClient($event)"
+            (showEvent)="showEvent($event.id)">
+        </kt-client-index>
+
+        <kt-client-index
+            Professionnel
+            *ngIf="selectedTabs == clientType.Professionnel"
+            [tabType]="clientType.Professionnel"
+            (filters)="getClients($event)"
+            [data]="clients"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event.id)"
+            (deleteEvent)="deleteClient($event)"
+            (showEvent)="showEvent($event.id)">
+        </kt-client-index>
+
+		<kt-client-index
+			Obliges
+            *ngIf="selectedTabs == clientType.Obliges"
+            [tabType]="clientType.Obliges"
+			(filters)="getClients($event)"
+			[data]="clients"
+			(addEvent)="addEvent()"
+			(editEvent)="editEvent($event.id)"
+			(deleteEvent)="deleteClient($event)"
+			(showEvent)="showEvent($event.id)">
+		</kt-client-index>
+
+    </kt-client-tabs>
+</ng-container>
+
+<ng-container *ngIf="isAddMode() || isEditMode()">
+	<kt-client-edit
+		[mode]="mode"
+		[form]="form"
+        [client]="client"
+		(addEvent)="addClient($event)"
+        (editEvent)="updateClient($event)"
+		(cancelEvent)="modeList()">
+	</kt-client-edit>
+</ng-container>
+
+<ng-container *ngIf="isShowMode()">
+    <kt-client-detail
+        [type]="client?.type">
+
+        <kt-client-edit
+            info
+            [mode]="mode"
+            [form]="form"
+            [client]="client"
+            (updateEvent)="editEvent($event)">
+        </kt-client-edit>
+
+        <kt-memos
+            memos
+            [Memos]="client?.memos"
+            (saveMemoEvent)="saveMemoToClient($event)">
+        </kt-memos>
+
+        <kt-historiques
+            historique
+            [Historique]="client?.historique">
+        </kt-historiques>
+
+        <kt-agenda-commercial-shell
+            agendaCommercial
+            [changeRoute]="false"
+            [changeColor]="true"
+            [clientId]="client?.id">
+        </kt-agenda-commercial-shell>
+
+        <kt-sms
+            sms
+            [SMS]="client?.sms"
+            (saveSmsEvent)="sendSMS($event)">
+        </kt-sms>
+
+        <kt-dossier-shell
+            dossier
+            [changeRoute]="false"
+            [showHeader]="false"
+            [client]="client"
+            [clientId]="client?.id">
+        </kt-dossier-shell>
+
+        <kt-situation
+            situation
+            (searchEvent)="getChiffreAffaire($event);"
+            [chiffreAffaireStatistics]="chiffreAffaireStatistics"
+            [showFilterClient]="false"
+            [numberOfFolder]="numberOfFolder">
+        </kt-situation>
+
+	</kt-client-detail>
+</ng-container>

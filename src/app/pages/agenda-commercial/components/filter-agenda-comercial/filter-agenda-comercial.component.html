@@ -1,0 +1,47 @@
+
+<div class="kt-portlet px-4 py-3">
+    <div class="row">
+        <div class="col-md-12 mb-4 mt-2">
+            <h4 class="kt-subheader__title">
+                <i class="{{icon}}"></i> {{ title | translate }}
+            </h4>
+        </div>
+        <div class="col-md-9">
+
+            <div class="row">
+                <kt-custom-input
+                    class="col-md-4"
+                    [suffixIcon]="'search'"
+                    [label]="'LABELS.SEARCH' | translate"
+                    [inputName]="'search'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-dropdown-commercial
+                    class="col-md-2"
+                    [inputName]="'responsableId'"
+                    [label]="'LABELS.RESPONSABLE' | translate"
+                    [formInstant]="form">
+                </kt-dropdown-commercial>
+
+                <kt-client-dropdown
+                    *ngIf="showFilterClient"
+                    class="col-md-2"
+                    [isShow]="false"
+                    [inputName]="'clientId'"
+                    [label]="'LABELS.CLIENT' | translate"
+                    [formInstant]="form">
+                </kt-client-dropdown>
+
+                <kt-agenda-evenement-dropdown
+                    class="col-md-2"
+                    [inputName]="'categorieId'"
+                    [types]="type.EvenementCategorie"
+                    [label]="'LABELS.CATEGORIE' | translate"
+                    [formInstant]="form">
+                </kt-agenda-evenement-dropdown>
+                </div>
+
+        </div>
+    </div>
+</div>

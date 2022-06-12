@@ -1,0 +1,81 @@
+<!--.................. INFO PAIEMENT ....................-->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'TITLES.INFO_PAIEMENT' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+            <div class="row">
+
+                <!--bank account -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.BANK_COMPTE' | translate"
+                    [inputName]="'bankAccountId'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!--the date de paiement-->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'datePaiement'"
+                    [label]="'LABELS.DATE' | translate">
+                </kt-custom-date-picker>
+
+                <!--mode reglement -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REGULATION_MODE' | translate"
+                    [inputName]="'regulationModeId'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- montant-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.AMOUNT' | translate"
+                    [inputName]="'montant'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- type paiement-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.TYPE' | translate"
+                    [inputName]="'type'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- description -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.DESCRIPTION' | translate"
+                    [inputName]="'description'"
+                    [formInstant]="form">
+                </kt-custom-input>
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+
+<!-- .......................INFO DOCUMENT ASSOCIATE..................... -->
+
+<ng-container
+    *ngIf="isShowMode() && relatedDocs?.length>0" >
+    <kt-shared-related-docs
+        [data]="relatedDocs">
+    </kt-shared-related-docs>
+</ng-container>
+<!-- .......................................................................... -->

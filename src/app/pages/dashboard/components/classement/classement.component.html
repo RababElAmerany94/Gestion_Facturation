@@ -1,0 +1,90 @@
+<div class="kt-portlet kt-portlet--height-fluid">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                <ng-container *ngIf="show.classementClientShow">
+                    {{ 'CHART.TOP_10_CLIENT' | translate }}
+                </ng-container>
+                <ng-container *ngIf="show.articlesTotals">
+                    {{ 'CHART.TOP_10_ARTICLE' | translate }}
+                </ng-container>
+                <ng-container *ngIf="show.articlesByCategory">
+                    {{ 'CHART.TOP_10_CATEGORIE_ARTICLE_COMMANDE' | translate }}
+                </ng-container>
+                <ng-container *ngIf="show.articlesQuantities">
+                    {{ 'CHART.TOP_10_ARTICLE_COMMANDE_QTE' | translate }}
+                </ng-container>
+            </h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+            <ng-container ktPortletTools>
+
+                <button
+                    [matTooltip]="'LABELS.ACTIONS' | translate"
+                    class="btn btn-label-brand btn-sm btn-icon btn-circle"
+                    [matMenuTriggerFor]="menu" >
+                    <i class="fa fa-ellipsis-v"></i>
+                </button>
+
+                <mat-menu #menu="matMenu" class="custom-material-menu" >
+                    <kt-custom-mat-menu [items]="menuItems" ></kt-custom-mat-menu>
+                </mat-menu>
+
+            </ng-container>
+        </div>
+    </div>
+    <div class="kt-portlet__body main-panel">
+        <div class="kt-widget6">
+            <div class="kt-widget6__head">
+                <div class="kt-widget6__item">
+                    <span>#</span>
+                    <span>{{ 'LABELS.FIRSTNAME' | translate }}</span>
+                    <span>
+                        <ng-container *ngIf="!show.articlesQuantities">
+                            {{ 'LABELS.CHIFFRE_AFFAIRE' | translate }}
+                        </ng-container>
+                        <ng-container *ngIf="show.articlesQuantities">
+                            {{ 'LABELS.QUANTITE' | translate }}
+                        </ng-container>
+                    </span>
+                </div>
+            </div>
+            <div class="kt-widget6__body">
+                <ng-container *ngIf="show.classementClientShow">
+                    <div class="kt-widget6__item" *ngFor="let item of data.classementClient;let i=index">
+                        <span>{{ i+1 }}</span>
+                        <span class="kt-widget11__title">{{ item?.client }}</span>
+                        <span class="kt-align-right kt-font-brand kt-font-bold">{{ item?.totalHT | RoundingNumber | Currency }}</span>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="kt-widget6__body">
+                <ng-container *ngIf="show.articlesByCategory">
+                    <div class="kt-widget6__item"  *ngFor="let item of data.facturesArticlesByCategory;let i=index">
+                        <span>{{ i+1 }}</span>
+                        <span>{{ item?.name }}</span>
+                        <span class="kt-align-right kt-font-brand kt-font-bold">{{ item?.total | RoundingNumber | Currency }}</span>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="kt-widget6__body">
+                <ng-container *ngIf="show.articlesQuantities">
+                    <div class="kt-widget6__item"  *ngFor="let item of data.facturesArticlesQuantities;let i=index">
+                        <span>{{ i+1 }}</span>
+                        <span>{{ item?.name }}</span>
+                        <span class="kt-align-right kt-font-brand kt-font-bold">{{ item?.quantity | RoundingNumber }}</span>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="kt-widget6__body">
+                <ng-container *ngIf="show.articlesTotals">
+                    <div class="kt-widget6__item"  *ngFor="let item of data.facturesArticlesTotals;let i=index">
+                        <span>{{ i+1 }}</span>
+                        <span>{{ item?.name }}</span>
+                        <span class="kt-align-right kt-font-brand kt-font-bold">{{ item?.total | RoundingNumber | Currency }}</span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

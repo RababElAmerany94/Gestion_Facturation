@@ -1,0 +1,11 @@
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-annulee" *ngIf="bonCommandeStatus.Annule == status" >
+    {{ 'STATUS.ANNULE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-facture" *ngIf="bonCommandeStatus.Commande == status" >
+    {{ 'STATUS.COMMANDE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-encours" *ngIf="bonCommandeStatus.EnCours == status" >
+    {{ 'STATUS.ENCOURS' | translate }}
+</span>

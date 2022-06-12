@@ -1,0 +1,14 @@
+<mat-form-field [formGroup]="formInstant" appearance="fill" class="example-full-width">
+    <mat-label>{{ label }}</mat-label>
+    <mat-select
+        [id]="inputName"
+        [formControlName]="inputName"
+        (selectionChange)="onChange($event)">
+    <mat-option *ngFor="let item of periods" value="{{item}}">
+            {{item}}
+    </mat-option>
+    </mat-select>
+    <mat-error>
+        <kt-custom-error-display [control]="control"></kt-custom-error-display>
+    </mat-error>
+</mat-form-field>

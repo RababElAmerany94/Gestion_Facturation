@@ -1,0 +1,48 @@
+<kt-custom-modal [title]="'LABELS.SELECT_MODELE' |translate">
+    <div mat-dialog-content class="dialog-body">
+
+        <!-- search field -->
+        <div class="d-flex flex-row flex-row-reverse mb-3">
+            <kt-searchbar class="w-40" [searchControl]="searchControl">
+            </kt-searchbar>
+        </div>
+        <!-- end search field -->
+        <ng-container *ngFor="let item of smsModel" >
+
+            <mat-accordion class="example-headers-align col-md-12">
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ item?.name }}
+                        </mat-panel-title>
+                        <mat-panel-description class="d-flex flex-row-reverse">
+                            <mat-icon (click)="selectModelSMS(item)">check</mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <mat-form-field class="w-100">
+                        <p [innerHTML]="item?.text"></p>
+                        <input matInput [disabled]="true">
+                    </mat-form-field>
+
+                </mat-expansion-panel>
+
+            </mat-accordion>
+        </ng-container>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+    </div>
+
+</kt-custom-modal>

@@ -1,0 +1,26 @@
+
+
+<kt-custom-modal [title]="'TITLES.PREVIEW_FILE' | translate">
+
+    <div mat-dialog-content class="dialog-body">
+        <div class="container-preview">
+            <iframe 
+                class="w-100 iframe-preview"
+                frameBorder="0" 
+                (load)="loadEvent($event)"            
+                [src]="urlSafe">
+            </iframe>
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button
+            (click)="dialogRef.close()"
+            color="primary"
+            mat-raised-button
+            mat-dialog-close>
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+    </div>
+
+</kt-custom-modal>

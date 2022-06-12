@@ -1,0 +1,22 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'UNITE.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<kt-breadcrumb-list 
+    [mode]="mode" 
+    (modeChangeEvent)="mode=$event" >
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-unite
+        [data]="unites"
+        (filters)="getUnites($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteUnite($event)">
+    </kt-index-unite>
+</ng-container>
+<!-- end list -->

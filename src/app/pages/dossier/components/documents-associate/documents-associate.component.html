@@ -1,0 +1,102 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-car'"
+        [title]="'TITLES.RELATED_DOCUMENT' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+            <button
+                mat-mini-fab
+                color="primary"
+                [matTooltip]="'DEVIS.ADD_TITLE' | translate"
+                (click)="addDocumentsEvent.emit(documentType.Devis)">
+                <i class="material-icons"> add </i>
+            </button>&nbsp;&nbsp;
+            <button
+                mat-mini-fab
+                color="warn"
+                [matTooltip]="'BON_COMMANDE.ADD_TITLE' | translate"
+                (click)="addDocumentsEvent.emit(documentType.BonCommande)">
+                <i class="material-icons"> add </i>
+            </button>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+
+                <thead>
+                    <tr>
+                    <th>{{ 'LABELS.TYPE' | translate }}</th>
+                    <th>{{ 'LABELS.REFERENCE' | translate }}</th>
+                    <th>{{ 'LABELS.CREATION_DATE' | translate }}</th>
+                    <th>{{ 'LABELS.AMOUNT_TTC' | translate }}</th>
+                    <th>{{ 'LABELS.STATUS' | translate }}</th>
+                    <th>{{ 'LABELS.ACTIONS' | translate }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of documentsAssociate; let i= index">
+                        <td> {{ "DOCTYPE."+item.type | translate }} </td>
+                        <td>
+                            <a href="javascript:;" (click)="goToDocument(i,item?.type)" class="kt-widget__username">
+                                {{ item.reference }}
+                            </a>
+                        </td>
+                        <td> {{ item.createOn | date:'shortDate' }} </td>
+                        <td> {{ item.totalTTC | RoundingNumber | Currency }} </td>
+                        <td>{{ ( item?.type === documentType.Devis ? "DEVIS_STATUS."+item.status :
+                            ( item?.type === documentType.Facture ? "FACTURE_STATUS."+item.status : "BON_COMMANDE_STATUS."+item.status ) ) | translate }}</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group">
+
+                                <button
+                                    type="button"
+                                    (click)="goToDocument(i,item?.type)"
+                                    class="btn btn-primary btn-icon"
+                                    [matTooltip]="'LABELS.SHOW'| translate" >
+                                    <i class="fas fa-eye"></i>
+                                </button>
+
+                                <ng-container *ngIf="canEdit(item)" >
+                                    <button
+                                        type="button"
+                                        (click)="editDocumentAssociate(i,item?.type)"
+                                        class="btn btn-success btn-icon"
+                                        [matTooltip]="'LABELS.EDIT'| translate" >
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="canDelete(item)">
+
+                                    <button
+                                        type="button"
+                                        (click)="deleteDocumentAssociate(item.id,item?.type)"
+                                        class="btn btn-danger btn-icon"
+                                        [matTooltip]="'LABELS.DELETE'| translate" >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+
+                                </ng-container>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="documentsAssociate?.length == 0">
+                        <td class="text-center" colspan="6">
+                            {{ 'LABELS.EMPTY_TABLE' | translate }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </kt-portlet-body>
+</kt-portlet>

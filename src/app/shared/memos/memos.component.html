@@ -1,0 +1,99 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [title]="title | translate"
+        [class]="'kt-portlet__head--lg'">
+        <ng-container ktPortletTools>
+
+            <!-- ........................................................................... -->
+            <button
+                mat-mini-fab
+                ktDebounceClick
+                color="primary"
+                class="ml-3"
+                (debounceClick)="addMemo()">
+                <i class="material-icons"> add </i>
+            </button>
+            <!-- ........................................................................... -->
+
+        </ng-container>
+    </kt-portlet-header>
+
+    <kt-portlet-body *ngIf="memos.length>0">
+
+        <div class="kt-notes">
+            <div class="kt-notes__items">
+                <div class="kt-notes__item" *ngFor="let item of memos;let i=index">
+                    <div class="kt-notes__media">
+                        <span class="kt-notes__icon">
+                            <strong>{{i+1}}</strong>
+                        </span>
+                    </div>
+                    <div class="kt-notes__content">
+                        <div class="kt-notes__section">
+                            <div class="kt-notes__info">
+                                <a href="javascript.void(0);" class="kt-notes__title">
+                                    {{ item?.userId |  GetNameOfUserById }}
+                                </a>
+                                <span class="kt-notes__desc kt-font-brand">
+                                    {{ item?.date | date:'short' }}
+                                </span>
+                            </div>
+                            <div class="kt-notes__dropdown">
+                                <i class="flaticon-more-1 kt-font-brand" [matMenuTriggerFor]="menu"></i>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item (click)="editMemo(i)">
+                                        <mat-icon>create</mat-icon>
+                                        <span>{{ 'LABELS.EDIT' | translate }}</span>
+                                    </button>
+                                    <button mat-menu-item (click)="removeMemo(i)">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>{{ 'LABELS.DELETE' | translate }}</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </div>
+                        <span class="kt-notes__body">
+                            <ng-container *ngIf="isDossier;then dossier else default"></ng-container>
+                            <ng-template #dossier>
+                                <h6>
+                                    {{ item?.name }} &nbsp;
+                                    <span
+                                        *ngIf="item?.category"
+                                        [style.backgroundColor]="item?.category?.color"
+                                        class="kt-badge kt-badge--inline kt-badge--pill kt-badge--rounded text-white" >
+                                        {{ item?.category?.name }}
+                                    </span>
+                                </h6>
+                                <p>
+                                    {{ item?.commentaire }}
+                                </p>
+                            </ng-template>
+                            <ng-template #default >
+                                <div class="mb-1" >
+                                    {{ item?.commentaire }}
+                                </div>
+                            </ng-template>
+                            <div *ngFor="let piece of item.pieceJointes;let j = index">
+                                <div class="d-flex pb-1">
+                                    <div class="flex-grow-1 text-primary">{{ piece.orignalName }}</div>
+                                    <div class="px-2 text-primary">
+                                        <i class="fa fa-download" (click)="downloadFile(piece)"></i>
+                                    </div>
+                                    <div class="px-2 text-info">
+                                        <i class="fa fa-eye" (click)="displayFile(piece)"></i>
+                                    </div>
+                                    <div class="px-2 text-danger">
+                                        <i class="fa fa-trash" (click)="removeFile(i,j)"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </kt-portlet-body>
+</kt-portlet>

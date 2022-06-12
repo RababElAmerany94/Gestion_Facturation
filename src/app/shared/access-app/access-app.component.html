@@ -1,0 +1,55 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [title]="title | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Body-->
+        <div class="kt-login__body">
+        	<!--begin::Signin-->
+        	<div class="kt-login__form">
+        		<div class="row">
+        			<div class="col-sm-4 mx-auto">
+        				<!--begin::Form-->
+        				<form class="kt-form" [formGroup]="form" autocomplete="off">
+
+        					<kt-custom-input
+        					   [inputName]="'userName'"
+        					   [label]="'LABELS.ENTER_USERNAME' | translate"
+        					   [formInstant]="form">
+        					</kt-custom-input>
+
+        					<kt-custom-input-password
+        					   [inputName]="'password'"
+        					   [label]="'LABELS.ENTER_PASSWORD' | translate"
+        					   [formInstant]="form">
+        					</kt-custom-input-password>
+
+        					<kt-custom-checkbox
+        					   class="col-md-6"
+        					   [label]="'LABELS.ISACTIF' | translate"
+        					   [formInstant]="form"
+        					   [inputName]="'isActive'">
+        					</kt-custom-checkbox>
+
+        					<div class="kt-login__actions mx-auto">
+        						<button
+                                    ktDebounceClick
+                                    (debounceClick)="save()"
+        							id="kt_login_signin_submit" class="btn btn-primary btn-elevate kt-login__btn-primary float-right">
+        							{{ 'LABELS.SAUVGARDE' | translate | uppercase}}
+        						</button>
+        					</div>
+
+        				</form>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+
+    </kt-portlet-body>
+</kt-portlet>

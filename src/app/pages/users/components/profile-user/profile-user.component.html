@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__body">
+                <div class="kt-widget kt-widget--user-profile-3">
+                    <div class="kt-widget__top">
+                        <div class="kt-widget__pic kt-widget__pic--brand kt-font-brand kt-font-boldest kt-hidden-">
+                            <ng-container 
+                                *ngIf="user?.roleId != userProfile.AdminAgence;then otherFirstLetter;else agenceFirstLetter" >
+                            </ng-container>
+                            <ng-template #otherFirstLetter >
+                                {{ user?.fullName | firstLetter }}
+                            </ng-template>
+                            <ng-template #agenceFirstLetter >
+                                {{ user?.agence?.raisonSociale | firstLetter }}
+                            </ng-template>
+                        </div>
+                        <div class="kt-widget__content">
+                            <div class="kt-widget__head">
+                                <a href="javascript:void(0);" class="kt-widget__username">
+                                    <ng-container 
+                                        *ngIf="user?.roleId != userProfile.AdminAgence;then other;else agence" >
+                                    </ng-container>
+                                    <ng-template #other >
+                                        {{ user?.fullName }}
+                                    </ng-template>
+                                    <ng-template #agence >
+                                        {{ user?.agence?.raisonSociale }}
+                                    </ng-template>     
+                                    <i class="flaticon2-correct kt-font-success" ></i>                                     
+                                </a>
+        
+                                <div class="kt-widget__action">
+                                    <button 
+                                        (click)="changePassword()"
+                                        type="button" 
+                                        class="btn btn-warning btn-sm btn-upper">
+                                        {{ 'LABELS.CHANGE_PASSWORD' | translate }}
+                                    </button>
+                                    <button 
+                                        (click)="modifierUser()"
+                                        type="button" 
+                                        class="btn btn-brand btn-sm btn-upper">
+                                        {{ 'LABELS.EDIT' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+        
+                            <div class="kt-widget__subhead">
+                                <a href="javascript:void(0);">
+                                    <i class="flaticon2-new-email"></i>
+                                    {{ user?.email }}
+                                </a>
+                                <a href="javascript:void(0);">
+                                    <i class="flaticon2-calendar-3"></i>
+                                    {{ 'ROLES.'+ user?.roleId | translate}}
+                                </a>
+                                <a href="javascript:void(0);">
+                                    <i class="flaticon2-phone"></i>
+                                    {{ user?.phoneNumber }}
+                                </a>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

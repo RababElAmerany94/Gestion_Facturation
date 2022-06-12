@@ -1,0 +1,73 @@
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-produits-index
+        [data]="produits"
+        (filters)="getProduits($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteEvent($event)"
+        (showEvent)="showEvent($event.id)"
+        (showAgenceEvent)="showAgenceEvent($event.id)"
+        (editAgenceEvent)="editAgenceEvent($event.id)"
+        (changeVisibilityEvent)="changeVisibilityEvent($event)">
+    </kt-produits-index>
+</ng-container>
+<!-- end list -->
+
+<!-- edit + add -->
+<ng-container *ngIf="(isAddMode() || isEditMode()) && !isAgenceMode" >
+    <kt-produits-edit
+        [mode]="mode"
+        [form]="form"
+        [Produit]="produit"
+        (addEvent)="addProduit($event)"
+        (editEvent)="editProduit($event)"
+        (cancelEvent)="modeList()">
+    </kt-produits-edit>
+</ng-container>
+<!-- end edit + add -->
+
+<ng-container *ngIf="isShowMode() && !isAgenceMode" >
+    <kt-produits-detail>
+
+        <kt-produits-edit
+            info
+            [mode]="mode"
+            [form]="form"
+            [Produit]="produit">
+        </kt-produits-edit>
+
+        <kt-memos
+            memos
+            [Memos]="produit?.memos"
+            (saveMemoEvent)="saveMemoToProduit($event)">
+        </kt-memos>
+
+        <kt-historiques
+            historique
+            [Historique]="produit?.historique">
+        </kt-historiques>
+
+    </kt-produits-detail>
+</ng-container>
+
+
+<!-- agence mode -->
+<ng-container *ngIf="isAgenceMode && !isListMode()" >
+    <kt-edit-produits-agence
+        [mode]="mode"
+        [form]="formAgence"
+        [PrixProduitParAgence]="produitAgence"
+        (cancelEvent)="modeList()"
+        (addEvent)="addPrixProduitParPrixEvent($event)"
+        (editEvent)="editPrixProduitParPrixEvent($event)">
+    </kt-edit-produits-agence>
+</ng-container>
+<!-- end agence mode -->

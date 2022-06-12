@@ -1,0 +1,28 @@
+<mat-form-field [formGroup]="formInstant" appearance="fill" class="example-full-width">
+    <mat-label>{{label}}</mat-label>
+    <input
+        matInput
+        [type]="type"
+        [formControlName]="inputName"
+        [readonly]="readOnly"
+        (input)="input($event.target.value)"
+        placeholder="{{ placeholder }}">
+
+        <mat-icon
+            *ngIf="suffixIcon"
+            matSuffix>{{suffixIcon}}</mat-icon>
+
+        <button
+            mat-icon-button
+            ktDebounceClick
+            matSuffix
+            *ngIf="isAddMode"
+            (debounceClick)="addValue($event)"
+            [matTooltip]="'LABELS.ADD' | translate" >
+            <mat-icon>add</mat-icon>
+        </button>
+
+    <mat-error>
+        <kt-custom-error-display [control]="control"></kt-custom-error-display>
+    </mat-error>
+</mat-form-field>

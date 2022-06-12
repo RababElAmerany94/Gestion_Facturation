@@ -1,0 +1,14 @@
+{
+    "TITLE": "Clients",
+    "LIST": {
+        "TITLE": "Liste des clients"
+    },
+    "LABELS": {
+        "INFOGENERAL": "Informations client",
+        "TAUXREMISE": "Taux Remise"
+    },
+    "DELETE": {
+        "HEADER_TEXT": "Supprimer client",
+        "QUESTION": "Êtes-vous sûr supprimer ce client ?"
+    }
+}

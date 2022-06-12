@@ -1,0 +1,55 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-car'"
+        [title]="'TITLES.RELATED_DOCUMENT' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+
+                <thead>
+                    <tr>
+                        <th>{{ 'LABELS.TYPE' | translate }}</th>
+                        <th>{{ 'LABELS.REFERENCE' | translate }}</th>
+                        <th>{{ 'LABELS.AMOUNT_TTC' | translate }}</th>
+                        <th>{{ 'LABELS.CREATION_DATE' | translate }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let item of items; let i = index;">
+                        <td>
+                            {{ 'DOCTYPE.'+item?.type | translate }}
+                        </td>
+                        <td>
+                            <ng-container *ngIf="item?.reference.trim();then showReference else showNot"></ng-container>
+                                <ng-template #showReference >
+                                    <span>
+                                        <a class="kt-widget__username" href="javascript:;" (click)="goToDocument(i,item?.type)">
+                                            {{ item?.reference }}
+                                        </a>
+                                    </span>
+                                </ng-template>
+                            <ng-template #showNot >
+                                -
+                            </ng-template>
+                        </td>
+                        <td class="text-right" >
+                            {{ item?.totalTTC > 0 ? (item?.totalTTC | RoundingNumber | Currency) : '-' }}
+                        </td>
+                        <td> {{ item?.createOn | date:'shortDate' }} </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </kt-portlet-body>
+</kt-portlet>

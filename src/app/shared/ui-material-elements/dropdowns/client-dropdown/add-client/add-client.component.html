@@ -1,0 +1,158 @@
+<kt-custom-modal [title]="title">
+    <div mat-dialog-content class="dialog-body">
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+            <div class="row">
+
+                <!-- reference -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'reference'"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- firstname -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'firstName'"
+                    (changeEvent)="generateCodeComptable()"
+                    [label]="'LABELS.FIRSTNAME' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- lastname -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'lastName'"
+                    *ngIf="isClientParticulier()"
+                    [label]="'LABELS.LASTNAME' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- charge type client-->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    [inputName]="'type'"
+                    (changeEvent)="generateChampsClient()"
+                    [label]="'LABELS.TYPE' | translate"
+                    [formInstant]="form"
+                    [data]="clientType">
+                </kt-custom-drop-down>
+
+                <!-- charge genre client-->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    [inputName]="'genre'"
+                    [label]="'LABELS.GENRE' | translate"
+                    [formInstant]="form"
+                    [data]="genreClient">
+                </kt-custom-drop-down>
+
+                <!-- Mode de régelement-->
+                <kt-regulation-mode-drop-down
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'regulationModeId'"
+                    [label]="'LABELS.REGULATION_MODE' | translate">
+                </kt-regulation-mode-drop-down>
+
+                <!-- phoneNumber-->
+                <kt-custom-input
+                    class="col-md-4"
+                    type= number
+                    [inputName]="'phoneNumber'"
+                    [label]="'LABELS.PHONE_NUMBER_1' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- siret-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'siret'"
+                    *ngIf="!isClientParticulier()"
+                    [label]="'LABELS.SIRET' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- email-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'email'"
+                    [label]="'CONTACTS.EMAIL' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- website -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'webSite'"
+                    *ngIf="!isClientParticulier()"
+                    [label]="'LABELS.WEBSITE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- codeComptable-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'codeComptable'"
+                    [label]="'LABELS.CODE_COMPTABLE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- commercial -->
+                <kt-dropdown-commercial
+                    class="col-md-4"
+                    [inputName]="'commercials'"
+                    [multiSelect]="true"
+                    [label]="'LABELS.COMMERCIAL' | translate"
+                    [formInstant]="form">
+                </kt-dropdown-commercial>
+
+                <!-- agence -->
+                <ng-container *ktIsForAgence="false">
+                    <kt-dropdown-agence
+                        class="col-md-4"
+                        [inputName]="'agenceId'"
+                        [label]="'LABELS.AGENCE' | translate"
+                        [formInstant]="form">
+                    </kt-dropdown-agence>
+                </ng-container>
+
+                <!-- is client a Sous Traitant -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    [label]="'LABELS.SOUS_TRAITANT' | translate"
+                    [inputName]="'isSousTraitant'"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="save()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.ADD'| translate }}"
+            cdkFocusInitial>
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+
+    </div>
+
+    </kt-custom-modal>

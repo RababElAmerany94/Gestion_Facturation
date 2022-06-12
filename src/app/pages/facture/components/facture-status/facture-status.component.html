@@ -1,0 +1,19 @@
+<span class="kt-badge kt-badge--inline kt-badge--pill status-brouillon" *ngIf="factureStatus.BROUILLON == status" >
+    {{ 'STATUS.BROUILLON' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill status-encours" *ngIf="factureStatus.ENCOURS == status" >
+    {{ 'STATUS.ENCOURS' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill status-cloture" *ngIf="factureStatus.CLOTUREE == status" >
+    {{ 'STATUS.CLOTUREE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill status-enretard" *ngIf="factureStatus.ENRETARD == status" >
+    {{ 'STATUS.ENRETARD' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill status-annulee" *ngIf="factureStatus.ANNULEE == status" >
+    {{ 'STATUS.ANNULEE' | translate }}
+</span>

@@ -1,0 +1,75 @@
+<kt-custom-modal [title]="'TABLE_ARTICLE.LIST_ARTICLE' | translate">
+
+    <div
+        mat-dialog-content class="dialog-body kt-mycart"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000"
+        [infiniteScrollContainer]="'.dialog-body'"
+        [fromRoot]="true"
+        (scrolled)="loadMore()">
+
+        <!-- search field -->
+        <kt-searchbar [searchControl]="searchControl" ></kt-searchbar>
+        <!-- end search field -->
+
+        <!-- list of articles -->
+        <div class="kt-mycart__body">
+
+            <div class="kt-mycart__item" *ngFor="let item of articles ;let i=index" >
+                <div class="kt-mycart__container">
+                    <div class="kt-mycart__info w-100">
+
+                        <a class="kt-mycart__title">
+                            {{ item?.designation }}
+                        </a>
+
+                        <span class="kt-mycart__desc" [innerHTML]="item?.description | truncate:25" ></span>
+
+                        <div class="kt-mycart__action">
+                            <span class="kt-mycart__price">{{ item?.totalTTC | RoundingNumber | Currency }}</span>
+                            <span class="kt-mycart__text">{{ 'LABELS.POUR' | translate }}</span>
+                            <span class="kt-mycart__quantity">
+                                <input
+                                    type="number"
+                                    ktAcceptIntInput
+                                    (change)="addQuantity(i,0)"
+                                    (input)="addQuantity(i,0)"
+                                    [value]="item?.qte"
+                                    [(ngModel)]="item.qte"
+                                    class="form-control input-quantity">
+                            </span>
+                            <a (click)="addQuantity(i,-1)" class="btn btn-label-success btn-icon">−</a>
+                            <a (click)="addQuantity(i,+1)" class="btn btn-label-success btn-icon">+</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- end list of articles -->
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="save()"
+            [matTooltip]="'LABELS.SAUVGARDE'| translate"
+            (click)="save()">{{ 'LABELS.SAUVGARDE' | translate }}
+        </button>
+
+    </div>
+
+</kt-custom-modal>

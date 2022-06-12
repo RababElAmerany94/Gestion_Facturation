@@ -1,0 +1,26 @@
+<kt-filters-dashboard
+    [showFilterClient]="showFilterClient"
+    (searchEvent)="searchEvent.emit($event)"
+></kt-filters-dashboard>
+
+<div class="row">
+    <div class="col-12">
+        <div class="kt-portlet kt-portlet--fit kt-portlet--head-noborder">
+            <div class="kt-portlet__body kt-portlet__body--fluid">
+                <div class="kt-widget20">
+                    <div class="kt-widget20__content kt-portlet__space-x">
+                        <span class="kt-widget20__number kt-font-brand">{{ numberOfFolder }}</span>
+                        <div class="kt-section__info">{{ 'LABELS.NOMBRE_DOSSIERS' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <kt-chiffre-affaire-chart
+        [dataChart]="chiffreAffaireStatistics"
+        class="col-md-12">
+    </kt-chiffre-affaire-chart>
+</div>

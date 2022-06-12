@@ -1,0 +1,20 @@
+{
+    "TITLE": "Avoirs",
+    "LIST": {
+        "TITLE": "Liste des avoirs",
+        "DELETE": {
+            "HEADER": "Supprimer une avoir",
+            "MESSAGE": "Êtes-vous sûr supprimer cet avoir ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter avoir"
+    },
+    "EDIT": {
+        "TITLE": "Modifier avoir"
+    },
+    "SHOW": {
+        "TITLE": "Détails avoir"
+    },
+    "LABELS": {}
+}

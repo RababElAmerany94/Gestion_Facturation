@@ -1,0 +1,59 @@
+<kt-custom-modal [title]="title">
+    <div mat-dialog-content class="dialog-body">
+
+        <form [formGroup]="form">
+
+            <div class="row">
+
+                <!-- À -->
+                <kt-label-tag
+                    class="col-md-12"
+                    (tagsEvent)="addEmail($event)"
+                    [tags]="emails"
+                    [inputName]="'emailTo'"
+                    [label]="'LABELS.A_ACCENT' | translate"
+                    [formInstant]="form">
+                </kt-label-tag>
+
+                <!-- objet -->
+                <kt-custom-input
+                    class="col-md-12"
+                    [inputName]="'subject'"
+                    [label]="'LABELS.OBJET' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- message -->
+                <kt-custom-editor-text
+                    class="col-md-12"
+                    [icon]="'flaticon-email'"
+                    [label]="'LABELS.MESSAGE' | translate"
+                    [inputName]="'body'"
+                    [formInstant]="form">
+                </kt-custom-editor-text>
+
+            </div>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="send()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.ADD'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SEND' | translate }}</button>
+
+    </div>
+
+</kt-custom-modal>

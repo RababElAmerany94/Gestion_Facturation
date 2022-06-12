@@ -1,0 +1,10 @@
+<!-- title -->
+<h3 class="kt-subheader__title mb-4"> {{ 'DOCUMENT_PARAMETER.TITLE' | translate }} </h3>
+
+<!-- end title -->
+<kt-edit-document-params
+    [documentParameter]="documentParametrage"
+    (addEvent)="addDocumentParameter($event)"
+    (editEvent)="editDocumentParameter($event)"
+    (cancelEvent)="modeList()">
+</kt-edit-document-params>

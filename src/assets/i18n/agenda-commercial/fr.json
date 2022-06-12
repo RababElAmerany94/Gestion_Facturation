@@ -1,0 +1,25 @@
+{
+    "TITLE": "Agenda",
+    "LIST": {
+        "TITLE": "Liste des événements",
+        "DELETE": {
+            "HEADER": "Supprimer un événement",
+            "MESSAGE": "Êtes-vous sûr supprimer ce événement ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter un événement"
+    },
+    "EDIT": {
+        "TITLE": "Modifier un événement"
+    },
+    "SHOW": {
+        "TITLE": "Détails d'un événement"
+    },
+    "LABELS": {
+        "SYNC_GOOGLE_CALENDAR": "Synchroniser avec GOOGLE Agenda"
+    },
+    "CHECK_RDV_IS_EXIST": {
+        "QUESTION": "Un rendez-vous est déjà positionné  à la même heure pour un même client et responsable, souhaitez-vous valider quand même ?"
+    }
+}

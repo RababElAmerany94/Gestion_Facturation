@@ -1,0 +1,30 @@
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-brouillon" *ngIf="devisStatus.Brouillon == status" >
+    {{ 'STATUS.BROUILLON' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-encours" *ngIf="devisStatus.Encours == status" >
+    {{ 'STATUS.ENCOURS' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-enretard" *ngIf="devisStatus.Enretard == status" >
+    {{ 'STATUS.ENRETARD' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-assigne" *ngIf="devisStatus.Valider == status" >
+    {{ 'STATUS.VALIDE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-signe" *ngIf="devisStatus.Signe == status" >
+    {{ 'STATUS.SIGNE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-perdu" *ngIf="devisStatus.EnPerdu == status" >
+    {{ 'STATUS.PERDU' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-facture" *ngIf="devisStatus.Facture == status" >
+    {{ 'STATUS.FACTURE' | translate }} 
+    <ng-container *ngIf="nouveauAvancementPercent" >
+        {{ nouveauAvancementPercent | RoundingNumber }} %
+    </ng-container>
+</span>

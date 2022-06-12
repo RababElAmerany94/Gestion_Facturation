@@ -1,0 +1,23 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'SOURCE_DU_LEAD.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event">
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-source-du-lead
+        [data]="sourceDuLeads"
+        (filters)="getsourceDuLead($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteEvent($event)"
+        (showEvent)="showEvent($event)">
+    </kt-index-source-du-lead>
+</ng-container>
+<!-- end list -->

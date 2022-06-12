@@ -1,0 +1,37 @@
+<kt-custom-modal [title]="'LABELS.PLANNING_COMMERCIALS' | translate:{date : dateRDV | date:'shortDate'} ">
+    <div mat-dialog-content class="dialog-body">
+
+        <!-- search field -->
+        <div class="d-flex flex-row flex-row-reverse mb-3">
+            <kt-searchbar
+                class="w-40"
+                [searchControl]="searchControl">
+            </kt-searchbar>
+        </div>
+        <!-- end search field -->
+
+        <ng-container *ngFor="let item of commercialsPlanning" >
+
+            <div class="d-flex flex-row justify-content-between p-2 mb-1 bg-warning text-light rounded">
+                <span class="font-size-lg">{{ item?.fullName }}</span>
+                <mat-icon (click)="selectCommercial(item)" style="cursor: pointer;">
+                    event
+                </mat-icon>
+            </div>
+
+            <kt-commercials-planning-table-details
+                [commercialPlanning]="item"
+                [showTitle]="false">
+            </kt-commercials-planning-table-details>
+
+        </ng-container>
+
+    </div>
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+    </div>
+</kt-custom-modal>

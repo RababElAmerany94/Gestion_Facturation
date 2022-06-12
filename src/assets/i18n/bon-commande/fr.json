@@ -1,0 +1,21 @@
+{
+    "TITLE": "Bons de commande",
+    "LIST": {
+        "TITLE": "Liste des bons de commande",
+        "DELETE": {
+            "HEADER": "Supprimer bon de commande",
+            "QUESTION": "Êtes-vous sûr supprimer cette bon de commande ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter bon de commande"
+    },
+    "EDIT": {
+        "TITLE": "Modifier bon de commande"
+    },
+    "SHOW": {
+        "TITLE": "Détails bon de commande"
+    },
+    "LABELS": {
+    }
+}

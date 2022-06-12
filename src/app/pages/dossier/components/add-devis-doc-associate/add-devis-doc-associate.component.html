@@ -1,0 +1,49 @@
+<kt-custom-modal  [title]=" title | translate">
+
+    <div mat-dialog-content class="dialog-body">
+
+        <mat-radio-group [(ngModel)]="selectedType">
+            <mat-list dense>
+
+                <mat-list-item >
+                    <mat-radio-button [value]="devisType.Normal">
+                        {{ 'DEVIS_TYPE.' + devisType?.Normal | translate }}
+                    </mat-radio-button>
+                </mat-list-item>
+
+                <mat-list-item *ngIf="isPrimeCEE">
+                    <mat-radio-button [value]="devisType.Euro">
+                        {{ 'DEVIS_TYPE.' + devisType?.Euro | translate }}
+                    </mat-radio-button>
+                </mat-list-item>
+
+                <mat-list-item *ngIf="isPrimeCEE">
+                    <mat-radio-button [value]="devisType.Reduction">
+                        {{ 'DEVIS_TYPE.' + devisType?.Reduction | translate }}
+                    </mat-radio-button>
+                </mat-list-item>
+
+            </mat-list>
+        </mat-radio-group>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+			mat-raised-button
+            mat-dialog-close
+            color="primary">
+			{{ "LABELS.CLOSE" | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="add()">
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+    </div>
+
+</kt-custom-modal>

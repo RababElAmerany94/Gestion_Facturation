@@ -1,0 +1,79 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-folder'"
+        [title]="'TITLES.DOSSIER_PV' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container *ngIf="dossierPV?.ficheControle != null" ktPortletTools>
+            <button
+                [matTooltip]="'TITLES.FICHE_CONTROLE' | translate"
+                mat-mini-fab
+                color="success"
+                class="ml-1"
+                (click)="showFicheDeControle()">
+                <i class="fa fa-file"></i>
+            </button>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <form [formGroup]="form" class="kt-form">
+            <div class="row">
+
+                <kt-table-article
+                    class="col-md-12"
+                    [data]="{
+                        articles:articles
+                    }"
+                    [readOnly]="true"
+                    [showTotals]="true"
+                    [disableRemiseGlobal]="true">
+                </kt-table-article>
+
+                <kt-pictures-view
+                    class="col-md-12"
+                    *ngIf="stringHelper.hasdata(this.anomalies)"
+                    [data]="anomalies">
+                </kt-pictures-view>
+
+                <kt-custom-checkbox
+                    class="col-md-6"
+                    [label]="'LABELS.IS_SATISFIED' | translate"
+                    [formInstant]="form"
+                    [inputName]="'isSatisfied'">
+                </kt-custom-checkbox>
+
+                <ng-container *ngIf="!satisfied">
+                    <kt-custom-input
+                        class="col-md-6"
+                        [inputName]="'reasonNoSatisfaction'"
+                        [label]="'LABELS.REASON_NO_SATISFACTION' | translate"
+                        [formInstant]="form">
+                    </kt-custom-input>
+                </ng-container>
+            </div>
+        </form>
+
+        <div class="row">
+
+            <div class="col-6">
+                <label>{{ 'LABELS.NAME_CLIENT_SIGNE' | translate: { name: dossierPV?.nameClientSignature } }}</label>
+                <div class="signature-pad">
+                    <img [src]="signatureClient" class="w-100">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <label>{{ 'LABELS.TECHNICIEN_SIGNATURE' | translate }}</label>
+                <div class="signature-pad">
+                    <img [src]="signatureTechnicien" class="w-100">
+                </div>
+            </div>
+
+        </div>
+
+    </kt-portlet-body>
+</kt-portlet>

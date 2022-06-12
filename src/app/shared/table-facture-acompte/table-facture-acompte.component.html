@@ -1,0 +1,97 @@
+<kt-portlet>
+
+    <kt-portlet-body>
+        <h5>
+            {{ 'LABELS.TOTAL_DU_DEVIS' | translate}}
+            {{ currentFactureDevis?.devis?.reference }}
+        </h5>
+        <div class="d-flex flex-row-reverse bd-highlight">
+            {{ currentFactureDevis?.devis?.totalTTC | RoundingNumber | Currency }}
+        </div>
+    </kt-portlet-body>
+
+</kt-portlet>
+
+<kt-portlet>
+
+    <kt-portlet-header
+    [icon]="'flaticon2-shopping-cart-1'"
+    [sticky]="false"
+    [title]="'LABELS.SITUATION_A_FACTURER' | translate"
+    [class]="'kt-portlet__head--lg'">
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+
+                <tr class="text-left" *ngFor="let article of articles">
+                    <th>{{ article?.designation }}</th>
+                    <td class="text-right text-nowrap">
+                        {{ article?.totalTTC | RoundingNumber | Currency}}<br>
+                        {{ avancementPercent | RoundingNumber }} %
+                    </td>
+                </tr>
+                <!-- TOTAL HT -->
+                <tr>
+                    <th class="text-left">
+                        {{ 'LABELS.PRIX_HT' | translate }}
+                    </th>
+                    <td class="text-right text-nowrap">
+                        {{ resultCalculation?.totalHT | RoundingNumber | Currency}}
+                    </td>
+                </tr>
+
+                <!-- total tva -->
+                <tr>
+                    <th class="text-left">
+                        {{ 'LABELS.AMOUNT_TVA' | translate }}
+                    </th>
+                    <td class="text-right text-nowrap">
+                        {{ getTotalTva() | RoundingNumber | Currency}}
+                    </td>
+                </tr>
+
+                <!-- total ttc -->
+                <tr>
+                    <th class="text-left">
+                        {{ 'LABELS.PRIX_TTC' | translate }}
+                    </th>
+                    <td class="text-right text-nowrap">
+                        {{ resultCalculation?.totalTTC | RoundingNumber | Currency}}
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </kt-portlet-body>
+
+</kt-portlet>
+
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="false"
+        [title]="'LABELS.TOTAL_NOUVEAU_AVANCEMENT' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <div ktPortletTools class="d-flex justify-content-between bd-highlight mb-2">
+            <span
+                class="btn btn-sm btn-primary px-2" disabled>
+                {{ nouveauAvancementPercent | RoundingNumber }} %
+            </span>
+        </div>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <mat-progress-bar
+            [mode]="mode"
+            [value]="nouveauAvancementPercent">
+        </mat-progress-bar>
+    </kt-portlet-body>
+
+</kt-portlet>

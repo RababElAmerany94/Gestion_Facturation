@@ -1,0 +1,138 @@
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon2-document'"
+        [title]="'DOCUMENT_PARAMETER.FACTURE.TITLE' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+            <div (click)="showCardBody = !showCardBody">
+                <i class="fas" [ngClass]="{'fa-minus': showCardBody,'fa-plus': !showCardBody}">
+                </i>
+            </div>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body  *ngIf="showCardBody">
+        <!-- .............................................. -->
+        <mat-tab-group [dynamicHeight]="true">
+
+            <!-- .............................................. -->
+            <mat-tab [label]="'LABELS.FACTURE_PARAMS' | translate">
+                <ng-template matTabContent>
+                    <!--begin::Form-->
+                        <form class="kt-form" [formGroup]="formFacture" >
+                            <div class="row">
+
+                                <h6 class="ml-3">
+                                    <i class="flaticon-calendar-with-a-clock-time-tools" ></i>
+                                    {{ 'DOCUMENT_PARAMETER.LABELS.DELAY_VALIDATE_FACTURE' | translate }}
+                                </h6>
+
+                                <kt-delay-dropdown
+                                    class="col-md-12"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.DELAI_VALIDITE' | translate"
+                                    [formInstant]="formFacture"
+                                    [inputName]="'validateDelay'">
+                                </kt-delay-dropdown>
+
+                                <kt-custom-editor-text
+                                    class="col-md-12"
+                                    [icon]="'flaticon2-document'"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.ENTETE_FACTURE' | translate"
+                                    [placeholder]="'DOCUMENT_PARAMETER.LABELS.ENTETE' | translate"
+                                    [inputName]="'header'"
+                                    [formInstant]="formFacture">
+                                </kt-custom-editor-text>
+
+                                <kt-custom-editor-text
+                                    class="col-md-12"
+                                    [icon]="'flaticon2-document'"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.PIED_DE_PAGE' | translate"
+                                    [placeholder]="'DOCUMENT_PARAMETER.LABELS.PIED_DE_PAGE' | translate"
+                                    [inputName]="'footer'"
+                                    [formInstant]="formFacture">
+                                </kt-custom-editor-text>
+
+                                <kt-custom-editor-text
+                                    class="col-md-12"
+                                    [icon]="'flaticon-notes'"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.NOTE_FACTURE' | translate"
+                                    [placeholder]="'LABELS.NOTE' | translate"
+                                    [inputName]="'note'"
+                                    [formInstant]="formFacture">
+                                </kt-custom-editor-text>
+
+                                <kt-custom-editor-text
+                                    class="col-md-12"
+                                    [icon]="'flaticon2-list-3'"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.REGLEMENT_CONDITION_FACTURE' | translate "
+                                    [placeholder]="'DOCUMENT_PARAMETER.LABELS.CONDITION_REGLEMENT' | translate"
+                                    [inputName]="'regulationCondition'"
+                                    [formInstant]="formFacture">
+                                </kt-custom-editor-text>
+
+                                <h6 class="ml-3">
+                                    <i class="flaticon-mail-1" ></i>
+                                    {{ 'DOCUMENT_PARAMETER.LABELS.SEND_EMAIL' | translate }}
+                                </h6>
+
+                                <kt-custom-input
+                                    class="col-md-12"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.SUJET_EMAIL' | translate"
+                                    [inputName]="'sujetMail'"
+                                    [formInstant]="formFacture">
+                                </kt-custom-input>
+
+                                <kt-custom-textarea
+                                    class="col-md-12"
+                                    [inputName]="'contenuMail'"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.CONTENU_EMAIL' | translate"
+                                    [formInstant]="formFacture">
+                                </kt-custom-textarea>
+
+
+                                <h6 class="ml-3" >
+                                    <i class="flaticon-mail" ></i>
+                                    {{ 'DOCUMENT_PARAMETER.LABELS.ENVOI_RELANCE' | translate }}
+                                </h6>
+
+                                <kt-custom-input
+                                    class="col-md-12"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.SUJET_RELANCE' | translate"
+                                    [inputName]="'sujetRelance'"
+                                    [formInstant]="formFacture">
+                                </kt-custom-input>
+
+                                <kt-custom-textarea
+                                    class="col-md-12"
+                                    [inputName]="'contenuRelance'"
+                                    [label]="'DOCUMENT_PARAMETER.LABELS.CONTENU_RELANCE' | translate"
+                                    [formInstant]="formFacture">
+                                </kt-custom-textarea>
+
+                            </div>
+                        </form>
+                    <!-- end form-->
+                </ng-template>
+            </mat-tab>
+            <!-- .............................................. -->
+
+            <!-- .............................................. -->
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span (click)="selectedTabs()">{{'LABELS.VISUALISER' | translate}}</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    <ng-content></ng-content>
+                </ng-template>
+            </mat-tab>
+            <!-- .............................................. -->
+
+        </mat-tab-group>
+        <!-- .............................................. -->
+
+    </kt-portlet-body>
+</kt-portlet>

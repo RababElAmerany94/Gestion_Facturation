@@ -1,0 +1,280 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-users-1'"
+        [title]="'LABELS.INFOGENERAL' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+            <button
+                mat-mini-fab
+                *ngIf="isShowMode() && !isClientOblige()"
+                color="primary"
+                [matTooltip]="'LABELS.ADD_DOSSIER' | translate"
+                (click)="addDossier()">
+                <i class="material-icons"> create_new_folder </i>
+            </button>&nbsp;&nbsp;
+
+            <button
+                mat-mini-fab
+               *ngIf="isShowMode()"
+                color="success"
+                [matTooltip]="'LABELS.EDIT' | translate"
+                (click)="editClient()">
+                <i class="material-icons"> create </i>
+            </button>
+
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+            <div class="row">
+
+                <!-- reference -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'reference'"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- firstname -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'firstName'"
+                    (changeEvent)="generateCodeComptable()"
+                    [label]="'LABELS.FIRSTNAME' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- lastname -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'lastName'"
+                    *ngIf="isClientParticulier()"
+                    [label]="'LABELS.LASTNAME' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- charge type client-->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    [inputName]="'type'"
+                    [label]="'LABELS.TYPE' | translate"
+                    [formInstant]="form"
+                    [showAny]="false"
+                    (changeEvent)="generateChampsClient()"
+                    [data]="clientType">
+                </kt-custom-drop-down>
+
+                <!-- charge genre client-->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    [inputName]="'genre'"
+                    [label]="'LABELS.GENRE' | translate"
+                    [formInstant]="form"
+                    *ngIf="!isClientOblige()"
+                    [data]="genreClient">
+                </kt-custom-drop-down>
+
+                <!-- Mode de régelement-->
+                <kt-regulation-mode-drop-down
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'regulationModeId'"
+                    [label]="'LABELS.REGULATION_MODE' | translate">
+                </kt-regulation-mode-drop-down>
+
+                <!-- phoneNumber-->
+                <kt-custom-input
+                    class="col-md-4"
+                    type= number
+                    [inputName]="'phoneNumber'"
+                    [label]="'LABELS.PHONE_NUMBER_1' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- origin -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'origin'"
+                    [label]="'LABELS.ORIGINE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- siret-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'siret'"
+                    *ngIf="!isClientParticulier()"
+                    [label]="'LABELS.SIRET' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- email-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'email'"
+                    [label]="'CONTACTS.EMAIL' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- website -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'webSite'"
+                    *ngIf="!isClientParticulier()"
+                    [label]="'LABELS.WEBSITE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- code Comptable-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'codeComptable'"
+                    [label]="'LABELS.CODE_COMPTABLE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- commercial -->
+                <kt-dropdown-commercial
+                    class="col-md-4"
+                    [inputName]="'commercials'"
+                    [multiSelect]="true"
+                    [label]="'LABELS.COMMERCIAL' | translate"
+                    *ngIf="!isClientOblige()"
+                    [formInstant]="form">
+                </kt-dropdown-commercial>
+
+                <!-- agence -->
+                <ng-container *ktIsForAgence="false">
+                    <kt-dropdown-agence
+                        class="col-md-4"
+                        *ngIf="!isClientOblige()"
+                        [inputName]="'agenceId'"
+                        [label]="'LABELS.AGENCE' | translate"
+                        [formInstant]="form">
+                    </kt-dropdown-agence>
+                </ng-container>
+
+                <!-- is client a Sous Traitant -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    [label]="'LABELS.SOUS_TRAITANT' | translate"
+                    [inputName]="'isSousTraitant'"
+                    *ngIf="!isClientOblige()"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+            </div>
+        </form>
+
+    </kt-portlet-body>
+</kt-portlet>
+
+<!----------------------------------- display information site installation -------------------------------------------->
+
+<ng-container *ngIf="isClientProfessionnel() || isClientParticulier()">
+    <kt-info-site-installation
+        [form]="form">
+    </kt-info-site-installation>
+</ng-container>
+
+<ng-container *ngIf="isClientOblige()">
+
+    <kt-portlet>
+
+        <kt-portlet-header
+            [sticky]="true"
+            [icon]="'flaticon-file-1'"
+            [title]="'TITLES.INFORMATIONS_SITE_INSTALLATION' | translate"
+            [class]="'kt-portlet__head--lg'">
+        </kt-portlet-header>
+
+        <kt-portlet-body>
+            <!--begin::Form-->
+            <form class="kt-form" [formGroup]="form">
+                <div class="row">
+
+                    <!-- charge label Prime CEE -->
+                    <kt-custom-input
+                        class="col-md-12"
+                        [inputName]="'labelPrimeCEE'"
+                        [label]="'LABELS.PRIME_CEE' | translate"
+                        [formInstant]="form">
+                    </kt-custom-input>
+
+                    <!-- Note devis -->
+                    <kt-custom-editor-text
+                        class="col-md-12"
+                        [disable]="isShowMode()"
+                        [icon]="'flaticon2-list-3'"
+                        [inputName]="'noteDevis'"
+                        [label]="'LABELS.NOTE_DEVIS' | translate"
+                        [formInstant]="form">
+                    </kt-custom-editor-text>
+
+                </div>
+            </form>
+            <!--end::Form-->
+
+        </kt-portlet-body>
+    </kt-portlet>
+</ng-container>
+
+<!------------------------------------------------------------------------------>
+
+<!-------------------------- display contact ----------------------------------->
+<kt-contacts
+    (changeContact)="setContact($event)"
+    [mode]="mode"
+    [isForClient]="true"
+    [client]="form.value"
+    [contacts]="contacts">
+</kt-contacts>
+<!------------------------------------------------------------------------------>
+
+<!--------------------------- display address ---------------------------------->
+<kt-addresses
+    (changeAddress)="setAddress($event)"
+    [mode]="mode"
+    [addresses]="address">
+</kt-addresses>
+<!------------------------------------------------------------------------------->
+
+<!------------------------- display relation client ----------------------------->
+<kt-relation-client
+    (changeRelationClient)="setClientRelation($event)"
+    [mode]="mode"
+    [clientRelation]="relations">
+</kt-relation-client>
+
+<!-- ......................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()"
+            *ngIf="isAddMode()">
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()"
+            *ngIf="isEditMode()">
+            {{ 'LABELS.EDIT' | translate }}
+        </button>
+        <button
+            class="btn btn-secondary"
+            (click)="cancel()">
+            {{ 'LABELS.CANCEL' | translate }}
+        </button>
+    </div>
+</div>
+<!-- ....................................................................... -->

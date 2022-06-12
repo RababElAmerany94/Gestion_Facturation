@@ -1,0 +1,13 @@
+{
+    "TITLE": "Devis",
+    "LIST": {
+        "TITLE": "Liste des devis",
+        "DELETE": {
+            "HEADER": "Supprimer devis"
+        }
+    },
+    "DELETE": {
+        "HEADER_TEXT": "Supprimer devis",
+        "QUESTION": "Êtes-vous sûr supprimer ce devis ?"
+    }
+}

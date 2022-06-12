@@ -1,0 +1,9 @@
+<!-- title -->
+<h3 class="kt-subheader__title mb-4"> {{ 'NUMERATION.TITLE' | translate }} </h3>
+<!-- end title -->
+       
+<kt-numerotation-index 
+    [numerations]="numerations"
+    (addEvent)="addNumeration($event)"
+    (editEvent)="updateNumeration($event.id,$event.numerotation)">
+</kt-numerotation-index>

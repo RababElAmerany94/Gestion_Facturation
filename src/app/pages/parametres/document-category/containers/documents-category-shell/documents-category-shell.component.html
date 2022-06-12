@@ -1,0 +1,24 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'CATEGORY_DOCUMENTS.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event" >
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-documents-category
+        [data]="categoriesDocuments"
+        (filters)="getCategoryDocuments($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteEvent($event)"
+        (showEvent)="showEvent($event)">
+    </kt-index-documents-category>
+</ng-container>
+<!-- end list -->
+

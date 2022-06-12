@@ -1,0 +1,27 @@
+<!-- .......................................................................................... -->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon2-zig-zag-line-sign'"
+        [title]="'LABELS.SIGNATURE' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!-- signature pad-->
+        <div class="row">
+
+            <div class="col-12">
+                <label>{{ 'LABELS.NAME_CLIENT_SIGNE' | translate: { name: nameClientSignature } }}</label>
+                <div class="signature-pad">
+                    <img [src]="signature" class="w-100">
+                </div>
+            </div>
+
+        </div>
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- .......................................................................................... -->

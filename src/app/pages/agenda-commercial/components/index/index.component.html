@@ -1,0 +1,87 @@
+<ng-container [ngSwitch]="typeTabs">
+    <div *ngSwitchCase="typetabs.Appels">
+        <kt-filter-agenda-comercial
+            [showFilterClient]="!clientId"
+            [title]="'LABELS.APPELS'"
+            [icon]="'fa fa-phone'"
+            (searchEvent)="searchEvent($event)">
+        </kt-filter-agenda-comercial>
+    </div>
+    <div *ngSwitchCase="typetabs.RendezVous">
+        <kt-filter-agenda-comercial
+            [showFilterClient]="!clientId"
+            [title]="'LABELS.RENDEZVOUS'"
+            [icon]="'fa fa-clock'"
+            (searchEvent)="searchEvent($event)">
+        </kt-filter-agenda-comercial>
+    </div>
+    <div *ngSwitchCase="typetabs.Taches">
+        <kt-filter-agenda-comercial
+            [showFilterClient]="!clientId"
+            [title]="'TITLES.TACHES'"
+            [icon]="'fa fa-tasks'"
+            (searchEvent)="searchEvent($event)">
+        </kt-filter-agenda-comercial>
+    </div>
+</ng-container>
+
+<kt-data-table
+    [data]="agendasDataTables"
+    [columns]="columns"
+    [name]="routeName.AgendaCommercial"
+    [title]="title | translate"
+    (changeEvent)="changeFiltersEvent($event)" >
+
+    <ng-template #statusTemplate let-status="status">
+        <kt-agenda-commercial-status
+            [status]="status" >
+        </kt-agenda-commercial-status>
+    </ng-template>
+
+    <ng-template #actionsTemplate let-element="element">
+
+        <button
+            type="button"
+            mat-icon-button
+            color="primary"
+            *ngIf="canUpdate()"
+            (click)="editClickEvent(element?.id)"
+            [matTooltip]="'LABELS.EDIT' | translate">
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+            mat-icon-button
+            color="warn"
+            type="button"
+            *ngIf="canDelete()"
+            (click)="deleteTache(element?.id)"
+            [matTooltip]="'LABELS.DELETE' | translate">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+        <button
+            mat-icon-button
+            color="accent"
+            type="button"
+            *ngIf="canRead()"
+            (click)="showClick(element?.id)"
+            [matTooltip]="'LABELS.SHOW' | translate" >
+            <mat-icon>remove_red_eye</mat-icon>
+        </button>
+
+    </ng-template>
+
+    <ng-container class="dataTables-actions" *ngIf="canCreate()">
+
+        <button
+            mat-mini-fab
+            color="primary"
+            class="ml-3"
+            (click)="addClick()" >
+            <i class="material-icons"> add </i>
+        </button>
+
+    </ng-container>
+
+</kt-data-table>

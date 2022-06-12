@@ -1,0 +1,66 @@
+<!-- ................................. general info ................................. -->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-user'"
+        [title]="'TITLES.GENERAL_INFO' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+
+            <div class="row">
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [type]="'number'"
+                    (changeEvent)="subscribePrixTVA()"
+                    [label]="'LABELS.TVA' | translate"
+                    [inputName]="'tva'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    (changeEvent)="subscribePrixHt()"
+                    [type]="'number'"
+                    [label]="'LABELS.PRIX_HT' | translate"
+                    [inputName]="'prixHT'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    (changeEvent)="subscribePrixTTC()"
+                    [type]="'number'"
+                    [label]="'LABELS.PRIX_TTC' | translate"
+                    [inputName]="'prixTTC'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- ................................................................................ -->
+
+<!-- .......................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()">
+            {{ 'LABELS.EDIT' | translate }}
+        </button>
+        <button class="btn btn-secondary" (click)="cancel()">{{ 'LABELS.CANCEL' | translate }}</button>
+    </div>
+</div>
+<!-- ....................................................................... -->

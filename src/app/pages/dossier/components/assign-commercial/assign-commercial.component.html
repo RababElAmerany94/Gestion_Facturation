@@ -1,0 +1,64 @@
+<kt-custom-modal [title]="'LABELS.ASSIGNER_DOSSIER' |translate">
+    <div mat-dialog-content class="dialog-body">
+        <form [formGroup]="form">
+
+            <div class="row">
+
+                <!-- date RDV -->
+                <kt-custom-date-time
+                    class="col-md-12"
+                    [formInstant]="form"
+                    [pickerType]= "'both'"
+                    [inputName]="'dateRDV'"
+                    [label]="'LABELS.DATE_RDV' | translate">
+                </kt-custom-date-time>
+
+                <!-- commercials planning-->
+                <kt-commercials-planning-dropdown
+                    class="col-md-12"
+                    [inputName]="'commercialId'"
+                    [label]="'LABELS.USER' | translate"
+                    [formInstant]="form"
+                    [dateRDV]="dateRDV"
+                    (changeEvent)="setCommercialPlanning($event)">
+                </kt-commercials-planning-dropdown>
+
+            </div>
+
+            <div class="d-flex flex-row-reverse mb-1">
+                <a  (click)="openCommercialPlanningDetails()"
+                    href="javascript:void(0)"
+                    class="btn btn-sm btn-primary">
+                    <i class="far fa-calendar"></i>
+                    {{ 'LABELS.SHOW' | translate }}
+                </a>
+            </div>
+
+            <kt-commercials-planning-table-details
+                [commercialPlanning]="selectedCommercialPlanning"
+                [showTitle]="true"
+                [title]="'LABELS.PLANNING_COMMERCIAL' | translate: { date: dateRDV | date: 'shortDate', name: selectedCommercialPlanning?.fullName }">
+            </kt-commercials-planning-table-details>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            (debounceClick)="save()"
+            color="primary"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}</button>
+    </div>
+
+</kt-custom-modal>

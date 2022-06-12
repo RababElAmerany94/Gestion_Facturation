@@ -1,0 +1,83 @@
+<kt-breadcrumb-list
+    [showTitle]="!isListMode()"
+    [title]="'TITLES.AGENDA' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+
+<ng-container *ngIf="isListMode()">
+
+    <kt-agenda-commercial-tabs
+        [changeColor]='changeColor'
+        [selectedTab]="selectedTabs"
+        (changeSelected)="selectedTabs=$event">
+
+        <kt-agenda
+            Agenda
+            [clientId]="clientId"
+            [dossierId]="dossierId"
+            [getAgendaRefresh]="isGetAgendaRefresh"
+            (editEvent)="editEvent($event)"
+            (addEvent)="addEvent($event)"
+            (updateDateEvent)="updateDate($event)"
+            (showEvent)="showEvent($event)">
+        </kt-agenda>
+
+        <kt-agenda-commercial-index
+            Taches
+            *ngIf="selectedTabs == selectedTabsTpe.Taches"
+            [clientId]="clientId"
+            [data]="echangeCommercials"
+            [type]="selectedTabs"
+            (filters)="getEchangeCommercial($event)"
+            (addEvent)="addEvent()"
+            (editEventIndex)="editEvent($event)"
+            (deleteEvent)="deleteEchangeCommercial($event)"
+            (showEvent)="showEvent($event)">
+        </kt-agenda-commercial-index>
+
+        <kt-agenda-commercial-index
+            RendezVous
+            *ngIf="selectedTabs == selectedTabsTpe.RendezVous"
+            [clientId]="clientId"
+            [data]="echangeCommercials"
+            [type]="selectedTabs"
+            (filters)="getEchangeCommercial($event)"
+            (addEvent)="addEvent()"
+            (editEventIndex)="editEvent($event)"
+            (deleteEvent)="deleteEchangeCommercial($event)"
+            (showEvent)="showEvent($event)">
+        </kt-agenda-commercial-index>
+
+        <kt-agenda-commercial-index
+            Appels
+            *ngIf="selectedTabs == selectedTabsTpe.Appels"
+            [clientId]="clientId"
+            [data]="echangeCommercials"
+            [type]="selectedTabs"
+            (filters)="getEchangeCommercial($event)"
+            (addEvent)="addEvent()"
+            (editEventIndex)="editEvent($event)"
+            (deleteEvent)="deleteEchangeCommercial($event)"
+            (showEvent)="showEvent($event)">
+        </kt-agenda-commercial-index>
+
+    </kt-agenda-commercial-tabs>
+
+</ng-container>
+
+<ng-container *ngIf="isShowMode()">
+
+    <kt-agenda-commercial-show
+        info
+        [mode]="mode"
+        [form]="form"
+        [Data]="echangeCommercial"
+        (saveMemo)="saveMemoToEchangeCommercial($event)"
+        (changeStatusEvent)="ChangeStatusEchangeCommercial($event)"
+        (saveAddresseEvent)="saveAddresseEvent($event)"
+        (saveContactEvent)="saveContactEvent($event)">
+    </kt-agenda-commercial-show>
+
+</ng-container>

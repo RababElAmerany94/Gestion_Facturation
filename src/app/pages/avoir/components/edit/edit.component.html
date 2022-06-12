@@ -1,0 +1,194 @@
+
+<!--.................. INFO avoir ....................-->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'TITLES.INFORAMTION_AVOIR' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container *ngIf="isShowMode()" ktPortletTools>
+
+            <kt-avoir-status [status]="avoir?.status" >
+            </kt-avoir-status>
+
+            <button
+                [matTooltip]="'LABELS.ACTIONS' | translate"
+                mat-mini-fab
+                color="primary"
+                class="ml-3"
+                [matMenuTriggerFor]="menu" >
+                <i class="flaticon-more"></i>
+            </button>
+
+            <mat-menu #menu="matMenu" class="custom-material-menu" >
+                <kt-custom-mat-menu [items]="menuItems" ></kt-custom-mat-menu>
+            </mat-menu>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+            <div class="row">
+
+                <!--the reference of avoir -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [inputName]="'reference'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!--the client of avoir -->
+                <ng-container >
+                    <kt-client-dropdown
+                        class="col-md-4"
+                        [client]="avoir?.client"
+                        [isShow]="isShowMode()"
+                        [inputName]="'clientId'"
+                        [label]="'LABELS.CLIENT' | translate"
+                        [formInstant]="form">
+                    </kt-client-dropdown>
+
+                </ng-container>
+
+                <!--the date of date creation-->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateCreation'"
+                    [label]="'LABELS.CREATION_DATE' | translate">
+                </kt-custom-date-picker>
+
+                <!--the date of deadline -->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateEcheance'"
+                    [label]="'LABELS.DATE_ECHEANCE' | translate">
+                </kt-custom-date-picker>
+
+                <!-- objet -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.OBJET' | translate"
+                    [inputName]="'objet'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+
+<!-- .......................................................................................... -->
+<kt-table-article
+    [remiseType]="remiseType"
+    [remise]="remise"
+    [data]="{
+        articles:articles
+    }"
+    [readOnly]="isShowMode()"
+    [disableRemiseGlobal]="false"
+    (changeEvent)="setResultCalculation($event)">
+</kt-table-article>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-more-v4'"
+        [title]="'TITLES.OTHER' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+
+            <div class="row">
+
+                <kt-custom-editor-text
+                    class="col-md-12"
+                    [icon]="'flaticon2-list-3'"
+                    [label]="'LABELS.CONDITION_REGULATION' | translate"
+                    [inputName]="'reglementCondition'"
+                    [formInstant]="form"
+                    [disable]="isShowMode()">
+                </kt-custom-editor-text>
+
+                <kt-custom-editor-text
+                    class="col-md-12"
+                    [icon]="'flaticon2-list-3'"
+                    [inputName]="'note'"
+                    [label]="'LABELS.NOTE' | translate"
+                    [formInstant]="form"
+                    [disable]="isShowMode()">
+                </kt-custom-editor-text>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+
+<!-- .......................INFO DOCUMENT ASSOCIATE..................... -->
+
+<ng-container
+    *ngIf="isShowMode() && relatedDocs?.length>0" >
+    <kt-shared-related-docs
+        [data]="relatedDocs">
+    </kt-shared-related-docs>
+</ng-container>
+<!-- .......................................................................... -->
+
+<!-- .......................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <div class="kt-section__content kt-section__content--solid">
+
+            <div class="btn-group" role="group">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary btn-small mr-1"
+                    (click)="cancel()">
+                    <i class="fas fa-times" ></i>  {{ 'LABELS.CANCEL' | translate }}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    (debounceClick)="save(status.BROUILLON)"
+                    type="button"
+                    class="btn btn-danger btn-small">
+                    <i class="fas fa-edit" ></i>
+                        {{'STATUS.BROUILLON' |translate}}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    (debounceClick)="save(status.ENCOURS)"
+                    type="button"
+                    class="btn btn-success btn-small">
+                    <i class="fas fa-check" ></i>
+                        {{'STATUS.ENCOURS' |translate}}
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ....................................................................... -->

@@ -1,0 +1,33 @@
+<!-- .............................................. -->
+<mat-tab-group [dynamicHeight]="true" (selectedTabChange)="selectedTabs($event.index)">
+
+    <!-- .............................................. -->
+            <!----- TABS JOURNAL_SALES --->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.JOURNAL_SALES' | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[journalSales]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+            <!-- TABS JOURNAL_BANQUE -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.JOURNAL_BANQUE' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[journalBanque]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+            <!-- TABS JOURNAL_CAISSE -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.JOURNAL_CAISSE' | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[journalCaisse]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+</mat-tab-group>
+<!-- .............................................. -->

@@ -1,0 +1,39 @@
+<kt-data-table
+	[data]="unites"
+	[columns]="columns"
+	[name]="routeName.Unites"
+	[title]="'UNITE.LIST_TITLE' | translate"
+	(changeEvent)="changeFiltersEvent($event)">
+
+    <ng-template #actionsTemplate let-element="element">
+
+        <ng-container>
+            <button
+                type="button"
+                mat-icon-button
+                color="primary"
+                *ngIf="canUpdate()"
+                (click)="editClick(element)"
+                [matTooltip]="'LABELS.EDIT' | translate">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                color="warn"
+                type="button"
+                *ngIf="canDelete()"
+                (click)="deleteClick(element?.id)"
+                [matTooltip]="'LABELS.DELETE' | translate">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </ng-container>
+
+    </ng-template>
+
+    <ng-container class="dataTables-actions" *ngIf="canCreate()">
+        <button mat-mini-fab color="primary" class="ml-3" (click)="addClick()" >
+            <i class="material-icons"> add </i>
+        </button>
+    </ng-container>
+
+</kt-data-table>

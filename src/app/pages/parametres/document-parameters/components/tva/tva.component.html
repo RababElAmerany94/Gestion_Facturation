@@ -1,0 +1,108 @@
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'DOCUMENT_PARAMETER.TVA.TITLE' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+            <i  class="fas"
+                [ngClass]="{'fa-minus': showCardBody,'fa-plus': !showCardBody}"
+                (click)="showCardBody = !showCardBody">
+            </i>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body  *ngIf="showCardBody">
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="formTva" >
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- tva par defaut -->
+                    <kt-custom-input
+                        class="col-md-4"
+                        [label]="'LABELS.TVA_BY_DEFALUT' | translate"
+                        [inputName]="'defaultValue'"
+                        [formInstant]="formTva">
+                    </kt-custom-input>
+
+                    <!-- racine -->
+                    <kt-custom-input
+                        class="col-md-4"
+                        [label]="'LABELS.RACINE' | translate"
+                        [inputName]="'rootAccountingCode'"
+                        [formInstant]="formTva">
+                    </kt-custom-input>
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <div class="table-responsive">
+                      <table class="table table-bordered text-center" style="overflow: hidden;">
+                        <thead>
+                          <tr class="text-center">
+                            <th> {{ 'LABELS.TVA' | translate }} </th>
+                            <th> {{ 'LABELS.CODE_COMPTABLE' | translate }}</th>
+                            <th>{{ 'LABELS.ACTIONS' | translate }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let element of tvaModels;let i= index">
+                                <td>{{element.value }}</td>
+                                <td>{{element.accountingCode}}</td>
+                                <td class="text-center">
+                                  <div class="btn-group" role="group">
+
+                                    <button
+                                        type="button"
+                                        (click)="updateTva(i)"
+                                        class="btn btn-sm btn-success btn-icon"
+                                        [matTooltip]="'LABELS.EDIT'| translate" >
+                                        <i class="flaticon-edit"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        (click)="deleteTva(i)"
+                                        class="btn btn-sm btn-danger btn-icon"
+                                        [matTooltip]="'LABELS.DELETE'| translate" >
+                                        <i class="flaticon-delete"></i>
+                                    </button>
+
+                                  </div>
+                                </td>
+                              </tr>
+                            <!-- Add tva -->
+                            <tr [formGroup]="formAddTva">
+                                <td>
+                                    <kt-custom-input
+                                        [type]="'number'"
+                                        [label]="'LABELS.TVA' | translate"
+                                        [inputName]="'value'"
+                                        [formInstant]="formAddTva">
+                                    </kt-custom-input>
+                                <td>
+                                    <kt-custom-input
+                                        [label]="'LABELS.CODE_COMPTABLE' | translate"
+                                        [inputName]="'accountingCode'"
+                                        [formInstant]="formAddTva">
+                                    </kt-custom-input>
+                                </td>
+                                <td class="text-center">
+                                    <button
+                                        type="button"
+                                        (click)="addTva()"
+                                        class="btn btn-sm btn-info btn-icon"
+                                        [matTooltip]="'LABELS.ADD'| translate" >
+                                        <i class="flaticon2-add-1"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </kt-portlet-body>
+</kt-portlet>

@@ -1,0 +1,39 @@
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-enattente" *ngIf="dossierStatus.EnAttente == status" >
+    {{ 'STATUS.ENATTENTE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-assigne" *ngIf="dossierStatus.Assigne == status" >
+    {{ 'STATUS.ASSIGNE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-signe" *ngIf="dossierStatus.Signe == status" >
+    {{ 'STATUS.SIGNE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-sync-dossier-antsroute" *ngIf="dossierStatus.Aplanifie == status" >
+    {{ 'STATUS.APLANIFIE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-assign" *ngIf="dossierStatus.Planifie == status" >
+    {{ 'STATUS.PLANIFIE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-realise" *ngIf="dossierStatus.Realise == status" >
+    {{ 'STATUS.REALISE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-facture-dossier" *ngIf="dossierStatus.Facture == status" >
+    {{ 'STATUS.FACTURE' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-enretard" *ngIf="dossierStatus.EnRetard == status" >
+    {{ 'STATUS.ENRETARD' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-perdu" *ngIf="dossierStatus.Perdu == status" >
+    {{ 'STATUS.PERDU' | translate }}
+</span>
+
+<span class="kt-badge kt-badge--inline kt-badge--pill text-nowrap status-chiffre" *ngIf="dossierStatus.Chiffre == status" >
+    {{ 'STATUS.CHIFFRE' | translate }}
+</span>

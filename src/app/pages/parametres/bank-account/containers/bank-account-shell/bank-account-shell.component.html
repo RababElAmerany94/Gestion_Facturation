@@ -1,0 +1,34 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'BANK_ACCOUNT.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"
+            [ngClass]="{'active': !isListMode()}">
+            <ng-container *ngIf="isListMode()">
+                {{ 'LABELS.LIST' | translate }}
+            </ng-container>
+            <ng-container *ngIf="!isListMode()">
+                <a href="javascript:void(0);" (click)="modeList()" >
+                    {{ 'LABELS.LIST' | translate }}
+                </a>
+            </ng-container>
+        </li>
+    </ol>
+</nav>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-compte-bancaire
+        [data]="bankAccounts"
+        (filters)="getBankAccounts($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteBankAccount($event)">
+    </kt-index-compte-bancaire>
+</ng-container>
+<!-- end list -->
+

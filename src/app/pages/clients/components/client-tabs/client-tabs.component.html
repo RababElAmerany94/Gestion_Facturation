@@ -1,0 +1,35 @@
+<!-- .............................................. -->
+<mat-tab-group
+    [selectedIndex]="selectedTab"
+    [dynamicHeight]="true"
+    (selectedTabChange)="selectedTabs($event.index)">
+
+    <!-- .............................................. -->
+                    <!-- TABS client particulier -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'CLIENT_TYPE.'+clientType.Particulier | translate"  >
+        <ng-template matTabContent>
+            <ng-content select="[Particulier]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                <!-- TABS client professionnel -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'CLIENT_TYPE.'+clientType.Professionnel | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[Professionnel]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                    <!-- TABS client obliges -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'CLIENT_TYPE.'+clientType.Obliges | translate"  >
+        <ng-template matTabContent>
+            <ng-content select="[Obliges]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+</mat-tab-group>
+<!-- .............................................. -->

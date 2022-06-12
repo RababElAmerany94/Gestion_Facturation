@@ -1,0 +1,85 @@
+<kt-custom-modal [title]="'LABELS.CREATION_SITUATION_DEVIS' | translate: { reference: devis?.reference } ">
+    <div mat-dialog-content class="dialog-body">
+        <form class="kt-form" [formGroup]="form">
+
+            <div class="d-flex justify-content-between bd-highlight mb-2">
+                <h6>{{ 'LABELS.ANCIEN_AVANCEMENT' | translate }}</h6>
+                <span
+                    class="btn btn-sm btn-primary px-2" disabled>
+                    {{ ancienAvancementPercent | RoundingNumber }} %
+                </span>
+            </div>
+
+            <mat-progress-bar
+                [color]="color"
+                [mode]="mode"
+                [value]="ancienAvancementPercent">
+            </mat-progress-bar>
+
+            <div class="d-flex flex-row-reverse bd-highlight mb-1">
+                <small>
+                    {{ ancienAvancement | RoundingNumber | Currency }} {{ 'LABELS.DE' | translate }}
+                    {{ devis?.totalTTC | RoundingNumber | Currency }}
+                </small>
+            </div>
+
+            <div class="row mt-4 mb-1">
+                <kt-custom-input
+                    class="col-md-9"
+                    type="number"
+                    [label]="'LABELS.NEW_AVANCEMENT' | translate"
+                    [inputName]="'montant'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-drop-down
+                    class="col-md-3"
+                    [data]="montantTypes"
+                    [showAny]="false"
+                    [label]="'LABELS.TYPE' | translate"
+                    [formInstant]="form"
+                    [inputName]="'montantType'">
+                </kt-custom-drop-down>
+            </div>
+
+            <div class="d-flex justify-content-between bd-highlight mb-2">
+                <h6>{{ 'LABELS.NOUVEAU_AVANCEMENT' | translate }}</h6>
+                <span
+                    class="btn btn-sm btn-primary px-2" disabled>
+                    {{ nouveauAvancementPercent | RoundingNumber }} %
+                </span>
+            </div>
+
+            <mat-progress-bar
+                [mode]="mode"
+                [value]="nouveauAvancementPercent">
+            </mat-progress-bar>
+
+            <div class="d-flex flex-row-reverse bd-highlight mb-1">
+                <small>
+                    {{ nouveauAvancement | RoundingNumber | Currency }} {{ 'LABELS.DE' | translate }}
+                    {{ devis?.totalTTC | RoundingNumber | Currency }}
+                </small>
+            </div>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE'| translate }}</button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            (debounceClick)="save()"
+            color="primary"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CREATE_FACTURE_ACOMPTE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.CREATE_FACTURE_ACOMPTE'| translate }}</button>
+    </div>
+
+</kt-custom-modal>

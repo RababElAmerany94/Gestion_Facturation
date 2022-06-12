@@ -1,0 +1,55 @@
+<!--.................. PAIEMENT GROUP ....................-->
+
+<kt-custom-modal [title]="'ADD.MOUVEMENT_COMPTE_COMPTE' | translate">
+    <div mat-dialog-content class="dialog-body">
+        <form [formGroup]="form">
+            <div class="row">
+
+                <!--Compte à débiter -->
+                <kt-bank-account-drop-down
+                    class="col-md-12"
+                    [inputName]="'compteDebitId'"
+                    [label]="'LABELS.COMPTE_DEBIT' | translate"
+                    [formInstant]="form">
+                </kt-bank-account-drop-down>
+
+                <!--Compte à créditer -->
+                <kt-bank-account-drop-down
+                    class="col-md-12"
+                    [inputName]="'creditCompteId'"
+                    [label]="'LABELS.COMPTE_CREDIT' | translate"
+                    [formInstant]="form">
+                </kt-bank-account-drop-down>
+
+
+                <!-- montant-->
+                <kt-custom-input
+                    [type]="'number'"
+                    class="col-md-12"
+                    [label]="'LABELS.AMOUNT' | translate"
+                    [inputName]="'montant'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- description -->
+                <kt-custom-textarea
+                    class="col-md-12"
+                    [label]="'LABELS.DESCRIPTION' | translate"
+                    [inputName]="'description'"
+                    [formInstant]="form">
+                </kt-custom-textarea>
+
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button mat-raised-button mat-dialog-close color="primary">{{ 'LABELS.CLOSE' | translate }}</button>
+        <button
+            ktDebounceClick
+            mat-raised-button
+            color="danger"
+            (click)="save()">
+            {{ 'LABELS.SAUVGARDE' | translate }}
+    </button>
+    </div>
+</kt-custom-modal>

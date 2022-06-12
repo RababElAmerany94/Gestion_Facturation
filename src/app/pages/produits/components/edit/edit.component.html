@@ -1,0 +1,158 @@
+<!-- ................................. general info ................................. -->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-user'"
+        [title]="'TITLES.GENERAL_INFO' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+
+
+            <div class="row">
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [inputName]="'reference'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.DESIGNATION' | translate"
+                    [inputName]="'designation'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-categorie-produit-dropdown
+                    class="col-md-4"
+                    [label]="'LABELS.CATEGORIE' | translate"
+                    [inputName]="'categoryId'"
+                    [formInstant]="form" >
+                </kt-categorie-produit-dropdown>
+
+                <kt-fournisseur-dropdown
+                    class="col-md-4"
+                    [label]="'LABELS.FOURNISSEUR' | translate"
+                    [inputName]="'fournisseurId'"
+                    [formInstant]="form">
+                </kt-fournisseur-dropdown>
+
+                <kt-unite-dropdown
+                    class="col-md-4"
+                    [label]="'LABELS.UNITE' | translate"
+                    [inputName]="'unite'"
+                    [formInstant]="form" >
+                </kt-unite-dropdown>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [type]="'number'"
+                    (changeEvent)="subscribePrixTVA()"
+                    [label]="'LABELS.TVA' | translate"
+                    [inputName]="'tva'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [type]="'number'"
+                    [label]="'LABELS.PRIX_ACHAT' | translate"
+                    [inputName]="'prixAchat'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    (changeEvent)="subscribePrixHt()"
+                    [type]="'number'"
+                    [label]="'LABELS.PRIX_HT' | translate"
+                    [inputName]="'prixHT'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    (changeEvent)="subscribePrixTTC()"
+                    [type]="'number'"
+                    [label]="'LABELS.PRIX_TTC' | translate"
+                    [inputName]="'prixTTC'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-textarea
+                    class="col-md-4"
+                    [label]="'LABELS.DESCRIPTION' | translate"
+                    [inputName]="'description'"
+                    [formInstant]="form" >
+                </kt-custom-textarea>
+
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    [label]="'LABELS.VISIBLE' | translate"
+                    [formInstant]="form"
+                    [inputName]="'isPublic'">
+                </kt-custom-checkbox>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- ................................................................................ -->
+
+<!-- prix par quantite -->
+<kt-prix-par-quantite
+    (prixParQuantiteChange)="setPrixParTranches($event)"
+    [mode]="mode"
+    [prices]="prixParTranches">
+</kt-prix-par-quantite>
+<!-- end prix par quantite -->
+
+<!--............................................. Labels ............................................-->
+<kt-portlet>
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon2-tag'"
+        [title]="'LABELS.LABELS' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <div class="row">
+            <kt-label-tag
+                class="col-md-12"
+                [mode]="mode"
+                (tagsEvent)="setTags($event)"
+                [tags]="labels"
+                [inputName]="'labels'"
+                [label]="'LABELS.TAGS' | translate"
+                [formInstant]="form">
+            </kt-label-tag>
+        </div>
+    </kt-portlet-body>
+
+</kt-portlet>
+<!--..................................................................................................-->
+
+<!-- .......................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()">
+            {{ ( isAddMode() ? 'LABELS.ADD' : 'LABELS.EDIT' ) | translate }}
+        </button>
+        <button class="btn btn-secondary" (click)="cancel()">{{ 'LABELS.CANCEL' | translate }}</button>
+    </div>
+</div>
+<!-- ....................................................................... -->

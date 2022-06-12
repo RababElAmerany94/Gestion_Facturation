@@ -1,0 +1,22 @@
+{
+    "TITLE": "Paiements",
+    "LIST": {
+        "TITLE": "Liste des paiements",
+        "DELETE": {
+            "HEADER": "Supprimer un paiement",
+            "MESSAGE": "Êtes-vous sûr supprimer ce paiement ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter facture",
+        "MOUVEMENT_COMPTE_COMPTE": "Mouvement compte à compte",
+        "PAIEMENT_GROUP": "Ajouter paiement groupé"
+    },
+    "EDIT": {
+        "TITLE": "Modifier paiement"
+    },
+    "SHOW": {
+        "TITLE": "Détails paiement"
+    },
+    "LABELS": {}
+}

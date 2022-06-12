@@ -1,0 +1,18 @@
+<mat-form-field [formGroup]="formInstant" appearance="fill" class="example-full-width">
+    <mat-label>{{label}}</mat-label>
+    <input
+        matInput
+        type="text"
+        (colorPickerChange)="changeColor($event)"
+        [(colorPicker)]="color"
+        [cpPresetColors]="['#7B1FA2', '#039BE5', '#FF5252', '#D32F2F', '#283593']"
+        [style.background]="color"
+        [cpAlphaChannel]="'always'"
+        [cpOutputFormat]="'hex'"
+        [disabled]="isShowmode"
+        [value]="color"
+        style="width: 50px;float: right;">
+    <mat-error>
+        <kt-custom-error-display [control]="control"></kt-custom-error-display>
+    </mat-error>
+</mat-form-field>

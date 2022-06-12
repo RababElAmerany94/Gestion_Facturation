@@ -1,0 +1,44 @@
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-paiement-index
+        [currentBalance]="currentBalance"
+        [data]="paiements"
+        (filters)="getPaiements($event)"
+        (deleteEvent)="deletePaiement($event)"
+        (showEvent)="showEvent($event.id)"
+        (paiementGroupEvent)="addPaiementGroupEvent()"
+        (transferCompteEvent)="MouvementCompteAcompteEvent()">
+    </kt-paiement-index>
+</ng-container>
+<!-- end list -->
+
+
+<!-- show -->
+<ng-container *ngIf="isShowMode()" >
+    <kt-paiement-detail>
+
+        <kt-paiement-edit
+            info
+            *ngIf="form"
+            [form]="form"
+            [Paiement]="paiement"
+            [mode]="mode">
+        </kt-paiement-edit>
+
+        <kt-historiques
+            historique
+            [Historique]="paiement?.historique">
+        </kt-historiques>
+
+    </kt-paiement-detail>
+</ng-container>
+<!-- end show -->

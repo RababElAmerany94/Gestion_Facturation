@@ -1,0 +1,24 @@
+{
+    "TITLE": "Agences",
+    "LIST": {
+        "TITLE": "Liste des Agences",
+        "DELETE": {
+            "HEADER": "Supprimer Agence",
+            "MESSAGE": "Êtes-vous sûr supprimer cette agence ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter Agence"
+    },
+    "EDIT": {
+        "TITLE": "Modifier Agence"
+    },
+    "SHOW": {
+        "TITLE": "Détails Agence"
+    },
+    "LABELS": {
+        "DATE_START_ACTIVITY": "Date début d'activité",
+        "DATE_END_ACTIVITY": "Date fin d'activité",
+        "CAPITAL": "Capital"
+    }
+}

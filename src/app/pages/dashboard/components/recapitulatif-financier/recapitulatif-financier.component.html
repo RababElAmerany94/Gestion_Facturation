@@ -1,0 +1,39 @@
+<div class="kt-portlet kt-portlet--bordered-semi kt-portlet--height-fluid">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                {{ 'LABELS.RECAPITULATIF_FINANCIER'| translate }}
+            </h3>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="kt-widget4">
+            <div class="kt-widget4__item">
+                <div class="kt-widget4__pic kt-widget4__pic--logo">
+                    <mat-icon color="primary" >account_balance</mat-icon>
+                </div>
+                <div class="kt-widget4__info">
+                    <a class="kt-widget4__title">
+                        {{ 'LABELS.MONTANT_DES_ENCAISSEMENT'| translate }}
+                    </a>
+                    <p class="kt-widget4__text">
+                    </p>
+                </div>
+                <span class="kt-widget4__number kt-font-brand">{{ data.currentBalance | RoundingNumber | Currency}}</span>
+            </div>
+            <div class="kt-widget4__item">
+                <div class="kt-widget4__pic kt-widget4__pic--logo">
+                    <mat-icon color="warn">payment</mat-icon>
+                </div>
+                <div class="kt-widget4__info">
+                    <a class="kt-widget4__title">
+                        {{ 'LABELS.CA_RESTANT_A_ENCAISSER'| translate }}
+                    </a>
+                    <p class="kt-widget4__text">
+                    </p>
+                </div>
+                <span class="kt-widget4__number kt-font-danger">{{ data.chiffreAffaireRestantAencaisser | RoundingNumber | Currency  }}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+{
+    "TITLE": "Comptabilité",
+    "LABELS": {
+        "JOURNAL_SALES": "Journal de vente",
+        "JOURNAL_BANQUE": "Journal de banque",
+        "JOURNAL_CAISSE": "Journal de caisse",
+        "CODE_JOURNAL": "Code Journal",
+        "DATE": "Date",
+        "NUMERO_COMPTE": "Numéro de compte",
+        "NUMERO_PIECE": "Numéro de pièce",
+        "DEBIT": "Débit",
+        "CREDIT": "Crédit",
+        "PAYMENT_TYPE": "Type paiement",
+        "TIERS": "Tiers"
+    }
+}

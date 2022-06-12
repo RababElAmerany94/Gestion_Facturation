@@ -1,0 +1,217 @@
+<!-- .................................. Info bon Commande .................................. -->
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'TITLES.INFOS_DEVIS' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container *ngIf="isShowMode()" ktPortletTools>
+            <kt-status
+                [status]="bonCommande?.status">
+            </kt-status>
+            <button
+                [matTooltip]="'LABELS.ACTIONS' | translate"
+                mat-mini-fab
+                color="primary"
+                class="ml-1"
+                [matMenuTriggerFor]="menu">
+                <i class="flaticon-more"></i>
+            </button>
+            <mat-menu #menu="matMenu" class="custom-material-menu">
+                <kt-custom-mat-menu [items]="menuItems"></kt-custom-mat-menu>
+            </mat-menu>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+            <div class="row">
+
+                <!-- the reference of bon Commande -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [inputName]="'reference'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!--the client of bon Commande -->
+                <ng-container *ngIf="dossier?.clientId == null || !isShowMode()">
+                    <kt-client-dropdown
+                        class="col-md-4"
+                        [client]="selectedClient"
+                        [isShow]="isShowMode()"
+                        [inputName]="'clientId'"
+                        (changeEvent)="changeClientEvent($event)"
+                        [types]="[clientType.Particulier,clientType.Professionnel]"
+                        [showAdd]="!isShowMode()"
+                        [label]="'LABELS.CLIENT' | translate"
+                        [formInstant]="form">
+                    </kt-client-dropdown>
+                </ng-container>
+
+                <!--the date of visit of bon Commande -->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateVisit'"
+                    [label]="'LABELS.DATE_VISITE' | translate">
+                </kt-custom-date-picker>
+
+                <!-- select address -->
+                <ng-container *ngIf="dossier?.clientId == null || !isShowMode()">
+                    <kt-address-dropdown
+                        class="col-md-4"
+                        [formInstant]="form"
+                        [inputName]="'siteIntervention'"
+                        [readOnly]="isShowMode()"
+                        [selectedAddress]="siteIntervention"
+                        [addresses]="selectedClient?.addresses"
+                        [label]="'ADDRESS.TITLE_SITE_INTERVENTION' | translate"
+                        (changeEvent)="setSiteIntervention($event)">
+                    </kt-address-dropdown>
+                </ng-container>
+
+                <!-- contact my_company or technicien-->
+                <kt-drop-down-users
+                    class="col-md-4"
+                    [inputName]="'userId'"
+                    [label]="(isContactMY_COMPANY() ? 'LABELS.MY_CONTACT' : 'LABELS.TECHNICIENS') | translate"
+                    [formInstant]="form">
+                </kt-drop-down-users>
+
+            </div>
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+
+</kt-portlet>
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<kt-table-article
+    *ngIf="currentType!=null"
+    [remiseType]="remiseType"
+    [remise]="remise"
+    [data]="{
+        articles:articles,
+        totalReduction:bonCommande?.totalReduction,
+        mode: currentType
+    }"
+    [readOnly]="isShowMode()"
+    [primeCEEEDF]="dossier?.primeCEE?.labelPrimeCEE ? dossier?.primeCEE?.labelPrimeCEE : bonCommande?.primeCEE?.labelPrimeCEE"
+    [disableRemiseGlobal]="currentType !== devisTypes?.Normal"
+    (changeEvent)="setResultCalculation($event)">
+</kt-table-article>
+<!-- .......................................................................................... -->
+
+<!-- ............................... signature informations ....................................-->
+<!--<kt-signature-devis
+    *ngIf="this.isShowMode() && devis?.signe != null"
+    [signature]="devis.signe"
+    [nameClientSignature]="devis.nameClientSignature">
+</kt-signature-devis>-->
+<!-- .......................................................................................... -->
+
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-more-v4'"
+        [title]="'TITLES.OTHER' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+
+            <div class="row">
+
+                <kt-custom-editor-text
+                    class="col-md-12"
+                    [inputName]="'note'"
+                    [label]="'LABELS.NOTE' | translate"
+                    [formInstant]="form"
+                    [disable]="isShowMode()">
+                </kt-custom-editor-text>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- .......................................................................................... -->
+
+<!-- ............................... info document associate .................................. -->
+
+<ng-container
+    *ngIf="isShowMode() && relatedDocs?.length>0">
+    <kt-shared-related-docs
+        [data]="relatedDocs">
+    </kt-shared-related-docs>
+</ng-container>
+
+<!-- .......................................................................................... -->
+
+<!-- .......................................................................................... -->
+<kt-portlet *ngIf="bonCommande?.status === status.Annule && isShowMode()">
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon2-cancel'"
+        [title]="'LABELS.RAISON_ANNULER' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <form class="kt-form" [formGroup]="form">
+
+            <div class="row">
+                <!-- raison annuler -->
+                <kt-custom-input
+                    class="col-md-12"
+                    [label]="'LABELS.RAISON_ANNULER' | translate"
+                    [inputName]="'raisonAnnulation'"
+                    [formInstant]="form">
+                </kt-custom-input>
+            </div>
+
+        </form>
+    </kt-portlet-body>
+</kt-portlet>
+<!-- ....................................................................................... -->
+
+<!-- ....................................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <div class="kt-section__content kt-section__content--solid">
+
+            <div class="btn-group" role="group">
+
+                <button type="button" class="btn btn-secondary btn-small mr-1" (click)="cancel()">
+                    <i class="fas fa-times"></i>  {{ 'LABELS.CANCEL' | translate }}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    (debounceClick)="save(status.EnCours)"
+                    type="button"
+                    class="btn btn-danger btn-small">
+                    <i class="fas fa-edit"></i> {{'STATUS.ENCOURS' |translate}}
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ....................................................................................... -->

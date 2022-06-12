@@ -1,0 +1,52 @@
+<!-- .............................................. -->
+<mat-tab-group [dynamicHeight]="true">
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.INFO' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[info]"></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.VISITE_TECHNIQUE' | translate" *ngIf="canAddVisiteTechnique">
+        <ng-template matTabContent>
+            <ng-content select="[VisiteTechnique]"></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.SMS' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[sms]"></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.MEMO_DOSSIER' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[memosDossier]"></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.HISTORIQUE' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[historique]"></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+
+    <mat-tab [label]="'TITLES.AGENDA' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[agendaCommercial]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+</mat-tab-group>
+<!-- .............................................. -->

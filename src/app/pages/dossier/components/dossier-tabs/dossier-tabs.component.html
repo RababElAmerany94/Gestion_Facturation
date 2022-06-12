@@ -1,0 +1,53 @@
+<!-- .............................................. -->
+<mat-tab-group
+    [selectedIndex]="selectedTab"
+    [dynamicHeight]="true"
+    (selectedTabChange)="selectedTabs($event.index)">
+
+ <!-- .............................................. -->
+                <!-- TABS A VALIDER-->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.A_VALIDER' | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[AValider]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                    <!-- TABS A VENIR-->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.A_VENIR' | translate"  >
+        <ng-template matTabContent>
+            <ng-content select="[AVenir]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                <!-- TABS A REPLANIFIER-->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.A_REPLANIFIER' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[AReplanifier]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                <!-- TABS ALL DEMANDES-->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.ALL_FOLDERS' | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[Toutes]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.DEMANDE_DEPUIS_WEB' | translate"  >
+        <ng-template matTabContent>
+            <ng-content select="[demandeDepuisWeb]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+</mat-tab-group>
+<!-- .............................................. -->

@@ -1,0 +1,30 @@
+<mat-form-field [formGroup]="formInstant"  appearance="fill" class="example-full-width">
+
+  <mat-label class="form-input__label" position="stacked">
+    {{label}}
+  </mat-label>
+
+  <mat-chip-list #chipList>
+
+    <mat-chip 
+      *ngFor="let tag of tags" 
+      [removable]="removable && !isShowMode()" 
+      (removed)="remove(tag)">
+      {{tag}}
+      <mat-icon matChipRemove *ngIf="removable && !isShowMode()">cancel</mat-icon>
+    </mat-chip>
+
+    <input 
+      [disabled]="isShowMode()" 
+      [formControlName]="inputName"
+      [matChipInputFor]="chipList" 
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)" />
+
+  </mat-chip-list>
+
+  <mat-hint class="text-danger">
+    <kt-custom-error-display [control]="control"></kt-custom-error-display>
+  </mat-hint>
+
+</mat-form-field>

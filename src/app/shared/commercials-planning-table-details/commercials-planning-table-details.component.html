@@ -1,0 +1,33 @@
+<ng-container *ngIf="commercialPlanning" >
+    <div class="row">
+        <div *ngIf="showTitle" class="col-md-12">
+            <label class="label-control">
+                {{ title }}
+            </label>
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <tr class="text-center">
+                        <ng-container *ngFor="let column of columns" >
+                            <th>{{ column | translate  }}</th>
+                        </ng-container>
+                    </tr>
+                    <tr *ngFor="let item of commercialPlanning?.dossiers">
+                        <td>{{ item?.clientFirstName }} {{ item?.clientLastName }} </td>
+                        <td>{{ item?.dateRDV | date:'shortTime' }}</td>
+                        <td>{{ getDefaultAddress(item?.siteIntervention)?.adresse}}</td>
+                        <td>{{ getDefaultAddress(item?.siteIntervention)?.ville }}</td>
+                        <td>{{ getDefaultAddress(item?.siteIntervention)?.codePostal }}</td>
+                        <td>{{ getDefaultContact(item?.contact) }} </td>
+                    </tr>
+                    <tr *ngIf="commercialPlanning?.dossiers?.length == 0">
+                        <td [attr.colspan]="columns.length" class="text-center" >
+                            {{ 'LABELS.EMPTY_TABLE' | translate }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-container>

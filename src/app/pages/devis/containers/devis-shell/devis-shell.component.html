@@ -1,0 +1,65 @@
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="modeChangeEvent($event)"
+    (cancelEvent)="setModeList()">
+</kt-breadcrumb-list>
+
+<ng-container *ngIf="isListMode()">
+    <kt-index
+        (filters)="getDevis($event)"
+        (addEvent)="isDupliquer=false;addEvent()"
+		(editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteDevis($event)"
+        (showEvent)="showEvent($event.id)"
+        [data]="devisPagedResult">
+    </kt-index>
+</ng-container>
+
+<ng-container *ngIf="isAddMode() || isEditMode()">
+    <kt-edit-devis
+        [mode]="mode"
+        [form]="form"
+        [Devis]="devis"
+        [Type]="type"
+        [Dossier]="dossier"
+        (addEvent)="addDevis($event)"
+        (editEvent)="updateDevis($event)">
+    </kt-edit-devis>
+</ng-container>
+
+<ng-container *ngIf="isShowMode()">
+    <kt-detail>
+
+        <kt-edit-devis
+            info
+            [mode]="mode"
+            [form]="form"
+            [Devis]="devis"
+            [Type]="type"
+            [Dossier]="dossier"
+            (printDevisEvent)="printDevis()"
+            (downloadEvent)="downloadPdfEvent()"
+            (dupliquerEvent)="dupliquer($event)"
+            (enPerduDevisEvent)="updateDevis($event)"
+            (signeDevisEvent)="updateDevis($event)"
+            (displayFileEvent)="visualizationPDFDevis($event)"
+            (transferToFactureEvent)="transferToFactureEvent($event)">
+        </kt-edit-devis>
+
+        <kt-emails
+            email
+            [canRevive]="true"
+            [type]="documentType"
+            [Emails]="devis?.emails"
+            [contacts]="devis?.client?.contacts"
+            (addEmailEvent)="sendEmail($event)">
+        </kt-emails>
+
+        <kt-historiques
+            historique
+            [Historique]="devis?.historique">
+        </kt-historiques>
+
+    </kt-detail>
+</ng-container>

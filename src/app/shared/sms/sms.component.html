@@ -1,0 +1,32 @@
+<kt-data-table
+    [data]="smsPagedResult"
+    [name]="routeName.Dossier"
+    [columns]="columns"
+    [title]="'SMS.TITLE' | translate"
+    (changeEvent)="changeFiltersEvent($event)">
+
+    <ng-template #actionsTemplate let-element="element">
+
+        <button
+            type="button"
+            mat-icon-button
+            color="accent"
+            (click)="showSms(element?.id)"
+            [matTooltip]="'LABELS.SHOW' | translate">
+            <mat-icon>remove_red_eye</mat-icon>
+        </button>
+
+    </ng-template>
+
+    <ng-container class="dataTables-actions">
+        <button
+            mat-mini-fab
+            ktDebounceClick
+            color="primary"
+            [matTooltip]="'SMS.ADD' | translate"
+            (debounceClick)="sendSms()">
+            <i class="material-icons"> add </i>
+        </button>
+    </ng-container>
+
+</kt-data-table>

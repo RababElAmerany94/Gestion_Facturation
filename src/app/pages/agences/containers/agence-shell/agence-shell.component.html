@@ -1,0 +1,74 @@
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-agence-index
+        [data]="agences"
+        (filters)="getAgences($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteEvent($event)"
+        (changeVisibilityEvent)="ChangeActivateAgenceEvent($event)"
+        (showEvent)="showEvent($event.id)">
+    </kt-agence-index>
+</ng-container>
+<!-- end list -->
+
+<!-- edit + add -->
+<ng-container *ngIf="isAddMode() || isEditMode()" >
+    <kt-agence-edit
+        [mode]="mode"
+        [form]="form"
+        [Agence]="agence"
+        (addEvent)="addAgence($event)"
+        (editEvent)="editAgence($event)"
+        (cancelEvent)="modeList()">
+    </kt-agence-edit>
+</ng-container>
+<!-- end edit + add -->
+
+<!-- detail -->
+<ng-container *ngIf="isShowMode()">
+    <kt-agence-detail [IsActive]="agence?.isActive">
+
+        <kt-agence-edit
+            info
+            [mode]="mode"
+            [form]="form"
+            [Agence]="agence">
+        </kt-agence-edit>
+
+        <kt-memos
+            memos
+            [Memos]="agence?.memos"
+            (saveMemoEvent)="saveMemoToAgence($event)">
+        </kt-memos>
+
+        <kt-historiques
+            historique
+            [Historique]="agence?.historique">
+        </kt-historiques>
+
+        <kt-access-app
+            login
+            [form]="formLogin"
+            [User]="agence?.agenceLogin"
+            (addEvent)="addLogin($event)"
+            (editEvent)="editLogin($event)">
+        </kt-access-app>
+
+        <kt-situation
+            situation
+            (searchEvent)="getChiffreAffaire($event);"
+            [chiffreAffaireStatistics]="chiffreAffaireStatistics"
+            [numberOfFolder]="numberOfFolder">
+        </kt-situation>
+
+    </kt-agence-detail>
+</ng-container>
+<!-- end detail -->

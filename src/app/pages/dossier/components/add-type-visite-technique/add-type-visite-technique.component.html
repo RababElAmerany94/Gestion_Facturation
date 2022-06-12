@@ -1,0 +1,49 @@
+<kt-custom-modal  [title]=" 'LABELS.CHOOSE_TYPE_VISITE_TECHNIQUE' | translate">
+
+    <div mat-dialog-content class="dialog-body">
+
+        <mat-radio-group [(ngModel)]="selectedType">
+            <mat-list dense>
+
+                <mat-list-item >
+                    <mat-radio-button [value]="visteTechniqueType.IsolutionCombles">
+                        {{ 'VISITE_TECHNIQUE_TYPE.' + visteTechniqueType?.IsolutionCombles | translate }}
+                    </mat-radio-button>
+                </mat-list-item>
+
+                <mat-list-item>
+                    <mat-radio-button [value]="visteTechniqueType.IsolutionMurs">
+                        {{ 'VISITE_TECHNIQUE_TYPE.' + visteTechniqueType?.IsolutionMurs | translate }}
+                    </mat-radio-button>
+                </mat-list-item>
+
+                <mat-list-item>
+                    <mat-radio-button [value]="visteTechniqueType.IsolutionPlanchers">
+                        {{ 'VISITE_TECHNIQUE_TYPE.' + visteTechniqueType?.IsolutionPlanchers | translate }}
+                    </mat-radio-button>
+                </mat-list-item>
+
+            </mat-list>
+        </mat-radio-group>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+			mat-raised-button
+            mat-dialog-close
+            color="primary">
+			{{ "LABELS.CLOSE" | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="add()">
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+    </div>
+
+</kt-custom-modal>

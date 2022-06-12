@@ -1,0 +1,20 @@
+{
+    "TITLE": "Produits",
+    "LIST": {
+        "TITLE": "Liste des produits",
+        "DELETE": {
+            "HEADER": "Supprimer produits",
+            "MESSAGE": "Êtes-vous sûr supprimer ce produits ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter produit"
+    },
+    "EDIT": {
+        "TITLE": "Modifier produit"
+    },
+    "SHOW": {
+        "TITLE": "Détails produit"
+    },
+    "LABELS": {}
+}

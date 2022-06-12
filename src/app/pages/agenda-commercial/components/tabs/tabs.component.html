@@ -1,0 +1,46 @@
+<!-- .............................................. -->
+<mat-tab-group
+    [selectedIndex]="selectedTab"
+    [dynamicHeight]="true"
+    [backgroundColor]="changeColor?'primary':''"
+    (selectedTabChange)="selectedTabs($event.index)">
+
+ <!-- .............................................. -->
+                <!-- TABS AGENDA -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.AGENDA' | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[Agenda]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                    <!-- TABS Tâches -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.TACHES' | translate"  >
+        <ng-template matTabContent>
+            <ng-content select="[Taches]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                <!-- TABS Rendez-vous -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.RENDEZVOUS' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[RendezVous]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .............................................. -->
+                <!-- TABS Appels -->
+    <!-- .............................................. -->
+    <mat-tab [label]="'LABELS.APPELS' | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[Appels]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+</mat-tab-group>
+<!-- .................................................. -->

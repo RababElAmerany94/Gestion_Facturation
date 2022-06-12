@@ -1,0 +1,141 @@
+<!--.................. INFO FACTURE ....................-->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'TITLES.INFORMATION_PAIEMENT' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <div class="kt-form">
+            <div class="row">
+                <!--the reference of facture-->
+                <kt-custom-input
+                    class="col-md-6"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [formInstant]="form"
+                    [inputName]="'reference'">
+                </kt-custom-input>
+
+                <!-- montant-->
+                <kt-custom-input
+                    class="col-md-6"
+                    [label]="'LABELS.AMOUNT' | translate"
+                    [formInstant]="form"
+                    [inputName]="'montant'">
+                </kt-custom-input>
+
+
+                <!--the date of deadline -->
+                <kt-custom-date-picker
+                    class="col-md-6"
+                    [formInstant]="form"
+                    [inputName]="'dateEcheance'"
+                    [label]="'LABELS.DATE_ECHEANCE' | translate">
+                </kt-custom-date-picker>
+
+                <!-- Reste à payer -->
+                <kt-custom-input
+                    class="col-md-6"
+                    [formInstant]="form"
+                    [inputName]="'restToPaye'"
+                    [label]="'LABELS.REST_TO_PAYE' | translate">
+                </kt-custom-input>
+
+            </div>
+
+        </div>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+
+<!-- .......................LIST DES PAIEMENTS..................... -->
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-car'"
+        [title]="'TITLES.LIST_PAIEMENT' | translate"
+        [class]="'kt-portlet__head--lg'">
+        <ng-container ktPortletTools>
+            <span></span>
+
+            <div *ngIf="canAddPaiement()" >
+                <button
+                    [matTooltip]="'ADD.PAIEMENT_BY_AVOIR' | translate"
+                    mat-mini-fab color="warn" class="ml-1"
+                    (click)="addPaiemetByAvoirEvent()" >
+                    <i class="flaticon-interface-4"></i>
+                </button>
+
+                <button
+                    [matTooltip]="'ADD.AJOUTER_PAIEMENT' | translate"
+                    mat-mini-fab color="success" class="ml-1"
+                    (click)="addPaiementEvent()" >
+                    <i class="flaticon-coins"></i>
+                </button>
+            </div>
+
+        </ng-container>
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{{ 'LABELS.DESCRIPTION' | translate }}</th>
+                        <th>{{ 'LABELS.TYPE' | translate }}</th>
+                        <th>{{ 'LABELS.DATE' | translate }}</th>
+                        <th>{{ 'LABELS.MOYEN' | translate }}</th>
+                        <th>{{ 'LABELS.BANK_COMPTE' | translate }}</th>
+                        <th>{{ 'LABELS.AMOUNT' | translate }}</th>
+                        <th>{{ 'LABELS.ACTIONS' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of facture?.facturePaiements;let i=index">
+                        <td><i *ngIf="item?.paiement?.comptabilise" class="ft-lock" ></i></td>
+                        <td> <a href="javascript:;" (click)="goToPaiement(item?.paiement?.id)"class="kt-widget__username">{{ item?.paiement?.description }}</a></td>
+                        <td> {{'PAIEMENT_TYPE.'+item.paiement?.type | translate }} </td>
+                        <td> {{ item?.paiement?.datePaiement | date:'shortDate' }} </td>
+                        <td>{{ item?.paiement?.regulationMode?.name }}</td>
+                        <td> {{ item?.paiement?.bankAccount?.name }} </td>
+                        <td class="text-right display-price" >{{ item?.montant | RoundingNumber | Currency }}</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group" *ngIf="!item?.paiement?.comptabilise">
+
+                                <button type="button"
+                                    *ngIf="canEditPaiement(item)"
+                                    (click)="editPaiementEvent(i)"
+                                    class="btn btn-warning btn-icon"
+                                    [matTooltip]="'LABELS.EDIT'| translate" >
+                                    <i class="fas fa-edit"></i>
+                                </button>
+
+                                <button type="button"
+                                    (click)="deletePaiementEvent(i)"
+                                    class="btn btn-danger btn-icon"
+                                    [matTooltip]="'LABELS.DELETE'| translate" >
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="facture?.facturePaiements?.length === 0" class="text-center">
+                        <td colspan="9"> {{ 'LABELS.EMPTY_TABLE' | translate}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </kt-portlet-body>
+</kt-portlet>

@@ -1,0 +1,15 @@
+<mat-form-field [formGroup]="formInstant" appearance="fill" class="example-full-width">
+    <mat-label>{{label}}</mat-label>
+    <div class="example-container">
+        <textarea 
+            matInput 
+            placeholder="{{placeholder}}"
+            rows="{{rows}}"
+            [formControlName]="inputName" 
+            placeholder="{{ placeholder }}">
+        </textarea>
+    </div>
+    <mat-error>
+        <kt-custom-error-display [control]="control"></kt-custom-error-display>
+    </mat-error>
+</mat-form-field>

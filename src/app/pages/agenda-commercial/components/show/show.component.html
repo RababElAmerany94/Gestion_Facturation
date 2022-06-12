@@ -1,0 +1,258 @@
+<div class="container">
+
+    <!-- ...........................................................................-->
+    <kt-portlet>
+        <kt-portlet-header
+            [sticky]="true"
+            [icon]="'flaticon-edit-1'"
+            [title]=" title | translate"
+            [class]="'kt-portlet__head--lg'">
+
+            <ng-container *ngIf="isShowMode()" ktPortletTools>
+
+                <kt-agenda-commercial-status
+                    [status]="echangeCommercial?.status">
+                </kt-agenda-commercial-status>
+
+                <button
+                    mat-mini-fab
+                    color="primary"
+                    class="ml-3"
+                    [matTooltip]="'LABELS.ACTIONS' | translate"
+                    [matMenuTriggerFor]="menu" >
+                    <i class="flaticon-more"></i>
+                </button>
+
+            <mat-menu #menu="matMenu" class="custom-material-menu">
+                <kt-custom-mat-menu [items]="menuItems" ></kt-custom-mat-menu>
+            </mat-menu>
+
+            </ng-container>
+
+        </kt-portlet-header>
+
+        <kt-portlet-body>
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <h4 class="mb-3">{{ echangeCommercial?.titre }}</h4>
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+
+                            <!-- client -->
+                            <tr>
+                                <th>{{ 'LABELS.CLIENT' | translate }}</th>
+                                <td class="text-left text-nowrap">
+                                    {{ echangeCommercial?.client?.fullName }}
+                                </td>
+                            </tr>
+
+                            <!-- dossier -->
+                            <tr>
+                                <th>{{ 'LABELS.DOSSIER' | translate }}</th>
+                                <td class="text-left text-nowrap">
+                                    {{ echangeCommercial?.dossier?.reference }}
+                                </td>
+                            </tr>
+
+                            <!-- Responsable commercial -->
+                            <tr>
+                                <th>{{ 'LABELS.RESPONSABLE' | translate }}</th>
+                                <td class="text-left text-nowrap">
+                                    {{ echangeCommercial?.responsable?.fullName }}
+                                </td>
+                            </tr>
+
+                            <!-- type tache -->
+                            <ng-container  *ngIf="echangeCommercial.type == types.Tache">
+                                <tr>
+                                    <th>{{ 'LABELS.TYPE' | translate }}</th>
+                                    <td class="text-left text-nowrap">
+                                        {{ echangeCommercial?.tacheType?.name }}
+                                    </td>
+                                </tr>
+                            </ng-container>
+
+                            <!-- type rdv -->
+                            <ng-container  *ngIf="echangeCommercial.type == types.RDV">
+                                <tr>
+                                    <th>{{ 'LABELS.TYPE' | translate }}</th>
+                                    <td class="text-left text-nowrap">
+                                        {{ echangeCommercial?.rdvType?.name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'LABELS.PHONE_NUMBER' | translate }}</th>
+                                    <td class="text-left text-nowrap">
+                                        {{ echangeCommercial?.phoneNumber }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'LABELS.ORIGINE' | translate }}</th>
+                                    <td class="text-left text-nowrap">
+                                        {{ echangeCommercial?.sourceRDV?.name }}
+                                    </td>
+                                </tr>
+                            </ng-container>
+
+                            <!-- categorie evenement -->
+                            <ng-container  *ngIf="echangeCommercial.type !== types.Tache">
+                                <tr>
+                                    <th>{{ 'LABELS.CATEGORIE' | translate }}</th>
+                                    <td class="text-left text-nowrap ">
+                                        {{ echangeCommercial?.categorie?.name }}
+                                    </td>
+                                </tr>
+                            </ng-container>
+
+                            <!-- Date -->
+                            <tr>
+                                <th>{{ 'LABELS.DATE' | translate }}</th>
+                                <td class="text-left text-nowrap ">
+                                    {{ echangeCommercial?.dateEvent | date: 'short'}}
+                                </td>
+                            </tr>
+
+                            <!-- Heure -->
+                            <tr>
+                                <th>{{ 'LABELS.HEURE' | translate }}</th>
+                                <td class="text-left text-nowrap ">
+                                    {{ echangeCommercial?.time }}
+                                </td>
+                            </tr>
+
+                            <!-- Duree -->
+                            <tr>
+                                <th>{{ 'LABELS.DUREE' | translate }}</th>
+                                <td class="text-left text-nowrap ">
+                                    {{ echangeCommercial?.duree }}
+                                </td>
+                            </tr>
+
+                            <!-- priority -->
+                            <ng-container  *ngIf="echangeCommercial.type == types.Tache">
+                                <tr>
+                                    <th>{{ 'LABELS.PRIORITE' | translate }}</th>
+                                    <td class="text-left text-nowrap ">
+                                        {{ (echangeCommercial?.priorite != null ?
+                                            'TACHE_PRIORITY.'+echangeCommercial?.priorite : '') | translate }}
+                                    </td>
+
+                                </tr>
+                            </ng-container>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <form class="kt-form" [formGroup]="form">
+                        <!-- description -->
+                        <kt-custom-editor-text
+                            class="col-md-6"
+                            [height]="'20rem'"
+                            [icon]="'flaticon2-list-3'"
+                            [label]="'LABELS.DESCRIPTION' | translate"
+                            [inputName]="'description'"
+                            [formInstant]="form"
+                            [disable]="isShowMode()">
+                        </kt-custom-editor-text>
+
+                    </form>
+                </div>
+
+            </div>
+        </kt-portlet-body>
+    </kt-portlet>
+    <!-- ...........................................................................-->
+
+    <!--------------------------- display responsible -------------------------------->
+    <div class="row">
+        <kt-portlet class="col">
+            <kt-portlet-header
+                [sticky]="true"
+                [icon]="'flaticon2-calendar-3'"
+                [title]=" 'LABELS.RESPONSABLE' | translate"
+                [class]="'kt-portlet__head--lg'">
+
+            </kt-portlet-header>
+
+            <kt-portlet-body>
+
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+
+                        <!-- registration Number -->
+                        <tr>
+                            <th>{{ 'LABELS.REGISTER_NUMBER' | translate }} :</th>
+                            <td class="text-left text-nowrap ">
+                                {{ echangeCommercial?.responsable?.registrationNumber }}
+                            </td>
+                        </tr>
+
+                        <!-- responsable -->
+                        <tr>
+                            <th>{{ 'LABELS.FIRSTNAME' | translate }} :</th>
+                            <td class="text-left text-nowrap ">
+                                {{ echangeCommercial?.responsable?.fullName }}
+                            </td>
+                        </tr>
+
+                        <!-- role of responable -->
+                        <tr>
+                            <th>{{ 'LABELS.ROLE' | translate }} :</th>
+                            <td class="text-left text-nowrap ">
+                                {{ (echangeCommercial?.responsable != null ?
+                                    'ROLES.'+echangeCommercial?.responsable?.roleId : '') | translate }}
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </kt-portlet-body>
+
+        </kt-portlet>
+
+        <!---------------------------- display contact ----------------------------------->
+        <ng-container *ngIf="echangeCommercial.type == types.Appel">
+            <kt-contacts
+                class="col"
+                (changeContact)="setContact($event)"
+                [isForAgenda]="true"
+                [contacts]="contacts"
+                [client]="echangeCommercial?.client">
+            </kt-contacts>
+        </ng-container>
+        <!------------------------------------------------------------------------------->
+
+        <!--------------------------- display address ----------------------------------->
+        <ng-container *ngIf="echangeCommercial.type == types.RDV">
+            <kt-addresses
+                class="col"
+                [isForAgenda]="true"
+                (changeAddress)="setAddress($event)"
+                [addresses]="address"
+                [client]="echangeCommercial?.client">
+            </kt-addresses>
+        </ng-container>
+        <!------------------------------------------------------------------------------->
+
+    </div>
+    <!-------------------------------------------------------------------------------->
+
+    <!--------------------------- display memos -------------------------------------->
+    <kt-memos
+        [Memos]="echangeCommercial?.memos"
+        (saveMemoEvent)="saveMemo.emit($event)">
+    </kt-memos>
+    <!------------------------------------------------------------------------------->
+
+    <!---------------------------- display historique ------------------------------->
+    <kt-historiques
+        [Historique]="echangeCommercial?.historique">
+    </kt-historiques>
+    <!-- ......................................................................... -->
+
+</div>

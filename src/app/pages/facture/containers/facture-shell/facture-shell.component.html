@@ -1,0 +1,88 @@
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="modeChangeEvent($event)"
+    (cancelEvent)="setModeList()">
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-facture-index
+        [data]="factures"
+        (filters)="getFactures($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteFacture($event)"
+        (showEvent)="showEvent($event?.id)"
+        (exportReleveFactureEvent)="exportReleveFactureEvent()"
+        (cancelFactureEvent)="cancelFacture($event)"
+        (dupliquerEvent)="dupliquer($event)"
+        (addFactureGroupEvent)="addFactureGroupEvent()">
+    </kt-facture-index>
+</ng-container>
+<!-- end list -->
+
+<!-- edit + add -->
+<ng-container *ngIf="isAddMode() || isEditMode()" >
+    <kt-facture-edit
+        *ngIf="form"
+        [mode]="mode"
+        [form]="form"
+        [Facture]="facture"
+        [Data]="data"
+        [Devis]="devis"
+        (addEvent)="addFacture($event)"
+        (editEvent)="editFacture($event)"
+        (cancelEvent)="setModeList()">
+    </kt-facture-edit>
+</ng-container>
+<!-- end edit + add -->
+
+<!-- show -->
+<ng-container *ngIf="isShowMode()" >
+    <kt-facture-detail [status]="facture?.status">
+
+        <kt-facture-edit
+            info
+            *ngIf="form"
+            [mode]="mode"
+            [form]="form"
+            [Facture]="facture"
+            (cancelFactureEvent)="cancelFacture($event)"
+            (printFactureEvent)="printFacture()"
+            (downloadEvent)="downloadFacture()"
+            (dupliquerEvent)="dupliquer($event)"
+            (displayFileEvent)="visualizationPDFFacture($event)">
+        </kt-facture-edit>
+
+        <kt-paiement-add
+            paiement
+            (addPaiementOperation)="addPaiement($event)"
+            (deletePaiementOperation)="deletePaiement($event)"
+            (editPaiementOperation)="editPaiement($event.paiementModel,$event.facturePaiementId)"
+            [Facture]="facture">
+        </kt-paiement-add>
+
+        <kt-memos
+            memos
+            [Memos]="facture?.memos"
+            (saveMemoEvent)="addMemoToFacture($event)">
+        </kt-memos>
+
+        <kt-emails
+            email
+            [Emails]="facture?.emails"
+            [contacts]="facture?.client?.contacts"
+            (addEmailEvent)="sendEmail($event)">
+        </kt-emails>
+
+        <kt-historiques
+            historique
+            [Historique]="facture?.historique">
+        </kt-historiques>
+
+    </kt-facture-detail>
+</ng-container>
+<!-- end show -->

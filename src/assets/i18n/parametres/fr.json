@@ -1,0 +1,250 @@
+{
+    "LABELS": {
+        "SERVER": "Serveur",
+        "PORT": "Port",
+        "SSL": "SSL",
+        "FACTURE": "Facture",
+        "AVOIR": "Avoir",
+        "CLIENT": "Client",
+        "FOURNISSEUR": "Fournisseur",
+        "ROOT": "Racine",
+        "FORMAT_DATE": "Format de la date",
+        "COUNT": "Valeur du compteur",
+        "COUNT_LENGTH": "Longeur du compteur",
+        "PREVIEW_REFERNCE": "Aperçu du résultat",
+        "FACTURE_PARAMS": "Paramétrage Facture",
+        "AVOIR_PARAMS": "Paramétrage Avoir",
+        "DEVIS_PARAMS": "Paramétrage Devis",
+        "BON_COMMANDE_PARAMS": "Paramétrage Bon de Commande",
+        "VISUALISER": "Visualiser"
+    },
+    "MESSAGING": {
+        "TITLE": "Messagerie",
+        "LIST_TITLE": "Configuration messagerie"
+    },
+    "NUMERATION": {
+        "TITLE": "Numérotation",
+        "LIST_TITLE": "Numérotations et préfixes des documents",
+        "DIALOG_TITLE": "Modifier numérotation"
+    },
+    "BANK_ACCOUNT": {
+        "TITLE": "Comptes bancaires",
+        "LIST_TITLE": "Liste des comptes bancaires"
+    },
+    "MODE_REGLEMENT": {
+        "TITLE": "Modes de règlements",
+        "LIST_TITLE": "Liste des modes de règlements"
+    },
+    "DATE_FORMAT": {
+        "NoDate": "Pas de date",
+        "Year": "Année",
+        "YearMonth": "Année/Mois"
+    },
+    "CATEGORY_PRODUCT": {
+        "TITLE": "Catégorie des produits",
+        "LIST_TITLE": "Liste des catégories des produits",
+        "ADD_TITLE": "Ajouter catégorie produit",
+        "EDIT_TITLE": "Modifier catégorie produit",
+        "SHOW_TITLE": "Détails catégorie produit",
+        "DELETE": {
+            "HEADER": "Supprimer categorie produit",
+            "MESSAGE": "Êtes-vous sûr supprimer cette catégorie de produits ?"
+        }
+    },
+    "SOURCE_DU_LEAD": {
+        "TITLE": "Source du LEAD",
+        "LIST_TITLE": "Liste Source du LEAD",
+        "ADD_TITLE": "Ajouter Source du LEAD",
+        "EDIT_TITLE": "Modifier Source du LEAD",
+        "SHOW_TITLE": "Détails Source du LEAD",
+        "DELETE": {
+            "HEADER": "Supprimer Source du LEAD",
+            "MESSAGE": "Êtes-vous sûr supprimer ce Source du LEAD ?"
+        }
+    },
+    "TYPE_LOGEMENT": {
+        "TITLE": "Types de logements",
+        "LIST_TITLE": "Liste types de logements",
+        "ADD_TITLE": "Ajouter type de logement",
+        "EDIT_TITLE": "Modifier type de logement",
+        "SHOW_TITLE": "Détails type de logement",
+        "DELETE": {
+            "HEADER": "Supprimer type de logement",
+            "MESSAGE": "Êtes-vous sûr supprimer ce type de logement ?"
+        }
+    },
+    "COMPTE_TYPE": {
+        "1": "Caisse",
+        "2": "Compte bancaire"
+    },
+    "DOCUMENT_PARAMETER": {
+        "TITLE": "Paramétrage des documents",
+        "LABELS": {
+            "DELAI_VALIDITE": "Délai de validité",
+            "CONDITION_REGLEMENT": "Conditions de règlement",
+            "ENTETE": "Entête",
+            "PIED_DE_PAGE": "Pied de page",
+            "SEND_EMAIL": "Envoi de mail",
+            "SUJET_EMAIL": "Sujet Mail",
+            "CONTENU_EMAIL": "Contenu Mail",
+            "ENVOI_RELANCE": "Envoi de relance",
+            "SUJET_RELANCE": "Sujet Relance",
+            "CONTENU_RELANCE": "Contenu Relance",
+            "DELAY_VALIDATE_FACTURE": "Délai de validité des factures",
+            "DELAY_VALIDATE_AVOIR": "Délai de validité des avoirs",
+            "NOTE_FACTURE": "Note facture",
+            "ENTETE_FACTURE": "Entête facture",
+            "REGLEMENT_CONDITION_FACTURE": "Conditions de règlement facture",
+            "NOTE_AVOIR": "Note avoir",
+            "ENTETE_AVOIR": "Entête avoir",
+            "REGLEMENT_CONDITION_AVOIR": "Conditions de règlement avoir",
+            "NOTE_DEVIS": "Note devis",
+            "ENTETE_DEVIS": "Entête devis",
+            "NOTE_BON_COMMANDE": "Note Bon de Commande",
+            "ENTETE_BON_COMMANDE": "Entête Bon de Commande"
+        },
+        "TVA": {
+            "TITLE": "Tva",
+            "EDIT_TVA": "Modifier tva et code comptable",
+            "DELETE": {
+                "HEADER": "Supprimer Tva",
+                "MESSAGE": "Êtes-vous sûr supprimer ce Tva ?"
+            }
+        },
+        "AVOIR": {
+            "TITLE": "Avoir"
+        },
+        "DEVIS": {
+            "TITLE": "Devis"
+        },
+        "FACTURE": {
+            "TITLE": "Facture"
+        },
+        "BON_COMMANDE": {
+            "TITLE": "Bon de Commande"
+        }
+    },
+    "PERIOD_COMPTABLE": {
+        "TITLE": "Période comptable",
+        "LIST_TITLE": "Liste des périodes comptables",
+        "ADD_TITLE": "Ajouter période comptable",
+        "EDIT_TITLE": "Modifier période comptable",
+        "SHOW_TITLE": "Détails période comptable"
+    },
+    "CATEGORY_DOCUMENTS": {
+        "TITLE": "Catégorie des Documents",
+        "LIST_TITLE": "Liste de catégorie des documents",
+        "ADD_TITLE": "Ajouter catégorie documents",
+        "EDIT_TITLE": "Modifier catégorie documents",
+        "SHOW_TITLE": "Détails catégorie documents",
+        "DELETE": {
+            "HEADER": "Supprimer categorie documents",
+            "MESSAGE": "Êtes-vous sûr supprimer cette catégorie de document ?"
+        }
+    },
+    "ARTICLES_SPECIAUX": {
+        "TITLE": "Articles Spéciaux",
+        "LIST_TITLE": "Liste des articles spéciaux",
+        "ADD_TITLE": "Ajouter un article spécial",
+        "EDIT_TITLE": "Modifier un article spécial",
+        "SHOW_TITLE": "Détails article spécial",
+        "DELETE": {
+            "HEADER": "Supprimer un article spécial",
+            "MESSAGE": "Êtes-vous sûr supprimer Cet article spécial ?"
+        }
+    },
+    "TYPE_CHAUFFAGE": {
+        "TITLE": "Types de Chauffage",
+        "LIST_TITLE": "Liste de Type de Chauffage",
+        "ADD_TITLE": "Ajouter Type de Chauffage",
+        "EDIT_TITLE": "Modifier Type de Chauffage",
+        "SHOW_TITLE": "Détails Type de Chauffage",
+        "DELETE": {
+            "HEADER": "Supprimer Type de Chauffage",
+            "MESSAGE": "Êtes-vous sûr supprimer Ce Type de Chauffage ?"
+        }
+    },
+    "TYPE_TACHE": {
+        "TITLE": "Type de Tâche",
+        "LIST_TITLE": "Liste de Type des Tâches",
+        "ADD_TITLE": "Ajouter Type de Tâche",
+        "EDIT_TITLE": "Modifier Type de Tâche",
+        "SHOW_TITLE": "Détails Type de Tâche",
+        "DELETE": {
+            "HEADER": "Supprimer Type de Tâche",
+            "MESSAGE": "Êtes-vous sûr supprimer ce Type de Tâche?"
+        }
+    },
+    "TYPE_APPEL": {
+        "TITLE": "Type d'appel",
+        "LIST_TITLE": "Liste de Type d'appel",
+        "ADD_TITLE": "Ajouter Type d'appel",
+        "EDIT_TITLE": "Modifier Type d'appel",
+        "SHOW_TITLE": "Détails Type d'appel",
+        "DELETE": {
+            "HEADER": "Supprimer Type d'appel",
+            "MESSAGE": "Êtes-vous sûr supprimer ce Type d'appel?"
+        }
+    },
+    "TYPE_RDV": {
+        "TITLE": "Type de RDV",
+        "LIST_TITLE": "Liste de Type des RDV",
+        "ADD_TITLE": "Ajouter Type de RDV",
+        "EDIT_TITLE": "Modifier Type de RDV",
+        "SHOW_TITLE": "Détails Type de RDV",
+        "DELETE": {
+            "HEADER": "Supprimer Type de RDV",
+            "MESSAGE": "Êtes-vous sûr supprimer ce Type de RDV?"
+        }
+    },
+    "CATEGORIE_EVENEMENT": {
+        "TITLE": "Catégories d'événements",
+        "LIST_TITLE": "Liste des Catégories d'événements",
+        "ADD_TITLE": "Ajouter Catégorie d'événement",
+        "EDIT_TITLE": "Modifier Catégorie D'événement",
+        "SHOW_TITLE": "Détails Catégorie d'événement",
+        "DELETE": {
+            "HEADER": "Supprimer Catégorie d'événement",
+            "MESSAGE": "Êtes-vous sûr supprimer ce Catégorie d'événement?"
+        }
+    },
+    "SOURCE_RDV": {
+        "TITLE": "Source du RDV",
+        "LIST_TITLE": "Liste des Sources du RDV",
+        "ADD_TITLE": "Ajouter Source du RDV",
+        "EDIT_TITLE": "Modifier Source du RDV",
+        "SHOW_TITLE": "Détails Source du RDV",
+        "DELETE": {
+            "HEADER": "Supprimer Source du RDV",
+            "MESSAGE": "Êtes-vous sûr supprimer ce Source du RDV?"
+        }
+    },
+    "TYPE_AGENDA_CONFIG": {
+        "0": "Tâches",
+        "1": "Rendez-vous",
+        "2": "Appels",
+        "3": "Catégories d'événements"
+    },
+    "MODELE_SMS": {
+        "TITLE": "Modèles SMS",
+        "LIST_TITLE": "Liste des modèles SMS",
+        "ADD_TITLE": "Ajouter un modèle SMS",
+        "EDIT_TITLE": "Modifier modèle SMS",
+        "SHOW_TITLE": "Détails modèle SMS",
+        "DELETE": {
+            "HEADER": "Supprimer un modèle SMS",
+            "MESSAGE": "Êtes-vous sûr supprimer ce modèle SMS?"
+        }
+    },
+    "CHAMPS_SITE_INTERVENTION": {
+        "TITLE": "Champs site d'installation",
+        "LIST_TITLE": "Liste des champs",
+        "ADD_TITLE": "Ajouter un champ",
+        "EDIT_TITLE": "Modifier champ",
+        "SHOW_TITLE": "Détails champ",
+        "DELETE": {
+            "HEADER": "Supprimer un champ",
+            "MESSAGE": "Êtes-vous sûr supprimer ce champ?"
+        }
+    }
+}

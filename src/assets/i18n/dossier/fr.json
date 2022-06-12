@@ -1,0 +1,49 @@
+{
+    "TITLE": "Dossiers",
+    "LIST": {
+        "TITLE_DOSSIER": "Liste des dossiers",
+        "DELETE": {
+            "HEADER": "Supprimer dossiers"
+        }
+    },
+    "DELETE_DOSSIER": {
+        "HEADER_TEXT": "Supprimer dossier",
+        "QUESTION": "Êtes-vous sûr supprimer ce dossier ?"
+    },
+    "DEVIS": {
+        "ADD_TITLE": "Ajouter devis",
+        "SHOW_TITLE": "Visualier devis",
+        "EDIT_TITLE": "Modifier devis",
+        "DELETE": {
+            "HEADER": "Supprimer devis",
+            "MESSAGE": "Êtes-vous sûr supprimer ce devis ?"
+        }
+    },
+    "BON_COMMANDE": {
+        "ADD_TITLE": "Ajouter bon de commande",
+        "SHOW_TITLE": "Visualier bon de commande",
+        "EDIT_TITLE": "Modifier bon de commande",
+        "DELETE": {
+            "HEADER": "Supprimer bon de commande",
+            "MESSAGE": "Êtes-vous sûr supprimer ce bon de commande ?"
+        }
+    },
+    "FACTURE":{
+        "DELETE": {
+            "HEADER": "Supprimer une facture",
+            "MESSAGE": "Êtes-vous sûr supprimer cette facture ?"
+        }
+    },
+    "LABELS": {
+        "A_VENIR": "À venir",
+        "A_VALIDER": "À valider",
+        "A_REPLANIFIER": "À replanifier",
+        "ALL_FOLDERS": "Tous les dossiers",
+        "PLANNING_COMMERCIAL": "Planning du {{ date }} pour {{ name }} :",
+        "ASSIGNER_DOSSIER": "Assigner dossier",
+        "PLANNING_COMMERCIALS": "Planning des commercials pour le {{ date }}"
+    },
+    "CHECK_USER_ASSIGNED_SAME_DATE_AND_HOUR": {
+        "QUESTION": "Un rendez-vous est déjà positionné à la même heure, souhaitez-vous l'assigner quand même ?"
+    }
+}

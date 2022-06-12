@@ -1,0 +1,242 @@
+<kt-custom-modal  [title]=" title | translate">
+
+    <div mat-dialog-content class="dialog-body">
+
+        <div class="row">
+
+                <!-- the type access technique of visite technique -->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [showAny]="false"
+                    [inputName]="'typeAccess'"
+                    [data]="visteTechniqueTypeAccess"
+                    (changeEvent)="visteTechniqueTypeAccessEvent($event)"
+                    [label]="'LABELS.TYPE_ACCESS' | translate"
+                    [formInstant]="form">
+                </kt-custom-drop-down>
+
+                <!-- the dimensions technique -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles && isTrappe"
+                    [label]="'LABELS.DIMENSIONS' | translate"
+                    [inputName]="'dimensions'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the type visite of visite technique -->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles && isToit"
+                    [showAny]="false"
+                    [inputName]="'toit'"
+                    [data]="visteTechniqueToit"
+                    [label]="'LABELS.TOIT' | translate"
+                    [formInstant]="form">
+                </kt-custom-drop-down>
+
+                <!-- the detail type access of visite technique -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles && !isToit && !isTrappe"
+                    [label]="'LABELS.DETAIL_TYPE_ACCESS' | translate"
+                    [inputName]="'detailTypeAccess'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the surface comble -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type="number"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.SURFACE_COMBLE' | translate"
+                    [inputName]="'surfaceComble'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the surface piece -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type="number"
+                    *ngIf="typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.SURFACE_PIECE' | translate"
+                    [inputName]="'surfacePiece'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the type plancher -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.TYPE_PLANCHER' | translate"
+                    [inputName]="'typePlancher'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the hauteur sous faitage -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    type="number"
+                    [label]="'LABELS.HAUTEUR_SOUS_FAITAGE' | translate"
+                    [inputName]="'hauteurSousFaitage'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the hauteur sous plafond -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type="number"
+                    *ngIf="typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.HAUTEUR_SOUS_PLAFOND' | translate"
+                    [inputName]="'hauteurSousPlafond'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the number conduit cheminee -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type="number"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.NOMBRE_CONDUIT_CHEMINEE' | translate"
+                    [inputName]="'nombreConduitCheminee'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the number of Spots A Proteger -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type="number"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.NOMBRE_SPOTS_A_PROTEGER' | translate"
+                    [inputName]="'nombreSpotsAProteger'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the number of luminaire -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type="number"
+                    *ngIf="typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.NOMBRE_LUMINAIRE' | translate"
+                    [inputName]="'nombreLuminaire'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- the number of VMC -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type="number"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.NOMBRE_VMC' | translate"
+                    [inputName]="'nombreVMC'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- Type support -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.PRESENCE_TUYAUTERIE' | translate"
+                    [inputName]="'presenceTuyauterie'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- Type support -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.TYPE_SUPPORT' | translate"
+                    [inputName]="'typeSupport'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- presence porte garge -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles"
+                    type="number"
+                    [label]="'LABELS.PRESENCE_PORTE_GARGE' | translate"
+                    [inputName]="'presencePorteGarge'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- is DEGAGEMENT A PREVOIR -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique !== typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.IS_DEGAGEMENT_A_PREVOIR' | translate"
+                    [inputName]="'isDegagementAPrevoir'"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+                <!-- is A Coffrer -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.IS_A_COFFRER' | translate"
+                    [inputName]="'isACoffrer'"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+                <!-- is A Rehausser -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.IS_A_REHAUSSER' | translate"
+                    [inputName]="'isARehausser'"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+                <!-- is client a Sous Traitant -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.IS_PRESENCE_NUISIBLES' | translate"
+                    [inputName]="'isPresenceNuisibles'"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+                <!-- Type nuisible -->
+                <kt-custom-input
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.TYPE_NUISIBLE' | translate"
+                    [inputName]="'typeNuisible'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- is Presence Boites Derivation -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    *ngIf="typeVisiteTechnique === typeVisiteTechniques.IsolutionCombles"
+                    [label]="'LABELS.IS_PRESENCE_BOITES_DERIVATION' | translate"
+                    [inputName]="'isPresenceBoitesDerivation'"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+        </div>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+			mat-raised-button
+            mat-dialog-close
+            color="primary">
+			{{ "LABELS.CLOSE" | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            *ngIf="!isShowMode"
+            (click)="Save()">
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+    </div>
+
+</kt-custom-modal>

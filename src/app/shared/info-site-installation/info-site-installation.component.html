@@ -1,0 +1,139 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-file-1'"
+        [title]="'TITLES.INFORMATIONS_SITE_INSTALLATION' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+            <div class="row">
+
+                <!-- source du lead -->
+                <kt-source-lead-dropdown
+                    class="col-md-4"
+                    [inputName]="'sourceLeadId'"
+                    [label]="'LABELS.SOURCE_DU_LEAD' | translate"
+                    [formInstant]="form">
+                </kt-source-lead-dropdown>
+
+                <!--the date of reception lead -->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateReceptionLead'"
+                    [label]="'LABELS.DATE_DE_RECEPTION_DU_LEAD' | translate">
+                </kt-custom-date-picker>
+
+                <!-- charge Type de Chauffage -->
+                <kt-type-chauffage
+                    class="col-md-4"
+                    [inputName]="'typeChauffageId'"
+                    [label]="'LABELS.TYPE_DE_CHAUFFAGE' | translate"
+                    [formInstant]="form">
+                </kt-type-chauffage>
+
+                <!-- charge Type de logement -->
+                <kt-type-logement-dropdown
+                    class="col-md-4"
+                    [inputName]="'logementTypeId'"
+                    [label]="'LABELS.TYPE_DE_LOGEMENT' | translate"
+                    [formInstant]="form">
+                </kt-type-logement-dropdown>
+
+                <!-- Parcelle cadastrale -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'parcelleCadastrale'"
+                    [label]="'LABELS.PARCELLE_CADASTRALE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- Surface à traiter -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [type]="'number'"
+                    [inputName]="'surfaceTraiter'"
+                    [label]="'LABELS.SURFACE_A_TRAITER' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- Nombre de personnes -->
+                <kt-custom-input
+                    class="col-md-4"
+                    type= number
+                    [inputName]="'nombrePersonne'"
+                    [label]="'LABELS.NB_DE_PESRSONNES' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- charge Précarité -->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    [inputName]="'precarite'"
+                    [label]="'LABELS.PRECARITE' | translate"
+                    [formInstant]="form"
+                    [data]="precarite">
+                </kt-custom-drop-down>
+
+                <!-- Revenu fiscale de référence -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'revenueFiscaleReference'"
+                    [label]="'LABELS.REVENU_FISCALE_DE_REFERENCE' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- Numéro d'HA -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [inputName]="'numeroAH'"
+                    [label]="'LABELS.NUMERO_DHA' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- Type de travaux -->
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    [inputName]="'typeTravaux'"
+                    [label]="'LABELS.LISTE_TRAVAUX' | translate"
+                    [formInstant]="form"
+                    [data]="typeTravaux">
+                </kt-custom-drop-down>
+
+                <!-- charge Prime CEE -->
+                <kt-prime-cee-dropdown
+                    class="col-md-4"
+                    [inputName]="'primeCEEId'"
+                    [label]="'LABELS.PRIME_CEE' | translate"
+                    [formInstant]="form">
+                </kt-prime-cee-dropdown>
+
+                <!-- Maison de plus de 2 ans -->
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    [label]="'LABELS.MAISON_DE_PLUS_DE_2_ANS' | translate"
+                    [inputName]="'isMaisonDePlusDeDeuxAns'"
+                    [formInstant]="form">
+                </kt-custom-checkbox>
+
+                <ng-container *ngIf="showInformationsSupplementaire">
+                    <ng-container *ngFor="let champ of champs">
+                        <kt-custom-input
+                            class="col-md-4"
+                            [inputName]="champ"
+                            [label]="champ"
+                            [formInstant]="champsForm">
+                        </kt-custom-input>
+                    </ng-container>
+                </ng-container>
+
+            </div>
+        </form>
+
+    </kt-portlet-body>
+
+</kt-portlet>

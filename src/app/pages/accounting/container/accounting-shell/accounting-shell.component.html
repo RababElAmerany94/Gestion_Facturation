@@ -1,0 +1,50 @@
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<ng-container *ngIf="isListMode()">
+    <kt-index-accounting (changeSelected)="selectedTabs=$event" >
+
+        <!-- journale de vente-->
+        <kt-accounting-table
+            journalSales
+            *ngIf="selectedTabs == accountingTabs.Sales"
+            [filterOptions]="initFilterOptionSales"
+            [tabType]="accountingTabs.Sales"
+            [data]="salesJournal"
+            (filters)="getSalesJournal($event)"
+            (exportEvent)="exportSalesJournalEvent($event)"
+            [columns]="columnsSalesJournal">
+        </kt-accounting-table>
+
+        <!-- journal de banque-->
+        <kt-accounting-table
+            journalBanque
+            *ngIf="selectedTabs == accountingTabs.Bank"
+            [filterOptions]="initFilterOptionSales"
+            [tabType]="accountingTabs.Bank"
+            [data]="accountsJournal"
+            (filters)="getAccountJournal($event)"
+            (exportEvent)="exportAccountJournalEvent($event)"
+            [columns]="columnsBankJournal">
+        </kt-accounting-table>
+
+        <!-- journal de caisse-->
+        <kt-accounting-table
+            journalCaisse
+            *ngIf="selectedTabs == accountingTabs.Caisse"
+            [filterOptions]="initFilterOptionsAccount"
+            [tabType]="accountingTabs.Caisse"
+            [data]="accountsJournal"
+            (filters)="getAccountJournal($event)"
+            (exportEvent)="exportAccountJournalEvent($event)"
+            [columns]="columnsBankJournal">
+        </kt-accounting-table>
+
+    </kt-index-accounting>
+</ng-container>

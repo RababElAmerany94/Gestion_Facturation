@@ -1,0 +1,70 @@
+<kt-data-table
+    [data]="produits"
+    [columns]="columns"
+    [name]="routeName.Produits"
+    [title]="'LIST.TITLE' | translate"
+    [orderBy]="defaultOrderBy"
+    (changeEvent)="changeFiltersEvent($event)">
+
+    <ng-template #actionsTemplate let-element="element">
+
+        <button type="button"
+                mat-icon-button
+                color="primary"
+                *ngIf="canUpdate()"
+                (click)="editClick(element)"
+                [matTooltip]="'LABELS.EDIT' | translate">
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <!-- owner produit -->
+        <button *ngIf="element.hasActions && canDelete()"
+                mat-icon-button
+                color="warn"
+                type="button"
+                (click)="deleteClick(element?.id)"
+                [matTooltip]="'LABELS.DELETE' | translate">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <!-- end owner produit -->
+
+        <button mat-icon-button
+                color="accent"
+                type="button"
+                *ngIf="canRead()"
+                (click)="showClick(element)"
+                [matTooltip]="'LABELS.SHOW' | translate">
+            <mat-icon>remove_red_eye</mat-icon>
+        </button>
+
+        <!-- active or deactivate -->
+
+        <ng-container *ngIf="element.hasActions && canUpdate()">
+            <button *ngIf="!element?.isPublic"
+                    mat-icon-button
+                    color="warn"
+                    type="button"
+                    (click)="activeClick(element.id)"
+                    [matTooltip]="'LABELS.ACTIVE' | translate">
+                <mat-icon>play_arrow</mat-icon>
+            </button>
+
+            <button *ngIf="element?.isPublic"
+                    mat-icon-button
+                    color="primary"
+                    type="button"
+                    (click)="deactivateClick(element.id)"
+                    [matTooltip]="'LABELS.DEACTIVATE' | translate">
+                <mat-icon>pause</mat-icon>
+            </button>
+        </ng-container>
+        <!-- end -->
+    </ng-template>
+
+    <ng-container class="dataTables-actions" *ngIf="canCreate()">
+        <button mat-mini-fab color="primary" class="ml-3" (click)="addClick()">
+            <i class="material-icons"> add </i>
+        </button>
+    </ng-container>
+
+</kt-data-table>

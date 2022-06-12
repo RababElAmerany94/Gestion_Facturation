@@ -1,0 +1,55 @@
+<kt-custom-modal [title]="title">
+    <div
+        mat-dialog-content class="dialog-body kt-mycart"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000"
+        [infiniteScrollContainer]="'.dialog-body'"
+        [fromRoot]="true"
+        (scrolled)="loadMore()">
+
+        <!-- search field -->
+        <kt-searchbar [searchControl]="searchControl" ></kt-searchbar>
+        <!-- end search field -->
+
+        <div class="mt-4 mx-2 kt-widget2">
+            <div class="kt-widget2__item kt-widget2__item--primary"  *ngFor="let item of dossiers;let i=index">
+                <div class="kt-widget2__checkbox">
+                </div>
+                <div class="kt-widget2__info">
+                    <mat-radio-group [(ngModel)]="dossierId">
+                        <mat-radio-button class="col-12" [value]="item.id">
+                            <span
+                                class="kt-widget2__title">
+                                {{ item?.reference }}: {{ item?.client?.fullName }}
+                            </span>
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="kt-widget2__actions">
+                    <span></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="save()"
+            [matTooltip]="'LABELS.SAUVGARDE'| translate">{{ 'LABELS.SAUVGARDE' | translate }}
+        </button>
+
+    </div>
+</kt-custom-modal>

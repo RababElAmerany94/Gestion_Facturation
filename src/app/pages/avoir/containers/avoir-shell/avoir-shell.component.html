@@ -1,0 +1,75 @@
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-avoir-index
+        [data]="avoirs"
+        (filters)="getAvoirs($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteAvoir($event)"
+        (showEvent)="showEvent($event.id)">
+    </kt-avoir-index>
+</ng-container>
+<!-- end list -->
+
+<!-- edit + add -->
+<ng-container *ngIf="isAddMode() || isEditMode()" >
+
+    <kt-avoir-edit
+        *ngIf="form"
+        [mode]="mode"
+        [form]="form"
+		[Avoir]="avoir"
+        (addEvent)="addAvoir($event)"
+        (editEvent)="editAvoir($event)"
+        (cancelEvent)="modeList()">
+    </kt-avoir-edit>
+
+</ng-container>
+<!-- end edit + add -->
+
+<!-- show -->
+<ng-container *ngIf="isShowMode()" >
+    <kt-avoir-detail>
+
+        <kt-avoir-edit
+            *ngIf="form"
+            info
+            [mode]="mode"
+            [form]="form"
+            [Avoir]="avoir"
+            (downloadEvent)="downloadAvoirEvent()"
+            (dupliquerEvent)="dupliquer($event)"
+            (displayFileEvent)="visualizationPDFAvoir()"
+            (printEvent)="printAvoirEvent()">
+        </kt-avoir-edit>
+
+        <kt-memos
+            memos
+            [Memos]="avoir?.memos"
+            (saveMemoEvent)="addMemoToAvoir($event)">
+        </kt-memos>
+
+        <kt-emails
+            email
+            [Emails]="avoir?.emails"
+            [contacts]="avoir?.client?.contacts"
+            (addEmailEvent)="sendEmail($event)">
+        </kt-emails>
+
+        <kt-historiques
+            historique
+            [Historique]="avoir?.historique">
+        </kt-historiques>
+
+    </kt-avoir-detail>
+</ng-container>
+<!-- end show -->

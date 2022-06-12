@@ -1,0 +1,48 @@
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon2-calendar-9'"
+        [title]="'TITLES.INFO_INSTALLATION_DOSSIER' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form">
+            <div class="row">
+
+                <!--the date of dossier -->
+                <kt-custom-input
+                    class="col-md-6"
+                    [label]="'LABELS.DATE_DEBUT_TRAVAUX' | translate"
+                    [inputName]="'dateDebutTravaux'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <!-- technicien -->
+                <kt-custom-input
+                    class="col-md-6"
+                    [inputName]="'technicienId'"
+                    [label]="'LABELS.TECHNICIENS' | translate"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- status -->
+                <ng-container *ngIf="false">
+                    <kt-custom-input
+                        class="col-md-6"
+                        [label]="'LABELS.STATUS' | translate"
+                        [inputName]="'status'"
+                        [formInstant]="form" >
+                    </kt-custom-input>
+                </ng-container>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>

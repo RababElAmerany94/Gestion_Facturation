@@ -1,0 +1,63 @@
+<!--begin::Form-->
+<form  class="kt-form kt-form--label-right" [formGroup]="form">
+    <kt-portlet>
+
+        <div class="bg-primary text-success">
+            <kt-portlet-header
+                [sticky]="true"
+                [icon]="'flaticon2-calendar-7'"
+                [title]="'GOOGLE_AGENDA.CONFIG' | translate"
+                [class]="'kt-portlet__head--lg'">
+            </kt-portlet-header>
+        </div>
+
+        <kt-portlet-body>
+            <ol class="mw-100">
+                <h4><li>{{ 'GOOGLE_AGENDA.STEP-1' | translate:{email : emailToShareWith} }}</li></h4>
+                <h4><li>{{ 'GOOGLE_AGENDA.STEP-2' | translate }}</li></h4>
+            </ol><br><br><br>
+
+                <div class="d-flex justify-content-center">
+                    <!-- the AGENDA ID -->
+                    <kt-custom-input
+                        class="col-md-6"
+                        [label]="'LABELS.AGENDA_ID' | translate"
+                        [inputName]="'calendarId'"
+                        [formInstant]="form">
+                    </kt-custom-input>
+                </div>
+
+
+            <div class="kt-section kt-margin-t-30">
+
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+                        <!-- ........................................... -->
+                        <div class="pull-right">
+                            <button
+                                ktDebounceClick
+                                color="accent"
+                                class="btn btn-info"
+                                type="button"
+                                (debounceClick)="save()"
+                                [matTooltip]="'LABELS.SAVE' | translate">
+                                    <div class="row">
+                                        <mat-icon>save</mat-icon>&nbsp;
+                                        <h4>{{ 'LABELS.SAVE' | translate }}</h4>
+                                    </div>
+                            </button>
+                        </div>
+
+                    <!-- ........................................................ -->
+
+                    </div>
+                </div>
+
+            </div>
+            <!--end::Form-->
+        </kt-portlet-body>
+    </kt-portlet>
+</form>
+
+<!-- ......................................................................................... -->

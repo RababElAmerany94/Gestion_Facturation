@@ -1,0 +1,285 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+@import "~highlight.js/styles/googlecode.css";
+
+// header base skins
+.kt-header-base-light {
+    @import "sass/global/layout/header/skins/base/light.scss";
+}
+
+.kt-header-base-dark {
+    @import "sass/global/layout/header/skins/base/dark.scss";
+}
+
+// header menu skins
+.kt-header-menu-light {
+    @import "sass/global/layout/header/skins/menu/light.scss";
+}
+
+.kt-header-menu-dark {
+    @import "sass/global/layout/header/skins/menu/dark.scss";
+}
+
+// brand skins
+.kt-brand-dark {
+    @import "sass/global/layout/brand/skins/dark.scss";
+}
+
+.kt-brand-light {
+    @import "sass/global/layout/brand/skins/light.scss";
+}
+
+// aside skins
+.kt-aside-dark {
+    @import "sass/global/layout/aside/skins/dark.scss";
+}
+
+.kt-aside-light {
+    @import "sass/global/layout/aside/skins/light.scss";
+}
+
+// Angular Date Time Picker
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+// hide bootstrap dropdown arrow globally
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.mat-table__wrapper--dashboard .mat-table {
+    min-width: 600px !important;
+    width: 100% !important;
+}
+
+.position-static {
+    position: static;
+}
+
+/**** button color *****/
+// Bootstrap states
+$primary: #5867dd;
+$success: #0abb87;
+$info: #5578eb;
+$warning: #ffb822;
+
+.status-encours {
+    background-color: #5d78ff !important;
+    color: white !important;
+}
+
+.status-assigne {
+    background-color: #13005a !important;
+    color: white !important;
+}
+
+.status-chiffre {
+    background-color: #87CEEB !important;
+    color: white !important;
+}
+
+.status-signe {
+    background-color: #0abb87 !important;
+    color: white !important;
+}
+
+.status-perdu {
+    background-color: #ff6427 !important;
+    color: white !important;
+}
+
+.status-brouillon {
+    background-color: #92949c !important;
+    color: white !important;
+}
+
+.status-realise {
+    background-color: #ee82ee !important;
+    color: white !important;
+}
+
+.status-facture {
+    background-color: #008033 !important;
+    color: white !important;
+}
+
+.status-facture-dossier {
+    background-color: #ff76c1 !important;
+    color: white !important;
+}
+
+.status-enretard {
+    background-color: #a80319 !important;
+    color: white !important;
+}
+
+.status-enattente {
+    background-color: #ffc409 !important;
+}
+
+.status-annulee {
+    background-color: #570091 !important;
+    color: white !important;
+}
+
+.status-cloture {
+    background-color: #ff0990 !important;
+    color: white !important;
+}
+
+.assigne {
+    color: #1b0179 !important;
+}
+
+.status-sync-dossier-antsroute {
+    background-color: #755702 !important;
+    color: white !important;
+}
+
+.sync-dossier-antsroute {
+    color: #755702 !important;
+}
+
+.devis {
+    color: #790101 !important;
+}
+
+ngx-input-star-rating {
+    --color-star-highlight: gold !important;
+}
+
+.mat-progress-bar-buffer {
+    background: #c8cacc !important;
+}
+
+// dropzone custom
+.dropzone.dropzone-default {
+    padding: 0px;
+    width: 100%;
+    margin: auto 11px;
+    overflow-y: hidden;
+}
+
+.advanced-pie-legend .total-value {
+    font-size: 28px !important;
+}
+
+.advanced-pie-legend .total-label {
+    font-size: 18px !important;
+    margin-bottom: 5px !important;
+    line-height: 1em !important;
+}
+
+.advanced-pie-legend
+    .legend-items-container
+    .legend-items
+    .legend-item
+    .item-value {
+    font-size: 18px !important;
+    margin-left: 11px;
+    line-height: 1em !important;
+    margin-top: 0px !important;
+}
+
+.advanced-pie-legend
+    .legend-items-container
+    .legend-items
+    .legend-item
+    .item-label {
+    font-size: 12px !important;
+    opacity: 0.7;
+    margin-left: 11px;
+    margin-top: 0px !important;
+    line-height: 1em !important;
+    color: #74788d;
+    font-weight: 500;
+}
+
+.advanced-pie-legend
+    .legend-items-container
+    .legend-items
+    .legend-item
+    .item-percent {
+    font-size: 12px !important;
+    opacity: 0.7;
+    margin-left: 11px;
+    line-height: 1em !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+// discussion style
+
+.discussion {
+    max-width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.discussion > .bubble {
+    border-radius: 1em;
+    padding: 0.25em 0.75em;
+    margin: 0.0625em;
+    max-width: 50%;
+}
+
+.discussion > .bubble.sender {
+    align-self: flex-start;
+    background-color: cornflowerblue;
+    color: #fff;
+}
+.discussion > .bubble.recipient {
+    align-self: flex-end;
+    background-color: #efefef;
+}
+
+.discussion > .bubble.sender.first {
+    border-bottom-left-radius: 0.1em;
+}
+.discussion > .bubble.sender.last {
+    border-top-left-radius: 0.1em;
+}
+.discussion > .bubble.sender.middle {
+    border-bottom-left-radius: 0.1em;
+    border-top-left-radius: 0.1em;
+}
+
+.discussion > .bubble.recipient.first {
+    border-bottom-right-radius: 0.1em;
+}
+.discussion > .bubble.recipient.last {
+    border-top-right-radius: 0.1em;
+}
+.discussion > .bubble.recipient.middle {
+    border-bottom-right-radius: 0.1em;
+    border-top-right-radius: 0.1em;
+}
+
+// end discussion style
+
+.pointer-cursor {
+    cursor: pointer;
+}

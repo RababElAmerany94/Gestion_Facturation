@@ -1,0 +1,67 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [title]="'MESSAGING.LIST_TITLE' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <div class="row" [formGroup]="form" >
+
+            <kt-custom-input
+                class="col-md-4"
+                [label]="'LABELS.USERNAME' | translate"
+                [inputName]="'username'"
+                [formInstant]="form" >
+            </kt-custom-input>
+
+            <kt-custom-input-password
+                class="col-md-4"
+                [label]="'LABELS.PASSWORD' | translate"
+                [inputName]="'password'"
+                [formInstant]="form" >
+            </kt-custom-input-password>
+
+            <kt-custom-input
+                class="col-md-4"
+                [label]="'LABELS.SERVER' | translate"
+                [inputName]="'server'"
+                [formInstant]="form" >
+            </kt-custom-input>
+
+            <kt-custom-input
+                class="col-md-4"
+                [label]="'LABELS.PORT' | translate"
+                [inputName]="'port'"
+                [formInstant]="form" >
+            </kt-custom-input>
+
+            <kt-custom-checkbox
+                class="col-md-4"
+                [label]="'LABELS.SSL' | translate"
+                [formInstant]="form"
+                [inputName]="'ssl'">
+            </kt-custom-checkbox>
+
+        </div>
+
+    </kt-portlet-body>
+
+
+    <!-- ....................................................................... -->
+    <kt-portlet-footer>
+        <div class="p-3">
+            <button
+                ktDebounceClick
+                class="btn btn-brand"
+                (debounceClick)="save()" >
+                {{ 'LABELS.SAUVGARDE' | translate }}
+            </button>
+        </div>
+    </kt-portlet-footer>
+    <!-- ....................................................................... -->
+
+</kt-portlet>
+

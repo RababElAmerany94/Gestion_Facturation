@@ -1,0 +1,216 @@
+<!-- ..........................INFO facture .................................. -->
+
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-edit-1'"
+        [title]="'TITLES.INFO_FACTURE' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container *ngIf="isShowMode()" ktPortletTools>
+            <kt-facture-status [status]="facture?.status"></kt-facture-status>
+            <button
+                [matTooltip]="'LABELS.ACTIONS' | translate"
+                mat-mini-fab
+                color="primary"
+                class="ml-3"
+                [matMenuTriggerFor]="menu" >
+                <i class="flaticon-more"></i>
+            </button>
+            <mat-menu #menu="matMenu" class="custom-material-menu" >
+                <kt-custom-mat-menu [items]="menuItems" ></kt-custom-mat-menu>
+            </mat-menu>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+            <div class="row">
+
+                <!--the reference of facture-->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [inputName]="'reference'"
+                    [readOnly]="true"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!--the client of facture-->
+                    <kt-client-dropdown
+                        class="col-md-4"
+                        [client]="selectedClient"
+                        [isShow]="isShowMode()"
+                        [inputName]="'clientId'"
+                        [label]="'LABELS.CLIENT' | translate"
+                        [formInstant]="form">
+                    </kt-client-dropdown>
+
+                <!--the date of date creation-->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateCreation'"
+                    [label]="'LABELS.CREATION_DATE' | translate">
+                </kt-custom-date-picker>
+
+                <!--the date of deadline -->
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateEcheance'"
+                    [label]="'LABELS.DATE_ECHEANCE' | translate">
+                </kt-custom-date-picker>
+
+                <!-- objet -->
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.OBJET' | translate"
+                    [inputName]="'objet'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <ng-container *ngIf="isShowMode() && facture.numeroAH != null">
+                    <!-- Numéro d'HA -->
+                    <kt-custom-input
+                        class="col-md-4"
+                        [inputName]="'numeroAH'"
+                        [label]="'LABELS.NUMERO_DHA' | translate"
+                        [formInstant]="form">
+                    </kt-custom-input>
+                </ng-container>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+
+<!-- .......................................................................... -->
+<ng-container *ngIf="(factureType || facture?.type) == factureTypes?.Acompte">
+    <kt-table-facture-acompte
+        [factureDevis]="factureDevis"
+        [currentFactureDevis]="currentFactureDevis"
+        [articles]="articles">
+    </kt-table-facture-acompte>
+</ng-container>
+
+<kt-table-article
+    *ngIf="(factureType || facture?.type)  !== factureTypes?.Acompte"
+    [remiseType]="remiseType"
+    [remise]="remise"
+    [data]="{
+        articles: articles,
+        totalReduction: transferDevisData ? transferDevisData?.factureDevis?.devis?.totalReduction : facture?.totalReduction,
+        mode: tableArticleMode
+    }"
+    [readOnly]="isShowMode()"
+    [disableRemiseGlobal]="typeDevis?.Normal != tableArticleMode || transferDevisData?.factureDevis?.devis?.type ===  typeDevis?.Normal"
+    [primeCEEEDF]="transferDevisData?.factureDevis?.devis?.dossier?.primeCEE?.labelPrimeCEE
+                    ? transferDevisData?.factureDevis?.devis?.dossier?.primeCEE?.labelPrimeCEE : facture?.devis[0]?.devis?.primeCEE?.labelPrimeCEE"
+    (changeEvent)="setResultCalculation($event)">
+    <kt-table-facture-cloture
+        underTotals
+        (resultEvent)="calculeFactureCloture=$event"
+        *ngIf="(factureType || facture?.type)  == factureTypes?.Cloture"
+        [factureDevis]="factureDevis">
+    </kt-table-facture-cloture>
+</kt-table-article>
+<!-- .......................................................................... -->
+
+<!-- .......................................................................... -->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-more-v4'"
+        [title]="'TITLES.OTHER' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+
+            <div class="row">
+
+                <kt-custom-editor-text
+                    class="col-md-12"
+                    [icon]="'flaticon2-list-3'"
+                    [label]="'LABELS.CONDITION_REGULATION' | translate"
+                    [inputName]="'reglementCondition'"
+                    [formInstant]="form"
+                    [disable]="isShowMode()">
+                </kt-custom-editor-text>
+
+                <kt-custom-editor-text
+                    class="col-md-12"
+                    [icon]="'flaticon2-list-3'"
+                    [inputName]="'note'"
+                    [label]="'LABELS.NOTE' | translate"
+                    [formInstant]="form"
+                    [disable]="isShowMode()">
+                </kt-custom-editor-text>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- .......................................................................... -->
+
+<!-- .......................... info document associate ....................... -->
+
+<ng-container
+    *ngIf="isShowMode() && relatedDocs?.length>0" >
+    <kt-shared-related-docs
+        [data]="relatedDocs">
+    </kt-shared-related-docs>
+</ng-container>
+
+<!-- .......................................................................... -->
+
+<!-- .......................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <div class="kt-section__content kt-section__content--solid">
+
+            <div class="btn-group" role="group">
+
+                <button type="button" class="btn btn-secondary btn-small mr-1" (click)="cancel()">
+                    <i class="fas fa-times" ></i>  {{ 'LABELS.CANCEL' | translate }}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    (debounceClick)="save(status.BROUILLON)"
+                    type="button"
+                    class="btn btn-danger btn-small"
+                    *ngIf="(devis == null || devis?.length == 0) && factureType == factureTypes?.Classic">
+                    <i class="fas fa-edit" ></i>
+                    {{ 'STATUS.BROUILLON' | translate }}
+                </button>
+
+                <button
+                    ktDebounceClick
+                    (debounceClick)="save(status.ENCOURS)"
+                    type="button"
+                    class="btn btn-success btn-small">
+                    <i class="fas fa-check" ></i> {{ 'STATUS.ENCOURS' | translate }}
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- .......................................................................... -->

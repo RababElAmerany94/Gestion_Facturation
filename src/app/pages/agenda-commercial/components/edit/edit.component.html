@@ -1,0 +1,202 @@
+<kt-custom-modal [title]="title">
+<div mat-dialog-content class="dialog-body">
+    <form [formGroup]="form">
+		<div class="row">
+
+            <!-- client -->
+            <kt-client-dropdown
+                *ngIf="!data?.clientId"
+                class="col-md-6"
+                [inputName]="'clientId'"
+                [client]="selectedClient"
+                (changeEvent)="setClient($event)"
+                [isShow]="isShowMode()"
+                [showAdd]="!isShowMode()"
+                [label]="'LABELS.CLIENT' | translate"
+                [formInstant]="form">
+            </kt-client-dropdown>
+
+            <!-- affaire -->
+            <kt-dossier-dropdown
+                *ngIf="!data?.dossierId"
+                class="col-md-6"
+                [inputName]="'dossierId'"
+                [dossier]="selectedDossier"
+                [clientId]="selectedClient?.id"
+                (changeEvent)="setDossier($event)"
+                [label]="'LABELS.DOSSIER' | translate"
+                [formInstant]="form">
+            </kt-dossier-dropdown>
+
+            <!-- Responsable commercial -->
+            <kt-dropdown-commercial
+                class="col-md-6"
+                [inputName]="'responsableId'"
+                [label]="'LABELS.RESPONSABLE' | translate"
+                [formInstant]="form">
+            </kt-dropdown-commercial>
+
+            <ng-container  *ngIf="data?.type == types.Tache">
+                <kt-agenda-evenement-dropdown
+                    class="col-md-6"
+                    [inputName]="'tacheTypeId'"
+                    [types]="type.TacheType"
+                    [label]="'LABELS.TYPE' | translate"
+                    [formInstant]="form">
+                </kt-agenda-evenement-dropdown>
+            </ng-container>
+
+            <ng-container  *ngIf="data?.type == types.RDV">
+                <kt-agenda-evenement-dropdown
+                    class="col-md-6"
+                    [inputName]="'rdvTypeId'"
+                    [types]="type.RdvType"
+                    [label]="'LABELS.TYPE' | translate"
+                    [formInstant]="form">
+                </kt-agenda-evenement-dropdown>
+            </ng-container>
+
+            <ng-container  *ngIf="data?.type !== types.Tache">
+                <kt-agenda-evenement-dropdown
+                    class="col-md-6"
+                    [inputName]="'categorieId'"
+                    [types]="type.EvenementCategorie"
+                    [label]="'LABELS.CATEGORIE' | translate"
+                    [formInstant]="form">
+                </kt-agenda-evenement-dropdown>
+            </ng-container>
+
+            <ng-container  *ngIf="data?.type !== types.Tache">
+                <!-- phone number -->
+                <kt-custom-input
+                    class="col-md-6"
+                    [label]="'LABELS.PHONE_NUMBER' | translate"
+                    [inputName]="'phoneNumber'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+            </ng-container>
+
+            <ng-container *ngIf="data?.type == types.Appel">
+                <kt-agenda-evenement-dropdown
+                    class="col-md-6"
+                    [inputName]="'typeAppelId'"
+                    [types]="type.AppelType"
+                    [label]="'LABELS.TYPE' | translate"
+                    [formInstant]="form">
+                </kt-agenda-evenement-dropdown>
+            </ng-container>
+
+            <ng-container *ngIf="data?.type == types.RDV">
+                <kt-agenda-evenement-dropdown
+                    class="col-md-6"
+                    [inputName]="'sourceRDVId'"
+                    [types]="type.SourceRDV"
+                    [label]="'LABELS.ORIGINE' | translate"
+                    [formInstant]="form">
+                </kt-agenda-evenement-dropdown>
+            </ng-container>
+
+            <!-- titre -->
+            <kt-custom-input
+				class="col-md-12"
+				[inputName]="'titre'"
+				[label]="'LABELS.TITLE' | translate"
+				[formInstant]="form">
+            </kt-custom-input>
+
+            <!-- description -->
+            <kt-custom-editor-text
+                class="col-md-12"
+                [icon]="'flaticon2-list-3'"
+                [label]="'LABELS.DESCRIPTION' | translate"
+                [inputName]="'description'"
+                [formInstant]="form"
+                [disable]="isShowMode()">
+            </kt-custom-editor-text>
+
+            <!-- Date -->
+            <kt-custom-date-picker
+                class="col-md-6"
+                [inputName]="'dateEvent'"
+                [label]="'LABELS.DATE' | translate"
+                [formInstant]="form">
+            </kt-custom-date-picker>
+
+            <!-- Heure -->
+            <kt-custom-date-time
+                class="col-md-6"
+                [pickerType]= "'timer'"
+                [inputName]="'time'"
+                [label]="'LABELS.HEURE' | translate"
+                [formInstant]="form">
+            </kt-custom-date-time>
+
+            <!-- Duree -->
+            <kt-period
+                class="col-md-6"
+                [inputName]="'duree'"
+                [label]="'LABELS.DUREE' | translate"
+                [formInstant]="form">
+            </kt-period>
+
+            <ng-container  *ngIf="data?.type == types.Tache">
+                <!-- priority -->
+                <kt-custom-drop-down
+                    class="col-md-6"
+                    [inputName]="'priorite'"
+                    [label]="'LABELS.PRIORITE' | translate"
+                    [formInstant]="form"
+                    [data]="Priorite">
+                </kt-custom-drop-down>
+            </ng-container>
+
+            <ng-container *ngIf="data?.type == types.RDV && address?.length < 2">
+                <!-- select address -->
+                <kt-address-dropdown
+                    class="col-md-6"
+                    [readOnly]="isShowMode()"
+                    [formInstant]="form"
+                    [inputName]="'adresse'"
+                    [selectedAddress]="address"
+                    [addresses]="selectedClient?.addresses"
+                    [label]="'ADDRESS.TITLE_ADRESSE' | translate"
+                    (changeEvent)="setSiteIntervention($event)">
+                </kt-address-dropdown>
+            </ng-container>
+
+            <ng-container *ngIf="data?.type == types.Appel && contacts?.length < 2">
+                <!-- select contact -->
+                <kt-contact-dropdown
+                    class="col-md-6"
+                    [readOnly]="isShowMode()"
+                    [label]="'CONTACTS.TITLE_CONTACT' | translate"
+                    [SelectContact]="contacts"
+                    [Contact]="selectedClient?.contacts"
+                    (changeEvent)="setContact($event)">
+                </kt-contact-dropdown>
+            </ng-container>
+
+		</div>
+	</form>
+</div>
+<div mat-dialog-actions class="dialog-footer" align="end" >
+    <button
+        mat-raised-button
+        mat-dialog-close
+        #tooltip="matTooltip"
+        matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+        {{ 'LABELS.CLOSE' | translate }}
+    </button>
+    <button
+        mat-raised-button
+        ktDebounceClick
+        *ngIf="!isShowMode()"
+        color="primary"
+        #tooltip="matTooltip"
+        matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+        (debounceClick)="saveBase()">
+        {{ 'LABELS.SAUVGARDE' | translate }}
+    </button>
+</div>
+
+</kt-custom-modal>

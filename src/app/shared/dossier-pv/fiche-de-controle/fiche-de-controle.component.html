@@ -1,0 +1,67 @@
+<kt-custom-modal [title]="'TITLES.FICHE_CONTROLE' |translate">
+    <div mat-dialog-content class="dialog-body">
+
+        <!-- .............................................. -->
+        <mat-tab-group [dynamicHeight]="true">
+
+            <!-- .............................................. -->
+                        <!-- TABS information -->
+            <!-- .............................................. -->
+            <mat-tab [label]="'TITLES.INFO' | translate" >
+                <ng-template matTabContent>
+                    <kt-information-fiche-controle
+                        [form]="form"
+                        [anomalies]="photos"
+                        [nameClientSignature]="nameClientSignature"
+                        [nameControllerSignature]="nameSignatureController"
+                        [signatureController]="signatureController"
+                        [signatureClient]="signatureClient">
+                    </kt-information-fiche-controle>
+                </ng-template>
+            </mat-tab>
+
+            <!-- .............................................. -->
+                            <!-- TABS CONSTAT_COMBLES -->
+            <!-- .............................................. -->
+            <mat-tab [label]="'TITLES.CONSTAT_COMBLES' | translate"  >
+                <ng-template matTabContent>
+                    <kt-constat-combles [form]="formConstatComble">
+                    </kt-constat-combles>
+                </ng-template>
+            </mat-tab>
+
+            <!-- .............................................. -->
+                        <!-- TABS CONSTAT_MURS -->
+            <!-- .............................................. -->
+            <mat-tab [label]="'TITLES.CONSTAT_MURS' | translate" >
+                <ng-template matTabContent>
+                    <kt-constat-murs [form]="formConstatMurs">
+                    </kt-constat-murs>
+                </ng-template>
+            </mat-tab>
+
+            <!-- .............................................. -->
+                            <!-- TABS CONSTAT_PLANCHERS -->
+            <!-- .............................................. -->
+            <mat-tab [label]="'TITLES.CONSTAT_PLANCHERS' | translate"  >
+                <ng-template matTabContent>
+                    <kt-constat-planchers [form]="formConstatPlanchers">
+                    </kt-constat-planchers>
+                </ng-template>
+            </mat-tab>
+
+        </mat-tab-group>
+        <!-- .............................................. -->
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}
+        </button>
+    </div>
+
+</kt-custom-modal>

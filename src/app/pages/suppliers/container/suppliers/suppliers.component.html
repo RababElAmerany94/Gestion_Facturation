@@ -1,0 +1,46 @@
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+
+<ng-container *ngIf="isListMode()">
+	<kt-supplier-index
+		(filters)="getSuppliers($event)"
+		[Suppliers]="suppliers"
+		(addEvent)="addEvent()"
+		(editEvent)="editEvent($event.id)"
+		(deleteEvent)="deleteSupplier($event)"
+		(showEvent)="showEvent($event.id)">
+	</kt-supplier-index>
+</ng-container>
+
+<ng-container *ngIf="isAddMode() || isEditMode()">
+	<kt-supplier-edit
+        [mode]="mode"
+        [form]="form"
+		[supplier]="supplier"
+		(addEvent)="addSupplier($event)"
+		(editEvent)="updateSupplier($event)"
+		(cancelEvent)="modeList()">
+	</kt-supplier-edit>
+</ng-container>
+
+<ng-container *ngIf="isShowMode()">
+	<kt-supplier-detail>
+
+		<kt-supplier-edit
+			info
+			[mode]="mode"
+			[form]="form"
+			[supplier]="supplier"
+			(cancelEvent)="modeList()">
+		</kt-supplier-edit>
+
+		<kt-historiques
+			historique
+			[Historique]="supplier?.historique">
+		</kt-historiques>
+	</kt-supplier-detail>
+</ng-container>

@@ -1,0 +1,88 @@
+<!--.................. PAIEMENT GROUP ....................-->
+<kt-custom-modal
+    [title]="title">
+    <!-- step 1-->
+    <div mat-dialog-content class="dialog-body">
+        <form [formGroup]="form">
+            <div class="row">
+
+                <!--reglement mode -->
+                <kt-regulation-mode-drop-down
+                    class="col-md-12"
+                    [label]="'LABELS.REGULATION_MODE' | translate"
+                    [inputName]="'regulationModeId'"
+                    [formInstant]="form">
+                </kt-regulation-mode-drop-down>
+
+                <!--the date de paiement-->
+                <kt-custom-date-picker
+                    class="col-md-12"
+                    [formInstant]="form"
+                    [inputName]="'datePaiement'"
+                    [label]="'LABELS.DATE' | translate">
+                </kt-custom-date-picker>
+
+                  <!--bank account -->
+                <kt-bank-account-drop-down
+                *ngIf="showBankAccount"
+                  class="col-md-12"
+                  [inputName]="'bankAccountId'"
+                  [label]="'LABELS.BANK_COMPTE' | translate"
+                  [formInstant]="form">
+                </kt-bank-account-drop-down>
+
+                <!-- montant -->
+                <kt-custom-input
+                    [type]="'number'"
+                    class="col-md-12"
+                    [label]="'LABELS.AMOUNT' | translate"
+                    [inputName]="'montant'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- description-->
+                <kt-custom-textarea
+                    class="col-md-12"
+                    [label]="'LABELS.DESCRIPTION' | translate"
+                    [inputName]="'description'"
+                    [formInstant]="form">
+                </kt-custom-textarea>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- action dialog-->
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+        <button
+            *ngIf="indexModified==null"
+            mat-raised-button
+            ktDebounceClick
+            color="warn"
+            (debounceClick)="addPaiement()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}
+        </button>
+
+        <button
+           *ngIf="indexModified!=null"
+            mat-raised-button
+            ktDebounceClick
+            color="warn"
+            (debounceClick)="editPaiement()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.EDIT'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}
+        </button>
+    </div>
+</kt-custom-modal>

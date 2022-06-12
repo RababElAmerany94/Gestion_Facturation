@@ -1,0 +1,78 @@
+<!--------------------------------- tva card ------------------------------------>
+<!------------------------------------------------------------------------------->
+<kt-tva-card
+    (tvaEventValue)="tvaParameter=$event"
+    [formTva]="formTva"
+    [formAddTva]="formAddTva"
+    [tvaModels]="tvaModels">
+</kt-tva-card>
+
+<!------------------------------- facture card ---------------------------------->
+<!------------------------------------------------------------------------------->
+<kt-facture-card
+    (changeSelected)="visualizationPDFFacture()"
+    [formFacture]="formFacture">
+         <pdf-viewer
+            [src]="displayFactureData"
+            [show-all]="true"
+            [original-size]="false"
+            [zoom]="0.5"
+            style="display: block">
+        </pdf-viewer>
+</kt-facture-card>
+
+<!-------------------------------- avoir card ----------------------------------->
+<!------------------------------------------------------------------------------->
+<kt-avoir-card
+    (changeSelected)="visualizationPDFAvoir()"
+    [formAvoir]="formAvoir" >
+        <pdf-viewer
+            [src]="displayAvoirData"
+            [show-all]="true"
+            [original-size]="false"
+            [zoom]="0.5"
+            style="display: block">
+        </pdf-viewer>
+</kt-avoir-card>
+
+<!-------------------------------- devis card ----------------------------------->
+<!------------------------------------------------------------------------------->
+<kt-devis
+    [formDevis]="formDevis"
+    (changeSelected)="visualizationPDFDevis()">
+        <pdf-viewer
+            [src]="displayDevisData"
+            [show-all]="true"
+            [original-size]="false"
+            [zoom]="0.5"
+            style="display: block">
+        </pdf-viewer>
+</kt-devis>
+
+<!--------------------------- bon Commande card --------------------------------->
+<!------------------------------------------------------------------------------->
+<kt-bon-commande
+    [formBonCommande]="formBonCommande"
+    (changeSelected)="visualizationPDFBonCommande()">
+        <pdf-viewer
+            [src]="displayBonCommandeData"
+            [show-all]="true"
+            [original-size]="false"
+            [zoom]="0.5"
+            style="display: block">
+        </pdf-viewer>
+</kt-bon-commande>
+
+<!-- ....................................................................... -->
+<div class="kt-portlet__foot">
+    <div class="kt-form__actions">
+        <button
+            class="btn btn-brand"
+            ktDebounceClick
+            (debounceClick)="save()">
+            {{ 'LABELS.EDIT' | translate }}
+        </button>
+        <button class="btn btn-secondary" (click)="cancel()">{{ 'LABELS.CANCEL' | translate }}</button>
+    </div>
+</div>
+<!-- ....................................................................... -->

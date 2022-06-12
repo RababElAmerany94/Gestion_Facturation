@@ -1,0 +1,101 @@
+<div class="offset-md-8 col-md-4">
+    <div class="kt-portlet kt-iconbox kt-iconbox--animate">
+        <div class="kt-portlet__body">
+            <div class="kt-callout__body text-right">
+                <div class="kt-callout__content">
+                    <h3 class="kt-widget1__number kt-font-brand">{{ currentBalance | RoundingNumber | Currency}}</h3>
+                    <span class="text-muted">{{ 'LABELS.CURRENT_SOLDE' | translate }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<kt-filter-search (searchEvent)="searchEvent()">
+    <ng-container class="filters">
+
+        <ng-container>
+            <!-- filtre by date minimal-->
+            <kt-custom-date-picker
+                class="col-md-3"
+                [formInstant]="form"
+                [inputName]="'dateFrom'"
+                [label]="'LABELS.DATE_MINIMAL' | translate">
+            </kt-custom-date-picker>
+        </ng-container>
+
+        <ng-container>
+             <!-- filtre by date maximal-->
+            <kt-custom-date-picker
+                class="col-md-3"
+                [formInstant]="form"
+                [inputName]="'dateTo'"
+                [label]="'LABELS.DATE_MAXIMAL' | translate">
+            </kt-custom-date-picker>
+        </ng-container>
+
+        <ng-container>
+            <!-- filter by bank compte-->
+            <kt-bank-account-drop-down
+                class="col-md-3"
+                [inputName]="'bankAccountId'"
+                [label]="'LABELS.BANK_COMPTE' | translate"
+                [formInstant]="form">
+            </kt-bank-account-drop-down>
+        </ng-container>
+
+    </ng-container>
+
+</kt-filter-search>
+<kt-data-table
+    [data]="paiements"
+    [columns]="columns"
+    [name]="routeName.Paiement"
+    [title]="'LIST.TITLE' | translate"
+    (changeEvent)="changeFiltersEvent($event)" >
+
+    <ng-template #actionsTemplate let-element="element">
+
+        <ng-container *ngIf="element.hasDeleteAction">
+            <button
+                mat-icon-button
+                color="warn"
+                type="button"
+                *ngIf="canDelete()"
+                (click)="deleteClick(element?.id)"
+                [matTooltip]="'LABELS.DELETE' | translate">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </ng-container>
+
+        <button
+            mat-icon-button
+            color="accent"
+            type="button"
+            *ngIf="canRead()"
+            (click)="showClick(element)"
+            [matTooltip]="'LABELS.SHOW' | translate">
+            <mat-icon>remove_red_eye</mat-icon>
+        </button>
+
+    </ng-template>
+
+    <ng-container class="dataTables-actions" *ngIf="canCreate()">
+        <button
+            [matTooltip]="'ADD.MOUVEMENT_COMPTE_COMPTE' | translate"
+            mat-mini-fab color="warn"
+            class="ml-1"
+            (click)="movementAccountToAccount()">
+            <i class="material-icons">swap_horiz</i>
+        </button>
+        <button
+            [matTooltip]="'ADD.PAIEMENT_GROUP' | translate"
+            mat-mini-fab
+            color="success"
+            class="ml-1"
+            (click)="addPaiementGroup()">
+            <i class="material-icons"> view_headline </i>
+        </button>
+    </ng-container>
+
+</kt-data-table>

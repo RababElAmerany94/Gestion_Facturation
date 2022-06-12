@@ -1,0 +1,45 @@
+<!-- .............................................. -->
+<mat-tab-group [dynamicHeight]="true">
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.INFO' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[info]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.PAIEMENTS' | translate" *ngIf="showPayment">
+        <ng-template matTabContent>
+            <ng-content select="[paiement]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.MEMOS' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[memos]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.EMAIL' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[email]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+    <!-- .............................................. -->
+    <mat-tab [label]="'TITLES.HISTORIQUE' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[historique]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+    <!-- .............................................. -->
+
+</mat-tab-group>
+<!-- .............................................. -->

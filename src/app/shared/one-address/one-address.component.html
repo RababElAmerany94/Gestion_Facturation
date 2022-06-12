@@ -1,0 +1,78 @@
+<kt-portlet [class]="address != null ? 'mb-2' : ''">
+    <kt-portlet-header
+        [icon]="'flaticon2-location'"
+        [sticky]="true" [title]="title | translate"
+        [class]="'kt-portlet__head--lg'">
+        <ng-container
+            *ngIf="!isShowMode()"
+            ktPortletTools>
+            <button
+                    *ngIf="address?.length === 0"
+                    mat-mini-fab
+                    color="primary"
+                    [matTooltip]="'ADDRESS.ADD_ADDRESS' | translate"
+                    (click)="addAddressDialog()">
+                <i class="material-icons"> add </i>
+            </button>
+            <button *ngIf="address?.length > 0"
+                    mat-mini-fab
+                    color="accent"
+                    [matTooltip]="'ADDRESS.EDIT_ADDRESS' | translate"
+                    (click)="editAddressDialog()">
+                <i class="material-icons"> edit </i>
+            </button>
+        </ng-container>
+    </kt-portlet-header>
+</kt-portlet>
+
+<div class="row" *ngIf="address?.length > 0">
+    <div class="col-md-12">
+        <div class="kt-portlet kt-portlet--height-fluid">
+            <div class="kt-portlet__head  kt-portlet__head--noborder">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit-y">
+                <!--begin::Widget -->
+                <div class="kt-widget kt-widget--user-profile-1">
+                    <div class="kt-widget__head">
+                        <div class="kt-widget__content pl-0">
+                            <div class="kt-widget__section">
+                                <span class="kt-widget__username">
+                                    {{ address[0]?.adresse }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-widget__body">
+                        <div class="kt-widget__content">
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{'ADDRESS.COMPLEMENT_ADRESSE'|translate}}:</span>
+                                <span href="#" class="kt-widget__data">{{address[0]?.complementAdresse}}</span>
+                            </div>
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{'ADDRESS.VILLE'|translate}}:</span>
+                                <span href="#" class="kt-widget__data">{{address[0]?.ville}}</span>
+                            </div>
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{'ADDRESS.CODE_POSTAL'|translate}}:</span>
+                                <span class="kt-widget__label">{{address[0]?.codePostal}}</span>
+                            </div>
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{'ADDRESS.DEPARTEMENT'|translate}}:</span>
+                                <span class="kt-widget__label">{{address[0]?.departement}}</span>
+                            </div>
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{'ADDRESS.PAYS'|translate}}:</span>
+                                <span class="kt-widget__label">{{ address[0]?.pays}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Widget -->
+        </div>
+    </div>
+</div>

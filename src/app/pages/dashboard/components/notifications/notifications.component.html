@@ -1,0 +1,61 @@
+
+<div class="kt-portlet kt-portlet--height-fluid">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                {{ 'LABELS.NOTIFICATION' | translate  }}
+            </h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+            <ng-container ktPortletTools>
+
+                <button
+                    ktDebounceClick
+                    [matTooltip]="'LABELS.MARQUER_ALL_SEEN' | translate"
+                    class="btn btn-label-brand btn-sm btn-icon btn-circle"
+                    (debounceClick)="markAllAsSeenNotification.emit()">
+                    <i class="fa fa-check"></i>
+                </button>
+
+            </ng-container>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="card_scroll kt-widget2 main-panel">
+            <div class="kt-widget2__item"
+                [ngClass]="{'kt-widget2__item--danger': !item.isSeen,'kt-widget2__item--success': item.isSeen}"
+                *ngFor="let item of notificationsPaged?.value;let i=index">
+                <div class="kt-widget2__checkbox">
+                </div>
+                <div class="kt-widget2__info">
+                    <a
+                        href="javascript:void(0)"
+                        class="kt-widget2__title">
+                        {{  item?.title }}
+                    </a>
+                    <a  href="javascript:void(0)"
+                        class="kt-widget2__username">
+                        {{ item?.userId | date:'shortDate' }}
+                    </a>
+                </div>
+                <div class="kt-widget2__actions">
+                    <a
+                        (click)="seenNotifications(i)"
+                        [matTooltip]="(item.isSeen ?'LABELS.NOTIFICATION_IS_SEEN' :'LABELS.NOTIFICATION_IS_NOT_SEEN') | translate"
+                        class="btn btn-sm btn-icon btn-icon-md " [ngClass]="{'btn-label-danger': !item.isSeen,'btn-label-success': item.isSeen}">
+                        <i [ngClass]="{'flaticon-eye': !item.isSeen,'flaticon2-check-mark': item.isSeen}"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-paginator
+        (page)="pageChange($event)"
+        [pageSize]="notificationsPaged?.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [length]="notificationsPaged?.rowCount"
+        [pageIndex]="notificationsPaged?.currentPage-1"
+        [showFirstLastButtons]="true">
+    </mat-paginator>
+</div>
+

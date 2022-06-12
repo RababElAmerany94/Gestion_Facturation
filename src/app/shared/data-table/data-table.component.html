@@ -1,0 +1,155 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [title]="title"
+        [icon] ="'flaticon-list-1'"
+        [class]="'kt-portlet__head--lg'">
+        <ng-container ktPortletTools>
+
+            <!-- ........................................................................... -->
+            <div class="kt-input-icon kt-input-icon--right kt-subheader__search">
+                <input type="text" class="form-control" [formControl]="searchFormControl"  [placeholder]="'LABELS.SEARCH' | translate" id="generalSearch">
+                <span class="kt-input-icon__icon kt-input-icon__icon--right">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
+                            </g>
+                        </svg>
+                    </span>
+                </span>
+            </div>
+            <!-- ........................................................................... -->
+
+            <!-- ........................................................................... -->
+            <kt-show-hide-table-columns
+                *ngIf="checkedColumns.length > 0"
+                class="ml-1"
+                [columns]="getColumnsNameTranslated()"
+                [tableName]="'dataSource'"
+                [checkedColumns]="checkedColumns"
+                (selectColumn)="setCheckedColumns($event)">
+            </kt-show-hide-table-columns>
+            <!-- ........................................................................... -->
+
+            <!-- ........................................................................... -->
+            <ng-content select=".dataTables-actions" ></ng-content>
+            <!-- ........................................................................... -->
+
+        </ng-container>
+    </kt-portlet-header>
+
+</kt-portlet>
+
+<div class="table-responsive">
+    <table
+        [dataSource]="items"
+        mat-table
+        class="kt-datatable__table"
+        id="dataSource"
+        matSort
+        (matSortChange)="sortChange($event)">
+
+        <!-- ............................................................................ -->
+        <ng-container [matColumnDef]="column.name" *ngFor="let column of columns;let i= index">
+            <ng-container *ngIf="!column.isOrder" >
+                <th mat-header-cell *matHeaderCellDef> {{ column.nameTranslate | translate | uppercase}} </th>
+            </ng-container>
+            <ng-container *ngIf="column.isOrder" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.nameTranslate | translate | uppercase}}</th>
+            </ng-container>
+            <td mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element[column.name] != null" >
+                    <ng-container *ngIf="column.type == columnType.Date" >
+                        {{ element[column.name] | date:'shortDate' }}
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.DateTime" >
+                        {{ element[column.name] | date:'short' }}
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.Currency" >
+                        <span class="text-right text-nowrap" >{{ element[column.name] | RoundingNumber | Currency }}</span>
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.Number" >
+                        {{ element[column.name] | RoundingNumber }}
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.Translate" >
+                        {{ element[column.name] | translate }}
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.Tags" >
+                        <span *ngFor="let item of element[column.name];" class="btn btn-bold btn-sm btn-font-sm  btn-label-brand bit-left-margin">
+                            <span class="text-nowrap">{{item}}</span>
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.List" >
+                        <ng-container *ngFor="let item of element[column.name];let i=index">
+                            <ng-container *ngIf="i>0" ><br/></ng-container>
+                            <span class="text-nowrap">
+                                <span class="kt-badge kt-badge--brand kt-badge--dot"></span>&nbsp;
+                                <span class="kt-font-bold kt-font-brand">{{item}}</span>
+                            </span>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.colorNews" >
+                        <span [ngStyle]="{'background-color': element[column.name]}" class="kt-badge kt-badge--inline kt-font-light" >
+                            {{element[column.name]}}
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.Status" >
+                        <ng-container
+                            [ngTemplateOutlet]="statusTemplate"
+                            [ngTemplateOutletContext]="{status : element[column.name],element : element}">
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.Html" >
+                        <span [innerHTML]="element[column.name]" ></span>
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.longText" >
+                        {{ element[column.name] | truncate:30 }}
+                    </ng-container>
+                    <ng-container *ngIf="column.type == columnType.any" >
+                        {{ element[column.name] }}
+                    </ng-container>
+                </ng-container>
+            </td>
+        </ng-container>
+        <!-- ............................................................................ -->
+
+        <!-- ............................................................................ -->
+        <ng-container matColumnDef="actions" *ngIf="isAction">
+            <th mat-header-cell *matHeaderCellDef> {{ 'LABELS.ACTIONS' | translate | uppercase }}</th>
+            <td mat-cell *matCellDef="let element" class="text-nowrap">
+                <ng-container
+                    [ngTemplateOutlet]="actionsTemplate"
+                    [ngTemplateOutletContext]="{element : element}">
+                </ng-container>
+            </td>
+        </ng-container>
+        <!-- ............................................................................ -->
+
+        <tr mat-header-row *matHeaderRowDef="getColumnsName()"></tr>
+        <tr mat-row *matRowDef="let row; columns: getColumnsName();"></tr>
+
+    </table>
+</div>
+
+<!-- empty datatables -->
+<ng-container *ngIf="items?.length == 0" >
+    <div class="text-center py-3 bg-white p-2" >
+        {{ 'LABELS.EMPTY_TABLE' | translate}}
+    </div>
+</ng-container>
+<!-- end empty dataTable -->
+
+<!-- ............................................................................ -->
+<mat-paginator
+    (page)="pageChange($event)"
+    [pageSize]="state?.PageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="rowCount"
+    [pageIndex]="state?.Page-1"
+    [showFirstLastButtons]="true">
+</mat-paginator>
+<!-- ............................................................................ -->

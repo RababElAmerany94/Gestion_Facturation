@@ -1,0 +1,103 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-interface-3'"
+        [title]="'DOCUMENT_PARAMETER.DEVIS.TITLE' | translate"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+            <i  class="fas"
+                [ngClass]="{'fa-minus': showCardBody,'fa-plus': !showCardBody}"
+                (click)="showCardBody = !showCardBody">
+            </i>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body  *ngIf="showCardBody">
+        <!-- .............................................. -->
+        <mat-tab-group [dynamicHeight]="true">
+
+            <!-- .............................................. -->
+            <mat-tab [label]="'LABELS.DEVIS_PARAMS' | translate">
+
+                <ng-template matTabContent>
+                    <!--begin::Form-->
+                    <form class="kt-form" [formGroup]="formDevis">
+                        <div class="row">
+
+                            <kt-delay-dropdown
+                                class="col-md-12"
+                                [label]="'DOCUMENT_PARAMETER.LABELS.DELAI_VALIDITE' | translate"
+                                [formInstant]="formDevis"
+                                [inputName]="'validateDelay'">
+                            </kt-delay-dropdown>
+
+                            <kt-custom-editor-text
+                                class="col-md-12"
+                                [icon]="'flaticon2-document'"
+                                [label]="'DOCUMENT_PARAMETER.LABELS.ENTETE_DEVIS' | translate"
+                                [placeholder]="'DOCUMENT_PARAMETER.LABELS.ENTETE' | translate"
+                                [inputName]="'header'"
+                                [formInstant]="formDevis">
+                            </kt-custom-editor-text>
+
+                            <kt-custom-editor-text
+                                class="col-md-12"
+                                [icon]="'flaticon2-document'"
+                                [label]="'DOCUMENT_PARAMETER.LABELS.PIED_DE_PAGE' | translate"
+                                [placeholder]="'DOCUMENT_PARAMETER.LABELS.PIED_DE_PAGE' | translate"
+                                [inputName]="'footer'"
+                                [formInstant]="formDevis">
+                            </kt-custom-editor-text>
+
+                            <kt-custom-editor-text
+                                class="col-md-12"
+                                [icon]="'flaticon-notes'"
+                                [label]="'DOCUMENT_PARAMETER.LABELS.NOTE_DEVIS' | translate"
+                                [placeholder]="'LABELS.NOTE' | translate"
+                                [inputName]="'note'"
+                                [formInstant]="formDevis">
+                            </kt-custom-editor-text>
+
+                            <h6 class="ml-3">
+                                <i class="flaticon-mail-1"></i>
+                                {{ 'DOCUMENT_PARAMETER.LABELS.SEND_EMAIL' | translate }}
+                            </h6>
+
+                            <kt-custom-input
+                                class="col-md-12"
+                                [label]="'DOCUMENT_PARAMETER.LABELS.SEND_EMAIL' | translate"
+                                [inputName]="'sujetMail'"
+                                [formInstant]="formDevis">
+                            </kt-custom-input>
+
+                            <kt-custom-textarea
+                                class="col-md-12"
+                                [inputName]="'contenuMail'"
+                                [label]="'DOCUMENT_PARAMETER.LABELS.CONTENU_EMAIL' | translate"
+                                [formInstant]="formDevis">
+                            </kt-custom-textarea>
+
+                        </div>
+                    </form>
+                    <!-- end form-->
+                </ng-template>
+            </mat-tab>
+            <!-- .............................................. -->
+
+            <!-- .............................................. -->
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span (click)="selectedTabs()">{{'LABELS.VISUALISER' | translate}}</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    <ng-content></ng-content>
+                </ng-template>
+            </mat-tab>
+            <!-- .............................................. -->
+        </mat-tab-group>
+        <!-- .............................................. -->
+    </kt-portlet-body>
+</kt-portlet>

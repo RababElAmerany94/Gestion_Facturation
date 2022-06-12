@@ -1,0 +1,93 @@
+<!--Begin::Portlet-->
+<div class="kt-portlet">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                {{ 'LABELS.FOLLOW_DOSSIER' | translate }}
+            </h3>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="tab-content main-panel">
+            <div class="tab-pane active">
+
+                <!--Begin::Timeline 3 -->
+                <div class="kt-timeline-v3" >
+                    <div class="kt-timeline-v3__items" >
+                        <ng-container *ngFor="let item of dossiers;let i=index">
+                            <div class="kt-timeline-v3__item"
+                                [ngClass]="{
+                                    'kt-timeline-v3__item--assigne': item?.status == status.Assigne,
+                                    'kt-timeline-v3__item--enattente': item?.status == status.EnAttente,
+                                    'kt-timeline-v3__item--enretard': item?.status == status.EnRetard,
+                                    'kt-timeline-v3__item--info': item?.status == status.Planifie,
+                                    'kt-timeline-v3__item--aplanifie': item?.status == status.Aplanifie,
+                                    'kt-timeline-v3__item--chiffre': item?.status == status.Chiffre,
+                                    'kt-timeline-v3__item--facture': item?.status == status.Facture,
+                                    'kt-timeline-v3__item--perdu': item?.status == status.Perdu,
+                                    'kt-timeline-v3__item--signe': item?.status == status.Signe,
+                                    'kt-timeline-v3__item--realise': item?.status == status.Realise
+                                }">
+                                <span class="kt-timeline-v3__item-time" style="font-size: 10px !important;">{{ item?.createdOn | date:'shortDate' }}</span>&nbsp;
+                                <div class="kt-timeline-v3__item-desc">
+                                    <span class="kt-timeline-v3__item-text">
+                                        {{ 'LABELS.DOSSIER' | translate }} {{ item?.reference }} {{ 'LABELS.FOR_CLIENT' | translate }} {{ item?.client?.fullName }}
+                                    </span>
+                                    <span class="ml-1">
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-assigne" *ngIf="item.status == status.Assigne">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-enattente" *ngIf="item.status == status.EnAttente">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-facture" *ngIf="item.status == status.Facture">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-enretard" *ngIf="item.status == status.EnRetard">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-chiffre" *ngIf="item.status == status.Chiffre">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-perdu" *ngIf="item.status == status.Perdu">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-realise" *ngIf="item.status == status.Realise">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-signe" *ngIf="item.status == status.Signe">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-assigne" *ngIf="item.status == status.Planifie">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                        <span class="kt-badge kt-badge--primary  kt-badge--inline kt-badge--pill font-weight-normal status-sync-dossier-antsroute" *ngIf="item.status == status.Aplanifie">
+                                            {{ 'DOSSIER_STATUS.'+item?.status | translate }}
+                                        </span>
+                                    </span><br>
+                                    <span class="kt-timeline-v3__item-user-name font-weight-normal" *ngIf="item?.commercial">
+                                        {{ 'LABELS.RESPONSABLE' | translate }}: {{ item?.commercial?.fullName }}
+                                    </span><br>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!--End::Timeline 3 -->
+            </div>
+        </div>
+    </div>
+
+    <mat-paginator
+        (page)="pageChange($event)"
+        [pageSize]="dossier?.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [length]="dossier?.rowCount"
+        [pageIndex]="dossier?.currentPage-1"
+        [showFirstLastButtons]="true">
+    </mat-paginator>
+
+</div>
+
+<!--End::Portlet-->

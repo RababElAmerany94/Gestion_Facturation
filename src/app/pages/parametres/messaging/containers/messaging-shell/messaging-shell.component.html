@@ -1,0 +1,8 @@
+<!-- title -->
+<h3 class="kt-subheader__title mb-4"> {{ 'MESSAGING.TITLE' | translate }} </h3>
+<!-- end title -->
+       
+<kt-messaging-index
+    [Messaging]="messaging"
+    (saveEvent)="saveEvent($event)">
+</kt-messaging-index>

@@ -1,0 +1,110 @@
+<!-- begin:: Content -->
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+    <kt-filters-dashboard
+        (searchEvent)="dashboardFilterOption=$event;initDataComponent()"
+    ></kt-filters-dashboard>
+
+    <div class="row">
+
+        <div class="col-lg-6 col-xl-4 order-lg-1 order-xl-1">
+            <kt-nombre-documents
+                [numberDocuments]="numberDocuments"
+            ></kt-nombre-documents>
+        </div>
+
+        <div class="col-lg-6 col-xl-4 order-lg-1 order-xl-1">
+
+            <kt-document-statistic
+                [title]="'LABELS.FACTURE'"
+                [sousTitle]="'LABELS.STATISTICS_FACTURE'"
+                [prefixTranslateStatus]="'FACTURE_STATUS'"
+                [dataStatistic]="statisticDocuments.facture">
+            </kt-document-statistic>
+
+            <div class="kt-space-20"></div>
+
+            <kt-document-statistic
+                [title]="'LABELS.AVOIR'"
+                [sousTitle]="'LABELS.STATISTICS_AVOIR'"
+                [prefixTranslateStatus]="'AVOIR_STATUS'"
+                [dataStatistic]="statisticDocuments.avoir">
+            </kt-document-statistic>
+
+        </div>
+
+        <div class="col-lg-6 col-xl-4 order-lg-1 order-xl-1">
+
+            <kt-document-statistic
+                [title]="'LABELS.DEVIS'"
+                [sousTitle]="'LABELS.STATISTICS_DEVIS'"
+                [prefixTranslateStatus]="'DEVIS_STATUS'"
+                [dataStatistic]="statisticDocuments.devis">
+            </kt-document-statistic>
+
+            <div class="kt-space-20"></div>
+
+            <kt-document-statistic
+                [title]="'LABELS.DOSSIER'"
+                [sousTitle]="'LABELS.STATISTICS_DOSSIERS'"
+                [prefixTranslateStatus]="'DOSSIER_STATUS'"
+                [dataStatistic]="statisticDocuments.dossier">
+            </kt-document-statistic>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-8">
+            <kt-chiffre-affaire-chart
+                [dataChart]="chiffreAffaireStatistics">
+            </kt-chiffre-affaire-chart>
+        </div>
+
+        <div class="col-xl-4">
+            <kt-notifications
+                [data]="notifications"
+                (changeEvent)="changeEventNotification($event)"
+                (seenNotificationEvent)="seenNotification($event)"
+                (markAllAsSeenNotification)="markAllAsSeenNotification()">
+            </kt-notifications>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-8">
+            <kt-classement [classementData]="classementData">
+            </kt-classement>
+        </div>
+
+        <div class="col-xl-4">
+            <kt-recapitulatif-financier
+                [data]="recapitulatifFinancier">
+            </kt-recapitulatif-financier>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-6">
+            <kt-evenenment
+                (changeEvent)="changeEventEchangeCommercial($event)"
+                [data]="echangeCommercial">
+            </kt-evenenment>
+        </div>
+
+        <div class="col-xl-6">
+            <kt-evenement-dossier
+                (changeEvent)="changeEventDossiers($event)"
+                [data]="dossiers">
+            </kt-evenement-dossier>
+        </div>
+
+    </div>
+
+</div>

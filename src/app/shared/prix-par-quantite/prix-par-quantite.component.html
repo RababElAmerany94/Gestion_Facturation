@@ -1,0 +1,68 @@
+<kt-portlet [class]="prices.length > 0 ? 'mb-2' : ''">
+    <kt-portlet-header 
+        [icon]="'flaticon-price-tag'" 
+        [sticky]="true" 
+        [title]="title | translate"
+        [class]="'kt-portlet__head--lg'">
+        <ng-container ktPortletTools>
+            <button
+               *ngIf="!isShowMode()"
+                mat-mini-fab 
+                color="primary" 
+                [matTooltip]="'PRIX_PAR_QUANTITE.ADD_TITLE' | translate"
+                (click)="addPrixParQuantite()">
+                <i class="material-icons"> add </i>
+            </button>
+        </ng-container>
+    </kt-portlet-header>
+</kt-portlet>
+
+<div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3" *ngFor="let item of prices;let i = index">
+        <div class="kt-portlet kt-portlet--height-fluid">
+            <div class="kt-portlet__head kt-portlet__head--noborder" *ngIf="!isShowMode()">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+    
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <a  (click)="editPrixParQuantite(i)"
+                        [matTooltip]="'LABELS.EDIT' | translate" 
+                        class="btn btn-outline-hover-success btn-icon btn-circle">
+                        <i class="flaticon-edit kt-font-success"></i>
+                    </a>
+                    <a  (click)="deletePrixParQuantite(i)"
+                        [matTooltip]="'LABELS.DELETE' | translate" 
+                        class="btn btn-outline-hover-danger btn-icon btn-circle">
+                        <i class="flaticon2-trash kt-font-danger"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="kt-portlet__body" [ngClass]="{'pt-5': isShowMode()}">
+                <!--begin::Widget -->
+                <div class="kt-widget kt-widget--user-profile-2">
+                    <div class="kt-widget__head"></div>
+                    <div class="kt-widget__body">
+                        <div class="kt-widget__section"> </div>
+                        <div class="kt-widget__item">
+                            <div class="kt-widget__contact">
+                                <span class="kt-widget__label">{{'LABELS.PRIX_TTC'|translate}}:</span>
+                                <a class="kt-widget__data">{{ item?.prix | RoundingNumber | Currency }}</a>
+                            </div>
+                            <div class="kt-widget__contact">
+                                <span class="kt-widget__label">{{'LABELS.QUANTITE'|translate}}:</span>
+                                <a class="kt-widget__data">
+                                    {{ item?.quantiteMinimal | RoundingNumber }} < 
+                                    {{ 'LABELS.QUANTITE' | translate }} < 
+                                    {{ item.quantiteMaximal | RoundingNumber}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Widget -->
+            </div>
+        </div>
+    </div>
+</div>

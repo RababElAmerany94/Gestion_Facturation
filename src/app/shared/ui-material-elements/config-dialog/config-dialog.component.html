@@ -1,0 +1,29 @@
+<kt-custom-modal [title]="data.header">
+
+  <div mat-dialog-content class="dialog-body pb-2">
+    {{data.message | translate}}
+  </div>
+
+  <div mat-dialog-actions class="dialog-footer" align="end">
+
+    <ng-container *ngFor="let item of data.buttons">
+
+      <i *ngIf="item.handler; then haseEvent; else close"></i>
+
+      <ng-template #haseEvent>
+        <button mat-raised-button [color]="item.cssClass" (click)="item.handler()" mat-dialog-close>
+          {{item.text}}
+        </button>
+      </ng-template>
+
+      <ng-template #close>
+        <button mat-raised-button [color]="item.cssClass" mat-dialog-close>
+          {{item.text}}
+        </button>
+      </ng-template>
+
+    </ng-container>
+
+  </div>
+
+</kt-custom-modal>

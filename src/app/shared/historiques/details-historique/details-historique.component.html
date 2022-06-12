@@ -1,0 +1,21 @@
+<kt-custom-modal [title]="'HISTORY.HISTORYDETAIL' | translate">
+    <div mat-dialog-content class="dialog-body">
+        <table class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <th>{{'HISTORY.ATTRIBUTE' | translate}}</th>
+              <th>{{'HISTORY.BEFORE' | translate}}</th>
+              <th>{{'HISTORY.AFTER' | translate}}</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let champ of details;let i = index">
+                <td> {{ champ.Attribute}}</td>
+                <td [innerHtml]="champ.Before"></td>
+                <td [innerHtml]="champ.After"></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div mat-dialog-actions class="dialog-footer" align="end">
+        <button mat-raised-button color="primary" (click)="close()">{{ 'LABELS.CLOSE' | translate }}</button>
+    </div>
+</kt-custom-modal>

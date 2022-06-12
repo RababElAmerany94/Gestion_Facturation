@@ -1,0 +1,48 @@
+{
+    "TITLE": "Factures",
+    "LIST": {
+        "TITLE": "Liste des factures",
+        "DELETE": {
+            "HEADER": "Supprimer une facture",
+            "MESSAGE": "Êtes-vous sûr supprimer cette facture ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter facture",
+        "EXPORT_RELEVE_FACTURE": "Export Relevé Facture",
+        "AJOUTER_PAIEMENT": "Ajouter paiement",
+        "PAIEMENT_BY_AVOIR": "Paiement par avoir",
+        "FACTURE_GROUPEE": "Ajouter facture groupée"
+    },
+    "EDIT": {
+        "TITLE": "Modifier facture",
+        "EDIT_PAIEMENT": "Modifier paiement"
+    },
+    "SHOW": {
+        "TITLE": "Détails facture"
+    },
+    "LABELS": {
+        "ANNULEZ_LA": "Oui, annulez la"
+    },
+    "RELEVE_FACTURE_TYPE": {
+        "0": "Relevé factures impayées",
+        "1": "Relevé factures payées"
+    },
+    "FACTURE_TYPE": {
+        "0": "Classic",
+        "1": "Acompte",
+        "2": "Clôture"
+    },
+    "PAYMENT": {
+        "DELETE": {
+            "HEADER": "Supprimer un paiement",
+            "MESSAGE": "Êtes-vous sûr supprimer ce paiement ?"
+        }
+    },
+    "CONFIRMATION": {
+        "CANCEL": {
+            "HEADER": "Confirmation",
+            "MESSAGE": "Êtes-vous sûr de vouloir annuler cette facture ?"
+        }
+    }
+}

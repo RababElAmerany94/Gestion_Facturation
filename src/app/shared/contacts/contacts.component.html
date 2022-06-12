@@ -1,0 +1,153 @@
+<kt-portlet [class]="!isForAgenda && contacts?.length > 0 ? 'mb-2' : ''">
+    <kt-portlet-header
+        [icon]="'flaticon2-user'"
+        [sticky]="true"
+        [title]="'CONTACTS.TITLE' | translate"
+        [class]="'kt-portlet__head--lg'">
+        <ng-container ktPortletTools>
+            <button
+                *ngIf="mode!=modes.Show && !isForAgenda"
+                mat-mini-fab
+                color="primary"
+                [matTooltip]="'CONTACTS.ADDCONTACT' | translate"
+                (click)="addContactDialog()">
+                <i class="material-icons"> add </i>
+            </button>
+            <button
+                *ngIf="isForAgenda"
+                mat-mini-fab
+                color="primary"
+                [matTooltip]="'CONTACTS.ADDCONTACT' | translate"
+                (click)="addContactDialogDropdown()">
+                <i class="material-icons"> add </i>
+            </button>&nbsp;&nbsp;
+            <button
+                *ngIf="isForClient && mode!=modes.Show"
+                mat-mini-fab
+                color="success"
+                [matTooltip]="'CONTACTS.ADDCONTACTCLIENT' | translate"
+                (click)="addContactClient()">
+                <i class="material-icons"> account_box </i>
+            </button>
+        </ng-container>
+    </kt-portlet-header>
+    <kt-portlet-body *ngIf="isForAgenda">
+        <mat-menu #menu="matMenu" class="custom-material-menu">
+            <ng-template matMenuContent let-index="index">
+                <button
+                    (click)="editContactDialog(index)"
+                    mat-menu-item>
+                    <mat-icon>create</mat-icon>
+                    <span>{{'LABELS.EDIT'|translate}}</span>
+                </button>
+                <button
+                    (click)="deleteContacts(index)"
+                    mat-menu-item>
+                    <mat-icon>delete</mat-icon>
+                    <span>{{'LABELS.DELETE'|translate}}</span>
+                </button>
+            </ng-template>
+        </mat-menu>
+        <div class="kt-widget3">
+            <ng-container *ngFor="let item of contacts;let i=index" >
+                <div class="kt-widget3__item">
+                    <div class="kt-widget3__header">
+                        <div class="kt-widget3__info pl-0">
+                            <a href="#" class="kt-widget3__username">
+                                {{item.civilite}} {{item.nom }} {{item.prenom}}
+                                <i class="flaticon2-correct kt-font-success" *ngIf="item?.isDefault"></i>
+                            </a><br>
+                            <span class="kt-widget3__time">
+                                {{item?.fonction}}
+                            </span>
+                        </div>
+                        <span class="kt-widget3__status">
+                            <mat-icon
+                                *ngIf="mode!=modes.Show"
+                                [matMenuTriggerFor]="menu"
+                                [matMenuTriggerData]="{ index:i }">
+                                more_vert
+                            </mat-icon>
+                        </span>
+                    </div>
+                    <div class="kt-widget3__body">
+                        <div class="kt-widget__content pb-3">
+                            <div class="kt-widget__info d-flex justify-content-between">
+                                <span class="kt-widget__label">{{'CONTACTS.EMAIL'|translate}}:</span>
+                                <a  href="mailto:{{ item?.email }}" class="kt-widget__data">{{item?.email}}</a>
+                            </div>
+                            <div class="kt-widget__info d-flex justify-content-between">
+                                <span class="kt-widget__label">{{'CONTACTS.MOBILE'|translate}}:</span>
+                                <a  href="tel:{{ item?.mobile }}" class="kt-widget__data">{{item?.mobile}}</a>
+                            </div>
+                            <div class="kt-widget__info d-flex justify-content-between">
+                                <span class="kt-widget__label">{{item?.commentaire}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </kt-portlet-body>
+</kt-portlet>
+
+<div class="row" *ngIf="!isForAgenda">
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3" *ngFor="let item of contacts;let i=index">
+        <div class="kt-portlet kt-portlet--height-fluid">
+            <div class="kt-portlet__head  kt-portlet__head--noborder">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title"></h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit-y">
+                <div class="kt-widget kt-widget--user-profile-1">
+                    <div class="kt-widget__head">
+                        <div class="kt-widget__content pl-0">
+                            <div class="kt-widget__section">
+                                <span class="kt-widget__username">
+                                    {{item.civilite}} {{item.nom }} {{item.prenom}}
+                                    <i class="flaticon2-correct kt-font-success" *ngIf="item?.isDefault"></i>
+                                </span>
+                                <span class="kt-widget__subtitle">
+                                    {{item?.fonction}}
+                                </span>
+                            </div>
+
+                            <div class="kt-widget__action">
+                                <ng-container *ngIf="mode!=modes.Show" >
+                                    <button
+                                        type="button"
+                                        class="btn btn-info btn-sm"
+                                        (click)="editContactDialog(i)">
+                                        {{'LABELS.EDIT'|translate}}
+                                    </button>&nbsp;
+                                    <button
+                                        type="button"
+                                        class="btn btn-success btn-sm"
+                                        (click)="deleteContacts(i)">
+                                        {{'LABELS.DELETE'|translate}}
+                                    </button>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-widget__body">
+                        <div class="kt-widget__content">
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{'CONTACTS.EMAIL'|translate}}:</span>
+                                <a  href="mailto:{{ item?.email }}" class="kt-widget__data">{{item?.email}}</a>
+                            </div>
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{'CONTACTS.MOBILE'|translate}}:</span>
+                                <a  href="tel:{{ item?.mobile }}" class="kt-widget__data">{{item?.mobile}}</a>
+                            </div>
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">{{item?.commentaire}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

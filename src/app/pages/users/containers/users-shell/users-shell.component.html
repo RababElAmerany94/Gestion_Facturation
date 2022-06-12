@@ -1,0 +1,59 @@
+<kt-breadcrumb-list
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event"
+    (cancelEvent)="setModeList()">
+</kt-breadcrumb-list>
+
+<ng-container *ngIf="isListMode()">
+    <kt-users-index
+        (filters)="getUsers($event)"
+        [data]="users"
+        (changePasswordEvent)="changePassword($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteUser($event)"
+        (changeVisibilityEvent)="ChangeActivateUserEvent($event)"
+        (showEvent)="showEvent($event.id)">
+    </kt-users-index>
+</ng-container>
+
+<ng-container *ngIf="isAddMode() || isEditMode()" >
+    <kt-users-edit
+        [mode]="mode"
+        [form]="form"
+        [User]="user"
+        (addEvent)="addUser($event)"
+        (editEvent)="editUser($event)"
+        (cancelEvent)="setModeList()">
+    </kt-users-edit>
+</ng-container>
+
+<ng-container *ngIf="isShowMode()">
+    <kt-users-detail>
+
+        <kt-users-edit
+            info
+            [mode]="mode"
+            [form]="form"
+            [User]="user">
+        </kt-users-edit>
+
+        <kt-google-agenda
+            googleAgenda
+            (saveCalendarId)="saveCalendarId($event)">
+        </kt-google-agenda>
+
+        <kt-memos
+            memos
+            [Memos]="user?.memos"
+            (saveMemoEvent)="saveMemoToUser($event)">
+        </kt-memos>
+
+        <kt-historiques
+            historique
+            [Historique]="user?.historique">
+        </kt-historiques>
+
+    </kt-users-detail>
+</ng-container>

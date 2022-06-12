@@ -1,0 +1,15 @@
+<div class="pb-3" [formGroup]="formInstant">
+    <mat-label>
+        <i *ngIf="icon" [class]="icon" ></i>
+        {{ label }}
+    </mat-label>
+    <angular-editor
+        [formControlName]="inputName"
+        [placeholder]="placeholder"
+        [config]="editorConfig"
+        [id]="inputName">
+    </angular-editor>
+    <mat-error>
+        <kt-custom-error-display [control]="control"></kt-custom-error-display>
+    </mat-error>
+</div>

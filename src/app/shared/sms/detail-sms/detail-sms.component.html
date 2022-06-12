@@ -1,0 +1,32 @@
+<kt-custom-modal [title]="'SMS.SHOW'  | translate ">
+    <div mat-dialog-content class="dialog-body">
+
+        <section class="discussion" *ngIf="sms">
+
+            <div class="text-left"><strong> {{ 'LABELS.VOUS'  | translate  }} </strong> . <small>{{sms?.date | date: 'MMM d, y, h:mm' }}</small></div>
+            <div class="bubble sender last">{{sms?.message }}</div>
+
+            <ng-container *ngIf="sms?.reponses?.length > 0">
+                <div class="text-right"><small>{{sms?.reponses[0]?.date | date: 'MMM d, y, h:mm' }}</small> . <strong>{{sms?.reponses[0].numeroTelephone}}</strong></div>
+                <ng-container *ngFor="let item of sms?.reponses ; let i=index">
+                    <div class="bubble recipient last">{{ item?.message }}</div>
+                </ng-container>
+            </ng-container>
+
+        </section>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+    </div>
+
+</kt-custom-modal>

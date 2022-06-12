@@ -1,0 +1,168 @@
+<kt-breadcrumb-list
+    [showTitle]="showHeader"
+    [title]="'TITLE' | translate"
+    [mode]="mode"
+    (modeChangeEvent)="modeChangeEvent($event)"
+    (cancelEvent)="modeList()">
+</kt-breadcrumb-list>
+
+<ng-container *ngIf="isListMode()">
+
+    <kt-dossier-tabs
+        *ngIf="showHeader"
+        [selectedTab]="selectedTabs"
+        (changeSelected)="selectedTabs=$event">
+
+        <kt-dossier-index
+            AValider
+            class="dossier"
+            *ngIf="selectedTabs == dossierTabs.AValider"
+            [tabType]="dossierTabs.AValider"
+            (filters)="getDossiers($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event.id)"
+            (deleteEvent)="deleteDossier($event)"
+            (showEvent)="showEvent($event.id)"
+            (dossierAssignationEvent)="dossierAssignationEvent($event)"
+            (addDevisEvent)="addDocument($event)"
+            [data]="dossiers">
+        </kt-dossier-index>
+
+        <kt-dossier-index
+            AVenir
+            class="dossier"
+            *ngIf="selectedTabs == dossierTabs.AVenir"
+            [tabType]="dossierTabs.AVenir"
+            (filters)="getDossiers($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event.id)"
+            (deleteEvent)="deleteDossier($event)"
+            (showEvent)="showEvent($event.id)"
+            (dossierAssignationEvent)="dossierAssignationEvent($event)"
+            (addDevisEvent)="addDocument($event)"
+            [data]="dossiers">
+        </kt-dossier-index>
+
+        <kt-dossier-index
+            AReplanifier
+            class="dossier"
+            *ngIf="selectedTabs == dossierTabs.AReplanifier"
+            [tabType]="dossierTabs.AReplanifier"
+            (filters)="getDossiers($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event.id)"
+            (deleteEvent)="deleteDossier($event)"
+            (showEvent)="showEvent($event.id)"
+            (dossierAssignationEvent)="dossierAssignationEvent($event)"
+            (addDevisEvent)="addDocument($event)"
+            [data]="dossiers">
+        </kt-dossier-index>
+
+        <kt-dossier-index
+            Toutes
+            class="dossier"
+            *ngIf="selectedTabs == dossierTabs.Toutes"
+            [tabType]="dossierTabs.Toutes"
+            [data]="dossiers"
+            (filters)="getDossiers($event)"
+            (addEvent)="addEvent()"
+            (editEvent)="editEvent($event.id)"
+            (deleteEvent)="deleteDossier($event)"
+            (showEvent)="showEvent($event.id)"
+            (dossierAssignationEvent)="dossierAssignationEvent($event)"
+            (addDevisEvent)="addDocument($event)"
+            (syncAntsrouteEvent)="syncAntsroute($event)"
+            (markDossierAplanifierEvent)="markDossierAplanifier($event)"
+            (syncAntsrouteClickEvent)="syncAntsrouteAllDossier()">
+        </kt-dossier-index>
+
+        <kt-demande-depuis-web
+            demandeDepuisWeb
+            *ngIf="selectedTabs == dossierTabs.DemandeDepuisWeb">
+        </kt-demande-depuis-web>
+
+    </kt-dossier-tabs>
+
+    <kt-dossier-index
+        dossier
+        *ngIf="!showHeader"
+        class="dossier"
+        (filters)="getDossiers($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event.id)"
+        (deleteEvent)="deleteDossier($event)"
+        (showEvent)="showEvent($event.id)"
+        (dossierAssignationEvent)="dossierAssignationEvent($event)"
+        (addDevisEvent)="addDocument($event)"
+        (syncAntsrouteEvent)="syncAntsroute($event)"
+        (markDossierAplanifierEvent)="markDossierAplanifier($event)"
+        [data]="dossiers">
+    </kt-dossier-index>
+
+</ng-container>
+
+<ng-container *ngIf="isAddMode() || isEditMode()">
+    <kt-dossier-edit
+        [mode]="mode"
+        [form]="form"
+        [Dossier]="dossier"
+        [client]="client"
+        (addEvent)="addDossier($event)"
+        (editEvent)="updateDossier($event)"
+        (generateReferenceEvent)="generateReferenceDossier($event)"
+        (cancelEvent)="modeList()">
+    </kt-dossier-edit>
+</ng-container>
+
+<ng-container *ngIf="isShowMode()">
+    <kt-dossier-detail [canAddVisiteTechnique]="canAddVisiteTechnique()">
+
+        <kt-dossier-edit
+            info
+            [mode]="mode"
+            [form]="form"
+            [Dossier]="dossier"
+            (addDocumentEvent)="addDocument($event)"
+            (deleteFactureEvent)="deleteFacture($event)"
+            (deleteBonCommandeEvent)="deleteBonCommande($event)"
+            (deleteDevisEvent)="deleteDevis($event)"
+            (markDossierPerduEvent)="markDossierPerduDialog($event)"
+            (markDossierAssignerEvent)="markDossierAssigneDialog($event)"
+            (updateEvent)="editEvent($event)">
+        </kt-dossier-edit>
+
+        <kt-agenda-commercial-shell
+            agendaCommercial
+            [changeRoute]="false"
+            [changeColor]="true"
+            [dossierId]="dossier?.id">
+        </kt-agenda-commercial-shell>
+
+        <kt-sms
+            sms
+            [SMS]="dossier?.sms"
+            (saveSmsEvent)="sendSMS($event)">
+        </kt-sms>
+
+        <kt-visite-technique
+            VisiteTechnique
+            [VisiteTechnique]="dossier?.visteTechnique"
+            (addEvent)="saveVisiteTechniqueToDossier($event)"
+            (cancelEvent)="modeList()">
+        </kt-visite-technique>
+
+        <kt-memos
+            memosDossier
+            [title]="'MEMOS_DOSSIER.TITLE'"
+            [Memos]="dossier?.memos"
+            [isDossier]="true"
+            (saveMemoEvent)="saveMemoDossierToDossier($event)">
+        </kt-memos>
+
+        <kt-historiques
+            historique
+            [Historique]="dossier?.historique">
+        </kt-historiques>
+
+    </kt-dossier-detail>
+</ng-container>

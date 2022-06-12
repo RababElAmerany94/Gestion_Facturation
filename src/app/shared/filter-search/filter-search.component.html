@@ -1,0 +1,29 @@
+<kt-portlet>
+
+    <kt-portlet-header
+        [sticky]="true"
+        [title]="'Filtres'"
+        [class]="'kt-portlet__head--lg'">
+
+        <ng-container ktPortletTools>
+            <i  class="fas"
+                [ngClass]="{'fa-minus': showCardBody,'fa-plus': !showCardBody}"
+                (click)="showCardBody = !showCardBody">
+            </i>
+        </ng-container>
+
+    </kt-portlet-header>
+
+    <kt-portlet-body *ngIf="showCardBody">
+        <div class="row align-items-center">
+            <ng-content select=".filters"></ng-content>
+        </div>
+        <div class="d-flex flex-row-reverse pt-2" >
+            <button mat-raised-button (click)="search()" color="primary">
+                {{ 'LABELS.SEARCH' | translate }}
+            </button>
+
+        </div>
+    </kt-portlet-body>
+
+</kt-portlet>

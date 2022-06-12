@@ -1,0 +1,31 @@
+{
+    "TITLE": "Utilisateurs",
+    "LIST": {
+        "TITLE": "Liste des utilisateurs",
+        "DELETE": {
+            "HEADER": "Supprimer user",
+            "MESSAGE": "Êtes-vous sûr supprimer cet utilisateur ?"
+        }
+    },
+    "ADD": {
+        "TITLE": "Ajouter utilisateur"
+    },
+    "EDIT": {
+        "TITLE": "Modifier utilisateur"
+    },
+    "SHOW": {
+        "TITLE": "Détails utilisateur"
+    },
+    "LABELS": {
+        "DATE_EMBAUCHE": "Date d'embauche",
+        "TYPE_CONTRACT": "Type de contrat",
+        "POSTE_OCCUPE": "Poste occupé",
+        "NUMERO_PERMIS_CONDUIT": "N° de permis de conduire",
+        "NUMERO_CARTE_SEJOUR_OR_PERMIS_TRAVAIL": "N° Carte de séjour ou permis de travail",
+        "NUMERO_SECURITE_SOCIALE": "N° de Sécurité Sociale",
+        "DATE_VISITE_MEDICALE": "Date de visite médicale",
+        "REMUNERATION": "Rémunération",
+        "IMMAT_VEHICULE": "Immatriculation véhicule",
+        "MUTUELLE": "Mutuelle"
+    }
+}

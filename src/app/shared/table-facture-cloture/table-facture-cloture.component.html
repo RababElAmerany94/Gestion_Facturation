@@ -1,0 +1,89 @@
+<ng-container *ngFor="let item of _factureDevis;let i= index">
+    <h6 class="devis">
+        {{ 'LABELS.FACTUR_ACOMPTE' | translate}}
+        {{ item?.facture?.reference }}
+        ({{ getPercentDevisFacture(item) | RoundingNumber}} %)
+        {{ 'LABELS.LE' | translate}}
+        {{ item?.createdOn | date: 'shortDate'}}
+    </h6>
+
+    <table class="table table-bordered">
+
+        <!-- TOTAL HT -->
+        <tr>
+            <th class="text-left">
+                {{ 'LABELS.TOTAL_HT' | translate }}
+            </th>
+            <td class="text-right text-nowrap">
+                {{ item.facture.totalHT | RoundingNumber | Currency}}<br>
+            </td>
+        </tr>
+
+        <!-- total tva -->
+        <tr>
+            <th class="text-left">
+                {{ 'LABELS.TVA' | translate }}
+            </th>
+            <td class="text-right text-nowrap">
+                {{ (item.facture.totalTTC - item.facture.totalHT) | RoundingNumber | Currency}}
+            </td>
+        </tr>
+
+        <!-- total ttc -->
+        <tr>
+            <th class="text-left">
+                {{ 'LABELS.TOTAL_TTC' | translate }}
+            </th>
+            <td class="text-right text-nowrap">
+                {{ item.facture.totalTTC | RoundingNumber | Currency}}<br>
+            </td>
+        </tr>
+
+    </table>
+</ng-container>
+
+<h6 class="devis">
+    {{ 'LABELS.FACTUR_CLOTURE' | translate}}
+</h6>
+<table class="table table-bordered table-striped">
+
+    <!-- TOTAL HT -->
+    <tr>
+        <th class="text-left">
+            {{ 'LABELS.TOTAL_HT' | translate }}
+        </th>
+        <td class="text-right text-nowrap">
+            {{ _result?.totalHT | RoundingNumber | Currency}}<br>
+        </td>
+    </tr>
+
+    <!-- total tva -->
+    <tr>
+        <th class="text-left">
+            {{ 'LABELS.TVA' | translate }}
+        </th>
+        <td class="text-right text-nowrap">
+            {{ (_result?.totalTTC-_result?.totalHT) | RoundingNumber | Currency}}
+        </td>
+    </tr>
+
+    <!-- total ttc -->
+    <tr>
+        <th class="text-left">
+            {{ 'LABELS.TOTAL_TTC' | translate }}
+        </th>
+        <td class="text-right text-nowrap">
+            {{ _result?.totalTTC | RoundingNumber | Currency}}<br>
+        </td>
+    </tr>
+
+    <!-- Reste à payer -->
+    <tr>
+        <th class="text-left">
+            {{ 'LABELS.REST_TO_PAYE' | translate }}
+        </th>
+        <td class="text-right text-nowrap">
+            {{ _result?.totalTTC | RoundingNumber | Currency}}<br>
+        </td>
+    </tr>
+</table>

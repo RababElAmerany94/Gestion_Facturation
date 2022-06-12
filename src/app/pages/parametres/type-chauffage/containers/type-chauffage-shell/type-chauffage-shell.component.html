@@ -1,0 +1,23 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'TYPE_CHAUFFAGE.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<kt-breadcrumb-list
+    [mode]="mode"
+    (modeChangeEvent)="mode=$event" >
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-type-chauffage-index
+        [data]="typeChauffages"
+        (filters)="getTypeChauffage($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteEvent($event)"
+        (showEvent)="showEvent($event)">
+    </kt-type-chauffage-index>
+</ng-container>
+<!-- end list -->

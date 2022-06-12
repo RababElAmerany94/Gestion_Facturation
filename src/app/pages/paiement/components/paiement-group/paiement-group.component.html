@@ -1,0 +1,291 @@
+<!--.................. PAIEMENT GROUP ....................-->
+<kt-custom-modal
+    [title]="'ADD.PAIEMENT_GROUP' | translate">
+
+    <!-- step 1-->
+    <div mat-dialog-content class="dialog-body"
+        *ngIf="stepOne">
+        <form [formGroup]="form">
+            <div class="row">
+
+                <!--bank account -->
+                <kt-bank-account-drop-down
+                    class="col-md-12"
+                    [inputName]="'bankAccountId'"
+                    [label]="'LABELS.BANK_COMPTE' | translate"
+                    [formInstant]="form">
+                </kt-bank-account-drop-down>
+
+                <!--the date de paiement-->
+                <kt-custom-date-picker
+                    class="col-md-12"
+                    [formInstant]="form"
+                    [inputName]="'datePaiement'"
+                    [label]="'LABELS.DATE' | translate">
+                </kt-custom-date-picker>
+
+                <!--reglement mode -->
+                <kt-regulation-mode-drop-down
+                    class="col-md-12"
+                    [label]="'LABELS.REGULATION_MODE' | translate"
+                    [inputName]="'regulationModeId'"
+                    [exclude]="excludeRegulationMode"
+                    [formInstant]="form">
+                </kt-regulation-mode-drop-down>
+
+                <!-- montant -->
+                <kt-custom-input
+                    [type]="'number'"
+                    class="col-md-12"
+                    [label]="'LABELS.AMOUNT' | translate"
+                    [inputName]="'montant'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <!-- description-->
+                <kt-custom-textarea
+                    class="col-md-12"
+                    [label]="'LABELS.DESCRIPTION' | translate"
+                    [inputName]="'description'"
+                    [formInstant]="form">
+                </kt-custom-textarea>
+
+                <!-- is for client or oblige -->
+                <div class="col-md-12 d-inline-flex p-2">
+
+                    <div class="col-md-6">
+                        <label class="kt-radio kt-radio--bold kt-radio--brand">
+                            <input
+                            [value]="true"
+                            type="radio"
+                            [(ngModel)]="forClient"
+                            #forClientInput="ngModel"
+                            [ngModelOptions]="{standalone: true}">
+                            <label>{{ 'LABELS.CLIENT' |translate}}</label>
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="kt-radio kt-radio--bold kt-radio--brand">
+                            <input
+                                [value]="false"
+                                type="radio"
+                                [(ngModel)]="forClient"
+                                #forClientInput="ngModel"
+                                [ngModelOptions]="{standalone: true}">
+                                <label> {{ 'LABELS.OBLIGES' |translate}}</label>
+                                <span></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- step 2-->
+    <div mat-dialog-content class="dialog-body"
+        *ngIf="stepTwo">
+        <form [formGroup]="form" class="row">
+
+            <!-- dropdown client-->
+            <ng-container *ngIf="forClient">
+                <kt-client-dropdown
+                    class="col-md-12"
+                    [isShow]="false"
+                    [types]="[clientType.Professionnel, clientType.Particulier]"
+                    [inputName]="'clientId'"
+                    [label]="'LABELS.CLIENT' | translate"
+                    [formInstant]="formClient">
+                </kt-client-dropdown>
+            </ng-container>
+
+            <!-- dropdow oblige-->
+            <ng-container *ngIf="!forClient">
+                <kt-client-dropdown
+                    class="col-md-12"
+                    [isShow]="false"
+                    [types]="[clientType.Obliges]"
+                    [inputName]="'primeCeeId'"
+                    [label]="'LABELS.OBLIGES' | translate"
+                    [formInstant]="formClient">
+                </kt-client-dropdown>
+            </ng-container>
+        </form>
+    </div>
+
+    <!-- step 3 -->
+    <div mat-dialog-content class="dialog-body kt-mycart"
+        *ngIf="stepThreeClient"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000"
+        [infiniteScrollContainer]="'.dialog-body'"
+        [fromRoot]="true"
+        (scrolled)="loadMore()">
+
+        <!-- search field -->
+        <kt-searchbar [searchControl]="searchControl" ></kt-searchbar>
+        <!-- end search field -->
+
+        <!-- list of factures -->
+        <div class="kt-widget2 mt-2">
+            <div class="kt-widget2__item kt-widget2__item--primary" *ngFor="let facture of (factures | OrderListFacturePayment); let i=index">
+                <div class="kt-widget2__checkbox">
+                    <label class="kt-checkbox kt-checkbox--solid kt-checkbox--single">
+                        <input type="checkbox" [(ngModel)]="facture.checked">
+                        <span></span>
+                    </label>
+                </div>
+                <div class="kt-widget2__info">
+                    <span class="kt-widget2__title">
+                        {{ facture?.reference }}
+                    </span>
+                    <span  class="kt-widget2__username">
+                        {{ 'LABELS.DATE_ECHEANCE' | translate }} : {{ facture?.dateEcheance | date:'shortDate' }}
+                    </span>
+                </div>
+                <div class="kt-widget2__info ml-1" [hidden]="!facture.checked">
+                    <input
+                        [ngModel]="facture['montant'] | RoundingNumberInput"
+                        (ngModelChange)="facture.montant = $event"
+                        type="number"
+                        class="form-control"
+                        placeholder="{{ 'LABELS.AMOUNT' | translate }}">
+                </div>
+                <div class="kt-widget2__actions">
+                    <span class="kt-widget1__number kt-font-primary">{{ 'LABELS.TOTAL_TTC' | translate }}: {{ facture?.totalTTC | RoundingNumber | Currency  }}</span><br>
+                    <small style="font-style: italic;" > ({{ 'LABELS.REST_TO_PAYE' | translate }} {{ facture?.totalTTC | RestPayerFacture:facture?.facturePaiements | RoundingNumber | Currency }})</small>
+                </div>
+            </div>
+            <div>
+                <span>
+                    <strong class="text-italic">
+                        {{ 'LABELS.AMOUNT_PAIEMENT' | translate }} :
+                    </strong>
+                    {{ montant | RoundingNumber | Currency }}
+                </span>
+                <span><br>
+                    <strong class="text-italic">
+                        {{ 'LABELS.TOTAL_AMOUNT_FACTURE' | translate }} :
+                    </strong>
+                    {{ totalMontant() | RoundingNumber | Currency }}
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- step 3 for oblige-->
+    <div mat-dialog-content class="dialog-body"
+        *ngIf="stepThreeObligesOption">
+        <form [formGroup]="form" class="row">
+
+            <!-- is periode or import exceel -->
+            <div class="col-md-12 d-inline-flex p-2">
+
+                <div class="col-md-6">
+                    <label class="kt-radio kt-radio--bold kt-radio--brand">
+                        <input
+                        [value]="true"
+                        type="radio"
+                        [(ngModel)]="isPeriode"
+                        #forClientInput="ngModel"
+                        [ngModelOptions]="{standalone: true}">
+                        <label>{{ 'LABELS.PAR_PERIODE' |translate}}</label>
+                        <span></span>
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <label class="kt-radio kt-radio--bold kt-radio--brand">
+                        <input
+                            [value]="false"
+                            type="radio"
+                            [(ngModel)]="isPeriode"
+                            #forClientInput="ngModel"
+                            [ngModelOptions]="{standalone: true}">
+                            <label> {{ 'LABELS.IMPORTER_EXCEL' |translate}}</label>
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- step 4 for oblige -->
+    <div mat-dialog-content class="dialog-body"
+        *ngIf="stepFourObliges">
+        <form [formGroup]="form" class="row">
+
+            <ng-container *ngIf="isPeriode">
+
+                <!-- filtre by date minimal-->
+                <kt-custom-date-picker
+                    class="col-md-12"
+                    [formInstant]="form"
+                    [inputName]="'dateFrom'"
+                    [label]="'LABELS.DATE_MINIMAL' | translate">
+                </kt-custom-date-picker>
+
+                <!-- filtre by date maximal-->
+                <kt-custom-date-picker
+                    class="col-md-12"
+                    [formInstant]="form"
+                    [inputName]="'dateTo'"
+                    [label]="'LABELS.DATE_MAXIMAL' | translate">
+                </kt-custom-date-picker>
+
+            </ng-container>
+
+            <ng-container *ngIf="!isPeriode">
+                <ngx-dropzone
+                    class="dropzone dropzone-default dropzone-brand dz-clickable mb-3"
+                    (change)="onSelect($event)"
+                    [multiple]="false"
+                    [accept]="accept"
+                    class="w-75 m-auto"
+                    [maxFileSize]="maxFileSize">
+                    <ngx-dropzone-label>{{ 'MEMOS.DROP_FILE' | translate }}</ngx-dropzone-label>
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" class="text-center">
+                        <ngx-dropzone-label>{{ f.name | truncate:15 }} ({{ f.type | truncate:30 }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                </ngx-dropzone>
+            </ng-container>
+
+        </form>
+    </div>
+
+    <!-- action dialog-->
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            *ngIf="stepOne"
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+        <button
+            *ngIf="stepOne || stepTwo || stepThreeClient || stepThreeObligesOption || stepFourObliges"
+            mat-raised-button
+            color="primary"
+            (click)="reset()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.REINITIALISE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.REINITIALISE'| translate }}
+        </button>
+
+        <button
+            *ngIf="stepOne || stepTwo || stepThreeClient || stepThreeObligesOption || stepFourObliges"
+            mat-raised-button
+            color="warn"
+            (click)="next()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.NEXT'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.NEXT' | translate }}
+        </button>
+    </div>
+
+</kt-custom-modal>

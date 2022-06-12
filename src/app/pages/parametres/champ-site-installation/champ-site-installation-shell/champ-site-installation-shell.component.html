@@ -1,0 +1,22 @@
+<!-- title -->
+<h3 class="kt-subheader__title"> {{ 'CHAMPS_SITE_INTERVENTION.TITLE' | translate }} </h3>
+<!-- end title -->
+
+<!-- breadcrumb -->
+<kt-breadcrumb-list 
+    [mode]="mode" 
+    (modeChangeEvent)="mode=$event" >
+</kt-breadcrumb-list>
+<!-- end breadcrumb -->
+
+<!-- list -->
+<ng-container *ngIf="isListMode()">
+    <kt-index-champs
+        [data]="champs"
+        (filters)="getChamps($event)"
+        (addEvent)="addEvent()"
+        (editEvent)="editEvent($event)"
+        (deleteEvent)="deleteChamp($event)">
+    </kt-index-champs>
+</ng-container>
+<!-- end list -->

@@ -1,0 +1,58 @@
+<div
+	ngbDropdown placement="bottom-right"
+	*ngIf="user"
+	class="kt-header__topbar-item kt-header__topbar-item--user">
+
+	<div ngbDropdownToggle class="kt-header__topbar-wrapper">
+		<div class="kt-header__topbar-user" [ngClass]="{'kt-header__topbar-icon': icon}">
+			<span class="kt-header__topbar-username kt-hidden-mobile" *ngIf="greeting">{{ getNameUser() }}</span>
+			<i *ngIf="icon" class="flaticon2-user-outline-symbol"></i>
+			<img *ngIf="avatar" alt="Pic" [attr.src]="'assets/media/users/300_25.jpg'">
+			<span *ngIf="badge"
+				class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{{ getNameUser() |firstLetter}}</span>
+		</div>
+	</div>
+
+	<div ngbDropdownMenu
+		class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+
+		<!--begin: Head -->
+		<div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x"
+			style="background-color:#1a5e9c">
+			<div class="kt-user-card__avatar">
+				<img *ngIf="avatar" alt="Pic" [attr.src]="'assets/media/users/300_25.jpg'" />
+				<span *ngIf="badge" class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">
+					{{ getNameUser() | firstLetter }}
+				</span>
+			</div>
+			<div class="kt-user-card__name">
+				{{ getNameUser() }}
+			</div>
+		</div>
+		<!--end: Head -->
+
+		<!--begin: Navigation -->
+		<div class="kt-notification">
+			<a ngbDropdownItem class="kt-notification__item" (click)="profileUser()">
+                <div class="kt-notification__item-icon">
+                    <i class="flaticon2-calendar-3 kt-font-success"></i>
+                </div>
+                <div class="kt-notification__item-details">
+                    <div class="kt-notification__item-title kt-font-bold">
+                        {{'LABELS.PROFIL'|translate}}
+                    </div>
+                    <div class="kt-notification__item-time">
+                        {{'LABELS.USER_INFO'|translate}}
+                    </div>
+                </div>
+            </a>
+			<div class="kt-notification__custom">
+                <a href="javascript:;" (click)="logout()" class="btn btn-outline-brand btn-upper btn-sm btn-bold">
+                    {{'LABELS.LOG_OUT'|translate}}
+                </a>
+            </div>
+		</div>
+		<!--end: Navigation -->
+
+	</div>
+</div>

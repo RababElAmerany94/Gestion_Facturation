@@ -1,0 +1,69 @@
+<div class="kt-portlet">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                {{'HISTORY.TITLE' |translate}}
+            </h3>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="row">
+            <div class="col-xl-3"></div>
+            <div class="col-xl-6">
+                <div class="kt-timeline-v1 kt-timeline-v1--justified">
+                    <div class="kt-timeline-v1__items">
+                        <div class="kt-timeline-v1__marker"></div>
+
+                        <div class="kt-timeline-v1__item" 
+                            *ngFor="let historique of historiques;let index = index; let first = first;"
+                            [ngClass]="{'kt-timeline-v1__item--first': first}" >
+                            
+                            <div class="kt-timeline-v1__item-circle">
+                                <div class="kt-bg-danger"></div>
+                            </div>
+
+                            <span class="kt-timeline-v1__item-time kt-font-brand">
+                                {{ historique?.changeDate | date:'short' }}
+                            </span>
+
+                            <div class="kt-timeline-v1__item-content">
+                                <div class="kt-timeline-v1__item-title">
+                                    <ng-container *ngIf="historique?.action == changesHistoryType.Added">
+                                        {{'LABELS.ADD' | translate}} 
+                                    </ng-container>
+                                    <ng-container *ngIf="historique?.action == changesHistoryType.Updated">
+                                        {{'LABELS.EDIT' | translate}} 
+                                    </ng-container>
+                                    <ng-container *ngIf="historique?.action == changesHistoryType.Deleted">
+                                        {{'LABELS.DELETE' | translate}} 
+                                    </ng-container>
+                                </div>
+                                <div class="kt-timeline-v1__item-body">
+                                    <p>
+                                        <ng-container *ngIf="historique?.action == changesHistoryType.Added">
+                                            {{'HISTORY.ADD_BY' | translate}} :
+                                        </ng-container>
+                                        <ng-container *ngIf="historique?.action == changesHistoryType.Updated">
+                                            {{'HISTORY.EDIT_BY' | translate}} :
+                                        </ng-container>
+                                        {{ historique?.userId | GetNameOfUserById }}
+                                    </p>
+                                </div>
+                                <div class="kt-timeline-v1__item-actions">
+                                    <a 
+                                        *ngIf="historique?.action != changesHistoryType.Added" 
+                                        (click)="showHistorique(historique)"
+                                        [matTooltip]="'LABELS.SHOW' | translate" 
+                                        class="btn btn-sm btn-label-brand btn-bold">{{'LABELS.SHOW' | translate}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3"></div>
+        </div>
+    </div>
+</div>

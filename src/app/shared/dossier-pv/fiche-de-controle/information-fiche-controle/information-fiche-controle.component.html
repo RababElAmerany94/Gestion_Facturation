@@ -1,0 +1,104 @@
+<form [formGroup]="form">
+
+    <kt-custom-input
+        class="col-md-2"
+        [inputName]="'numberOperation'"
+        [label]="'LABELS.NUMBER_OPERATION' | translate"
+        [formInstant]="form">
+    </kt-custom-input>
+
+    <!--  date Controle-->
+    <kt-custom-date-picker
+        class="col-md-2"
+        [formInstant]="form"
+        [inputName]="'dateControle'"
+        [label]="'LABELS.DATE_CONTROLE' | translate">
+    </kt-custom-date-picker>
+
+    <!-- prstation Type -->
+    <kt-custom-drop-down
+        class="col-md-2"
+        [inputName]="'prestationType'"
+        [data]="prestationType"
+        [label]="'LABELS.TYPE_DE_PRESTATION' | translate"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- photos -->
+    <kt-pictures-view
+        *ngIf="stringHelper.hasdata(this.anomalies)"
+        [data]="anomalies">
+    </kt-pictures-view>
+
+    <!-- rating evaluation Accompagnement-->
+    <div class="col-md-6" [formGroup]="form">
+        <label>{{ 'LABELS.EVALUATION_ACCOMPAGNEMENT' | translate }}</label><br>
+        <ngx-input-star-rating
+            formControlName="evaluationAccompagnement">
+        </ngx-input-star-rating>
+    </div>
+
+    <!-- rating evaluation Travaux Realises -->
+    <div class="col-md-6" [formGroup]="form">
+        <label>{{ 'LABELS.EVALUATION_TRAVAUX_REALISES' | translate }}</label><br>
+        <ngx-input-star-rating
+            formControlName="evaluationTravauxRealises">
+        </ngx-input-star-rating>
+    </div>
+
+    <!-- rating evaluation Proprete Chantier -->
+    <div class="col-md-6" [formGroup]="form">
+        <label>{{ 'LABELS.EVALUATION_PROPRETE_CHANTIER' | translate }}</label><br>
+        <ngx-input-star-rating
+            formControlName="evaluationPropreteChantier">
+        </ngx-input-star-rating>
+    </div>
+
+    <!-- rating evaluation Contact Avec Techniciens ktlicateurs -->
+    <div class="col-md-6" [formGroup]="form">
+        <label>{{ 'LABELS.EVALUATION_CONTACT_AVEC_TECHNICIENS_APPLICATEURS' | translate }}</label><br>
+        <ngx-input-star-rating
+            formControlName="evaluationContactAvecTechniciensApplicateurs">
+        </ngx-input-star-rating>
+    </div>
+
+    <!-- controller -->
+    <kt-drop-down-users
+        class="col-md-2"
+        [inputName]="'controllerId'"
+        [label]="'LABELS.CONTROLE' | translate"
+        [formInstant]="form">
+    </kt-drop-down-users>
+
+    <!------------------------------- #region remarques ---------------------------------->
+    <!------------------------------------------------------------------------------->
+
+    <kt-custom-textarea
+        [inputName]="'remarques'"
+        class="col-md-2"
+        [label]="'LABELS.REMARQUE' | translate"
+        [formInstant]="form">
+    </kt-custom-textarea>
+
+    <!-----------------------------------end region---------------------------------->
+    <!------------------------------------------------------------------------------->
+
+    <div class="row">
+        <!-- signature pad-->
+        <div class="col-md-6">
+            <span>{{ 'LABELS.NAME_CLIENT_SIGNE' | translate: { name: nameClientSignature } }}</span>
+            <div class="signature-pad">
+                <img [src]="signatureClient" class="w-100">
+            </div>
+        </div><br>
+
+        <!-- signature pad-->
+        <div class="col-md-6">
+            <span>{{ 'LABELS.CONTROLLER_SIGNATURE' | translate: { name: nameControllerSignature }  }}</span>
+            <div class="signature-pad">
+                <img [src]="signatureController" class="w-100">
+            </div>
+        </div>
+    </div>
+
+</form>

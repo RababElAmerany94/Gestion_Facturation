@@ -1,0 +1,113 @@
+<!-- ................................. general info ................................. -->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-user'"
+        [title]="'TITLES.GENERAL_INFO' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form"  [formGroup]="form" >
+
+            <div class="row">
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REGISTER_NUMBER' | translate"
+                    [inputName]="'registrationNumber'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.FIRSTNAME' | translate"
+                    [inputName]="'firstName'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.LASTNAME' | translate"
+                    [inputName]="'lastName'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'CONTACTS.EMAIL' | translate"
+                    [inputName]="'email'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.PHONE_NUMBER' | translate"
+                    [inputName]="'phoneNumber'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-drop-down
+                    class="col-md-4"
+                    [data]="roles"
+                    [showAny]="false"
+                    [label]="'LABELS.ROLE' | translate"
+                    [formInstant]="form"
+                    [inputName]="'roleId'">
+                </kt-custom-drop-down>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.USERNAME' | translate"
+                    [inputName]="'userName'"
+                    [formInstant]="form">
+                </kt-custom-input>
+
+                <kt-custom-input-password
+                    *ngIf="isAddMode()"
+                    class="col-md-4"
+                    [label]="'LABELS.PASSWORD' | translate"
+                    [inputName]="'password'"
+                    [formInstant]="form">
+                </kt-custom-input-password>
+
+                <kt-custom-checkbox
+                    class="col-md-4"
+                    [label]="'LABELS.ACTIVE' | translate"
+                    [formInstant]="form"
+                    [inputName]="'isActive'">
+                </kt-custom-checkbox>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- ................................................................................ -->
+
+<!-- ....................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()"
+            *ngIf="isAddMode()">
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+        <button
+            ktDebounceClick
+            class="btn btn-brand"
+            (debounceClick)="save()"
+            *ngIf="isEditMode()">
+            {{ 'LABELS.EDIT' | translate }}
+        </button>
+        <button class="btn btn-secondary" (click)="cancel()">{{ 'LABELS.CANCEL' | translate }}</button>
+    </div>
+</div>
+<!-- ....................................................................... -->

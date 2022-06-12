@@ -1,0 +1,45 @@
+table {
+  width: 100%;
+}
+
+.mat-cell,
+.mat-footer-cell {
+  font-size: 0.92rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  color: #595d6e;
+  vertical-align: middle;
+  padding: 8px 10px;
+}
+
+.mat-header-cell {
+  padding: 16px 10px;
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: 0.94rem;
+  white-space: nowrap;
+  color: #595d6e;
+}
+
+.form-control {
+  height: calc(1.5em + 0.97rem + 2px);
+}
+
+mat-row,
+mat-header-row,
+mat-footer-row,
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  border-bottom: 1px solid #f0f3ff;
+}
+
+:host ::ng-deep kt-portlet {
+  .kt-portlet {
+    margin-bottom: 0.25px;
+  }
+}
+
+.bit-left-margin{
+    margin-left: 2px;
+}

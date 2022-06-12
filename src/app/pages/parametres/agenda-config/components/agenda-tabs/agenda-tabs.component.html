@@ -1,0 +1,54 @@
+<!-- ............................................................. -->
+<mat-tab-group
+    [selectedIndex]="selectedTab"
+    [dynamicHeight]="true"
+    (selectedTabChange)="selectedTabs($event.index)">
+
+    <!-- ............................................................. -->
+                <!-- TABS Tache Type -->
+    <!-- .......................................................... -->
+    <mat-tab [label]="'TYPE_TACHE.TITLE' | translate" >
+        <ng-template matTabContent>
+            <ng-content select="[TacheType]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .......................................................... -->
+                    <!-- TABS Rdv Type -->
+    <!-- .......................................................... -->
+    <mat-tab [label]="'TYPE_RDV.TITLE' | translate"  >
+        <ng-template matTabContent>
+            <ng-content select="[RdvType]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .......................................................... -->
+                <!-- TABS Type Appel  -->
+    <!-- .......................................................... -->
+    <mat-tab [label]="'TYPE_APPEL.TITLE' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[AppelType]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .......................................................... -->
+                <!-- TABS Evenenment Categorie -->
+    <!-- .......................................................... -->
+    <mat-tab [label]="'CATEGORIE_EVENEMENT.TITLE' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[EvenementCategorie]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .......................................................... -->
+                <!-- TABS Source du RDV -->
+    <!-- .......................................................... -->
+    <mat-tab [label]="'SOURCE_RDV.TITLE' | translate">
+        <ng-template matTabContent>
+            <ng-content select="[SourceRDV]" ></ng-content>
+        </ng-template>
+    </mat-tab>
+
+    <!-- .......................................................... -->
+</mat-tab-group>
+<!-- ............................................................... -->

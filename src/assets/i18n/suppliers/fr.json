@@ -1,0 +1,14 @@
+{
+    "TITLE": "Fournisseur",
+    "LIST": {
+        "TITLE": "Liste des fournisseurs"
+    },
+    "LABELS": {
+        "INFOGENERAL":"Informations fournisseur",
+        "RAISONSOCIAL": "Raison sociale"
+    },
+    "DELETE": {
+        "HEADER_TEXT": "Supprimer client",
+        "QUESTION": "Êtes-vous sûr supprimer ce fournisseur ?"
+    }
+}

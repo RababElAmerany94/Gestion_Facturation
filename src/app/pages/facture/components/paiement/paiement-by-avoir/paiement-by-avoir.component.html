@@ -1,0 +1,62 @@
+<kt-custom-modal [title]="title">
+
+    <div 
+        mat-dialog-content class="dialog-body kt-mycart"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000"
+        [infiniteScrollContainer]="'.dialog-body'"
+        [fromRoot]="true"
+        (scrolled)="loadMore()">
+
+        <!-- search field -->
+        <kt-searchbar [searchControl]="searchControl" ></kt-searchbar>
+        <!-- end search field -->
+
+        <!-- list of factures -->
+        <div class="kt-widget2 mt-2">
+            <div class="kt-widget2__item kt-widget2__item--primary" *ngFor="let avoir of avoirs; let i=index">
+                <div class="kt-widget2__checkbox">
+                    <label class="kt-checkbox kt-checkbox--solid kt-checkbox--single" (change)="selectAvoir(i)">
+                        <input type="checkbox" [checked]="avoir['checked']">
+                        <span></span>
+                    </label>
+                </div>
+                <div class="kt-widget2__info">
+                    <span class="kt-widget2__title">
+                        {{ avoir?.reference }}
+                    </span>
+                    <span  class="kt-widget2__username">
+                        {{ 'LABELS.DATE_ECHEANCE' | translate }} : {{ avoir?.dateEcheance | date:'shortDate' }}
+                    </span>
+                </div>
+                <div class="kt-widget2__actions">
+                    <span class="kt-widget1__number kt-font-primary">{{ 'LABELS.TOTAL_TTC' | translate }}: {{ avoir?.totalTTC | RoundingNumber | Currency  }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="warn"
+            (debounceClick)="savePaiementByAvoir()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}
+        </button>
+
+    </div>
+
+</kt-custom-modal>

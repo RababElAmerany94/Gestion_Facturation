@@ -1,0 +1,59 @@
+<kt-filter-search (searchEvent)="searchEvent()" >
+    <ng-container class="filters">
+
+        <!-- filter by period-->
+        <kt-custom-drop-down
+            class="col-md-4"
+            [showAny]="false"
+            [inputName]="'period'"
+            [data]="PeriodeComptable"
+            [label]="'LABELS.PERIOD_FILTER' | translate"
+            [formInstant]="form">
+        </kt-custom-drop-down>
+
+        <ng-container *ngIf="showInterval">
+            <!-- filtre by date minimal-->
+            <kt-custom-date-picker
+                class="col-md-4"
+                [formInstant]="form"
+                [inputName]="'dateFrom'"
+                [label]="'LABELS.DATE_MINIMAL' | translate">
+            </kt-custom-date-picker>
+        </ng-container>
+
+        <ng-container *ngIf="showInterval">
+            <!-- filtre by date maximal-->
+            <kt-custom-date-picker
+                class="col-md-4"
+                [formInstant]="form"
+                [inputName]="'dateTo'"
+                [label]="'LABELS.DATE_MAXIMAL' | translate">
+            </kt-custom-date-picker>
+        </ng-container>
+
+    </ng-container>
+
+</kt-filter-search>
+
+<kt-data-table
+    [columns]="columns"
+    [name]="routeName.Comptabilite"
+    [data]="journalData"
+    (changeEvent)="changeFiltersEvent($event)"
+    [isAction]="false"
+    [title]="'LABELS.LIST' | translate">
+
+    <ng-container class="dataTables-actions" >
+        <button
+            mat-mini-fab
+            ktDebounceClick
+            color="success"
+            class="ml-1"
+            (debounceClick)="exportClick()"
+            [matTooltip]="'LABELS.EXPORT_EXCEL' | translate">
+            <i class="material-icons">exit_to_app</i>
+        </button>
+
+    </ng-container>
+
+</kt-data-table>

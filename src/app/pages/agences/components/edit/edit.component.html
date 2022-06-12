@@ -1,0 +1,161 @@
+<!-- ................................. general info ................................. -->
+<kt-portlet >
+
+    <kt-portlet-header
+        [sticky]="true"
+        [icon]="'flaticon-user'"
+        [title]="'TITLES.GENERAL_INFO' | translate"
+        [class]="'kt-portlet__head--lg'">
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+
+        <!--begin::Form-->
+        <form class="kt-form" [formGroup]="form" >
+
+            <div class="row">
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.REFERENCE' | translate"
+                    [inputName]="'reference'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.RAISON_SOCIALE' | translate"
+                    [inputName]="'raisonSociale'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.FORME_JURIDIQUE' | translate"
+                    [inputName]="'formeJuridique'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.CAPITAL' | translate"
+                    [inputName]="'capital'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.NUMERO_TVA_INTRA' | translate"
+                    [inputName]="'numeroTvaINTRA'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.SIRET' | translate"
+                    [inputName]="'siret'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'CONTACTS.EMAIL' | translate"
+                    [inputName]="'email'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.PHONE_NUMBER' | translate"
+                    [inputName]="'phoneNumber'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-input
+                    class="col-md-4"
+                    [label]="'LABELS.CODE_COMPTABLE' | translate"
+                    [inputName]="'codeComptable'"
+                    [formInstant]="form" >
+                </kt-custom-input>
+
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateDebutActivite'"
+                    [label]="'LABELS.DATE_START_ACTIVITY' | translate">
+                </kt-custom-date-picker>
+
+                <kt-custom-date-picker
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'dateFinActivite'"
+                    [label]="'LABELS.DATE_END_ACTIVITY' | translate">
+                </kt-custom-date-picker>
+
+                <kt-regulation-mode-drop-down
+                    class="col-md-4"
+                    [formInstant]="form"
+                    [inputName]="'regulationModeId'"
+                    [label]="'LABELS.REGULATION_MODE' | translate">
+                </kt-regulation-mode-drop-down>
+
+            </div>
+
+        </form>
+        <!--end::Form-->
+
+    </kt-portlet-body>
+</kt-portlet>
+<!-- ................................................................................ -->
+
+<!--....................................  address facturation  ................................... -->
+<kt-one-address
+    [mode]="mode"
+    [title]="'ADDRESS.TITLE_FACTURATION'"
+    [address]="adresseFacturation"
+    (changeAddress)="setAddressFacturation($event)" >
+</kt-one-address>
+<!-- ............................................................................................. -->
+
+<!-- .................................... addresses livraisons ..................................... -->
+<kt-addresses
+    [mode]="mode"
+    [title]="'ADDRESS.TITLE_LIVRAISON'"
+    [addresses]="adresseLivraison"
+    (changeAddress)="setAddressLivraison($event)" >
+</kt-addresses>
+<!-- ............................................................................................... -->
+
+<!-- ............................... contacts ..................................... -->
+<kt-contacts
+    [mode]="mode"
+    [contacts]="contacts"
+    (changeContact)="setContacts($event)" >
+</kt-contacts>
+<!-- .............................................................................. -->
+
+<!-- .......................................................................... -->
+<div class="kt-portlet__foot" *ngIf="!isShowMode()">
+    <div class="kt-form__actions">
+        <button
+            *ngIf="isAddMode()"
+            ktDebounceClick
+            (debounceClick)="save()"
+            class="btn btn-brand">
+            {{ 'LABELS.ADD' | translate }}
+        </button>
+        <button
+            class="btn btn-brand"
+            ktDebounceClick
+            (debounceClick)="save()"
+            *ngIf="isEditMode()">
+            {{ 'LABELS.EDIT' | translate }}
+        </button>
+        <button
+            class="btn btn-secondary"
+            (click)="cancel()">
+            {{ 'LABELS.CANCEL' | translate }}
+        </button>
+    </div>
+</div>
+<!-- ....................................................................... -->

@@ -1,0 +1,91 @@
+<kt-custom-modal [title]="'ADD.FACTURE_GROUPEE'">
+
+    <div mat-dialog-content class="dialog-body" *ngIf="stepClient">
+        <form [formGroup]="form">
+            <div class="row">
+                <kt-client-dropdown
+                    class="col-md-12"
+                    [isShow]="false"
+                    [types]="[clientType.Particulier,clientType.Professionnel]"
+                    [inputName]="'clientId'"
+                    [label]="'LABELS.CLIENT' | translate"
+                    [formInstant]="form">
+                </kt-client-dropdown>
+            </div>
+        </form>
+    </div>
+
+    <div
+        mat-dialog-content
+        class="dialog-body kt-mycart"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000"
+        [infiniteScrollContainer]="'.dialog-body'"
+        [fromRoot]="true"
+        (scrolled)="loadMore()"
+        *ngIf="stepDevis">
+
+        <!-- search field -->
+        <kt-searchbar [searchControl]="searchControl" ></kt-searchbar>
+
+        <!-- list of devis -->
+        <div class="kt-mycart__body">
+            <div class="kt-mycart__item" *ngFor="let item of devis;let i=index" >
+                <div class="kt-mycart__container">
+                    <div class="kt-mycart__info">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="item['checked']"  (change)="item['checked'] != item['checked']" class="custom-control-input" id="{{i+2000*27}}">
+                            <label class="custom-control-label" for="{{i+2000*27}}" style="font-weight: bold;">
+                                {{ item?.reference}} : {{ item?.createdOn | date:'shortDate'  }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">
+            {{ 'LABELS.CLOSE' | translate }}
+        </button>
+
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="reinitialize()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.REINITIALISE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.REINITIALISE'| translate }}
+        </button>
+
+        <button
+            *ngIf="stepClient"
+            mat-raised-button
+            color="warn"
+            (click)="next()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.NEXT'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.NEXT' | translate }}
+        </button>
+
+        <button
+            *ngIf="stepDevis"
+            mat-raised-button
+            color="success"
+            (click)="next()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.ADD'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}
+        </button>
+
+    </div>
+
+</kt-custom-modal>

@@ -1,0 +1,85 @@
+<kt-custom-modal [title]="title">
+    <div mat-dialog-content class="dialog-body">
+        <form [formGroup]="form">
+
+            <div class="row">
+
+                <ngx-dropzone
+                    class="dropzone dropzone-default dropzone-brand dz-clickable mb-3"
+                    (change)="onSelect($event)"
+                    [multiple]="true"
+                    [accept]="accept"
+                    [maxFileSize]="maxFileSize">
+                    <ngx-dropzone-label>{{ 'MEMOS.DROP_FILE' | translate }}</ngx-dropzone-label>
+                    <ngx-dropzone-preview
+                        *ngFor="let file of files"
+                        [removable]="true"
+                        (removed)="onRemove(file)">
+                        <ngx-dropzone-label>
+                            {{ file.name | truncate:15 }} ({{ file.type }})
+                        </ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                </ngx-dropzone>
+
+                <ng-container *ngIf="isDossier">
+                    <kt-custom-input
+                        class="col-md-6"
+                        [label]="'LABELS.FIRSTNAME' | translate"
+                        [inputName]="'name'"
+                        [formInstant]="form">
+                    </kt-custom-input>
+                    <kt-categorie-document
+                        class="col-md-6"
+                        (changeEvent)="setCategory($event)"
+                        [label]="'LABELS.CATEGORIE' | translate"
+                        [inputName]="'category'"
+                        [label]="'LABELS.CATEGORIE' | translate"
+                        [formInstant]="form" >
+                    </kt-categorie-document>
+                </ng-container>
+
+                <kt-custom-textarea
+                    class="col-md-12"
+                    [inputName]="'commentaire'"
+                    [label]="'LABELS.COMMENTAIRE' | translate"
+                    [formInstant]="form">
+                </kt-custom-textarea>
+
+                <mat-list
+                    class="w-100"
+                    *ngIf="editMemoDossier?.pieceJointes?.length>0 || editMemo?.pieceJointes?.length>0">
+                    <div mat-subheader>{{ 'LABELS.FILES' | translate }}</div>
+                    <mat-list-item *ngFor="let file of (isDossier ? editMemoDossier?.pieceJointes : editMemo?.pieceJointes);let i=index">
+                        <div mat-line>{{ file.orignalName | truncate:20 }}</div>
+                        <button mat-icon-button color="warn" (click)="removeFile(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            color="primary"
+            (debounceClick)="save()"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.SAVE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAVE' | translate }}</button>
+
+    </div>
+
+</kt-custom-modal>

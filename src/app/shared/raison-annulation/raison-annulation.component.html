@@ -1,0 +1,37 @@
+<kt-custom-modal [title]="'LABELS.RAISON_ANNULER' |translate">
+    <div mat-dialog-content class="dialog-body">
+        <form [formGroup]="form">
+
+            <div class="row">
+
+                <!-- raison annuler of document -->
+                <kt-custom-input
+                    class="col-md-12"
+                    [label]="'LABELS.RAISON_ANNULER' | translate"
+                    [inputName]="'raisonAnnulation'"
+                    [formInstant]="form">
+                </kt-custom-input>
+            </div>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="dialog-footer" align="end">
+
+        <button
+            mat-raised-button
+            mat-dialog-close
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.CLOSE'| translate }}">{{ 'LABELS.CLOSE' | translate }}</button>
+
+        <button
+            mat-raised-button
+            ktDebounceClick
+            (debounceClick)="save()"
+            color="primary"
+            #tooltip="matTooltip"
+            matTooltip="{{ 'LABELS.SAUVGARDE'| translate }}"
+            cdkFocusInitial>{{ 'LABELS.SAUVGARDE' | translate }}</button>
+    </div>
+
+</kt-custom-modal>

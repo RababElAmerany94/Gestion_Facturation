@@ -1,0 +1,64 @@
+<form [formGroup]="form">
+
+    <!-- surface Isolant Prevue -->
+    <kt-custom-input
+        [type]="'number'"
+        [inputName]="'surfaceIsolantPrevue'"
+        [label]="'LABELS.SURFACE_ISOLANT_PREVUE' | translate"
+        [formInstant]="form">
+    </kt-custom-input>
+
+    <!-- surface Isolant Pose -->
+    <kt-custom-input
+        [type]="'number'"
+        [inputName]="'surfaceIsolantPose'"
+        [label]="'LABELS.SURFACE_ISOLANT_POSE' | translate"
+        [formInstant]="form">
+    </kt-custom-input>
+
+    <!-- ecart Autour Points Eclairage -->
+    <kt-custom-drop-down
+        [inputName]="'ecartAutourPointsEclairage'"
+        [label]="'LABELS.ECART_AUTOUR_POINTS_ECLAIRAGE' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- ecart Autour Boitiers Electriques -->
+    <kt-custom-drop-down
+        [inputName]="'ecartAutourBoitiersElectrique'"
+        [label]="'LABELS.ECART_AUTOUR_BOITIERS_ELECTRIQUE' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- ecart Au Feu Autour Fumees -->
+    <kt-custom-drop-down
+        [inputName]="'ecartAuFeuAutourFumees'"
+        [label]="'LABELS.ECART_AU_FEU_AUTOUR_FUMEES' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- presence Fils Non Gaines Noyes Dans Isolant -->
+    <kt-custom-drop-down
+        [inputName]="'presenceFilsNonGainesNoyesDansIsolant'"
+        [label]="'LABELS.PRESENCE_FILS_NON_GAINES_NOYES_DANS_ISOLANT' | translate"
+        [data]="ficheControleStatusItem"
+        [formInstant]="form">
+    </kt-custom-drop-down>
+
+    <!-- is Pose Correcte Isolant -->
+    <kt-custom-checkbox
+        [label]="'LABELS.IS_POSE_CORRECTE_ISOLANT' | translate"
+        [formInstant]="form"
+        [inputName]="'isPoseCorrecteIsolant'">
+    </kt-custom-checkbox>
+
+    <!-- conclusion Isolation Murs -->
+    <kt-custom-checkbox
+        [label]="'LABELS.CONCLUSION_ISOLATION_MURS' | translate"
+        [formInstant]="form"
+        [inputName]="'conclusionIsolationMurs'">
+    </kt-custom-checkbox>
+</form>
