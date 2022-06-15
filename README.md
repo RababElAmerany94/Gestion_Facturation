@@ -3,8 +3,8 @@
 # Billing Management Web
 
 <p align="center">
-<a href="https://github.com/RababElAmerany94/billing-management-web">
-<img  alt="Rabab El Amerany Project" title="Rabab Project" src="https://github.com/RababElAmerany94/billing-management-web/blob/main/src/assets/images/site.PNG" />
+<a href="https://github.com/rabelamerany/billing-management-web">
+<img  alt="Rabab El Amerany Project" title="Rabab Project" src="https://github.com/rabelamerany/billing-management-web/blob/main/src/assets/images/site.PNG" />
 </a>
 </p>
 <br>
@@ -93,6 +93,6 @@ If you already have an existing Angular project on GitHub, skip step 1 and 2.
 
 Rabab El Amerany - rab.el.amerany@gmail.com
 
-Project Link: [https://github.com/RababElAmerany94/platform-to-track-orders](https://github.com/RababElAmerany94/platform-to-track-orders)
+Project Link: [https://github.com/rabelamerany/billing-management-web](https://github.com/rabelamerany/billing-management-web)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
