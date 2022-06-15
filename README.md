@@ -17,10 +17,10 @@ Web solution aimed at optimizing the efficiency of internal services, the relati
 ## Built With
 
 * [JQuery](https://jquery.com)
-* [Codeigniter](https://www.codeigniter.com)
+* [Angular](https://angular.io)
 * [Bootstrap](https://getbootstrap.com)
 * [CSS](https://www.css-com.com/)
-* [GroceryCRUD](https://www.grocerycrud.com)
+* [Angular Material](https://material.angular.io)
 * [MySQL](https://www.mysql.com)
 * [JavaScript](https://www.javascript.com)
 * [Font Awesome](https://fontawesome.com)
@@ -31,9 +31,9 @@ Web solution aimed at optimizing the efficiency of internal services, the relati
 
 This command has the following prerequisites:
 
-- Git 1.9 or higher (execute `git --version` to check your version)
-- Angular project created via [Angular CLI](https://github.com/angular/angular-cli) v9.0.0 or greater (execute `ng update` to upgrade your project if necessary)
-- older Angular projects can still use the standalone program. See the documentation at [README_standalone](https://github.com/angular-schule/angular-cli-ghpages/blob/master/docs/README_standalone.md).
+- Git (execute `git --version` to check your version)
+- Angular project created via [Angular CLI](https://github.com/angular/angular-cli) v8.0.0 or greater (execute `ng update` to upgrade your project if necessary)
+- older Angular projects can still use the standalone program.
 
 ## 🚀 Quick Start (local development) <a name="quickstart-local"></a>
 
@@ -87,35 +87,6 @@ If you already have an existing Angular project on GitHub, skip step 1 and 2.
 5. Your project should be available at `https://<username>.github.io/<repositoryname>`.  
    Learn more about GitHub pages on the [official website](https://pages.github.com/).
    
-<!-- GETTING STARTED -->
-
-## 📖 Changelog <a name="changelog"></a>
-
-A detailed changelog is available in the [releases](https://github.com/angular-schule/angular-cli-ghpages/releases) section.
-
-**⚠️ BREAKING CHANGE (v1)**
-
-Starting with version 1 the option `--configuration` was renamed to `--build-target`.
-
-BEFORE (_does not work_):
-
-```
-ng deploy --configuration=test
-```
-
-NOW:
-
-```
-ng deploy --build-target=test
-```
-
-If you use the old syntax, you will probably receive the following error:
-
-> An unhandled exception occurred: Configuration 'test' is not set in the workspace.
-
-<br>
-
-
 <!-- CONTACT -->
 
 ## Contact
