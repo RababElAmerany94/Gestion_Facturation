@@ -29,7 +29,7 @@
     "@fortawesome/fontawesome-free": "^5.13.1",
     "@kolkov/angular-editor": "^1.1.2",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
-    "@ngx-lite/input-star-rating": "^0.3.5",
+    "@ngx-lite/input-star-rating": "^0.2.5",
     "@ngx-loading-bar/core": "^4.2.0",
     "@ngx-translate/core": "^12.1.2",
     "@swimlane/ngx-charts": "^14.0.0",
