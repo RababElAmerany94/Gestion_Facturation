@@ -35,58 +35,30 @@ This command has the following prerequisites:
 - Angular project created via [Angular CLI](https://github.com/angular/angular-cli) v8.0.0 or greater (execute `ng update` to upgrade your project if necessary)
 - older Angular projects can still use the standalone program.
 
-## 🚀 Quick Start (local development) <a name="quickstart-local"></a>
 
-This quick start assumes that you are starting from scratch.
-If you already have an existing Angular project on GitHub, skip step 1 and 2.
+## 🚀 Installation
 
-1. Install the latest version of the Angular CLI globally
-   and create a new Angular project.
+You can instruct your audience on installing and setting up your app
 
+1. Clone the repo
    ```sh
-   npm install -g @angular/cli
-   ng new your-angular-project --defaults
-   cd your-angular-project
+   git clone https://github.com/rabelamerany/billing-management-web
+   ```
+2. Install the app by running from the project root:
+   ```sh
+   npm install
+   ```
+3. Running application
+   ```sh
+   ng serve --o
+   ```
+4. Don't forget to run the api project.
+   ```ccharp
+   https://github.com/rabelamerany/billing-management-api
    ```
 
-2. By default the Angular CLI initializes a Git repository for you.  
-   To add a new remote for GitHub, use the `git remote add` command:
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-   ```sh
-   git remote add origin https://github.com/<username>/<repositoryname>.git
-   ```
-
-   Hints:
-
-   - Create a new empty GitHub repository first.
-   - Replace `<username>` and `<repositoryname>` with your username from GitHub and the name of your new repository.
-   - Please enter the URL `https://github.com/<username>/<repositoryname>.git` into your browser – you should see your existing repository on GitHub.
-   - Please double-check that you have the necessary rights to make changes to the given project!
-
-3. Add `angular-cli-ghpages` to your project.
-
-   ```sh
-   ng add angular-cli-ghpages
-   ```
-
-4. Deploy your project to GitHub pages with all default settings.
-   Your project will be automatically built in production mode.
-
-   ```sh
-   ng deploy --base-href=/<repositoryname>/
-   ```
-
-   Which is the same as:
-
-   ```sh
-   ng deploy your-angular-project --base-href=/<repositoryname>/
-   ```
-
-   Please be aware of the `--base-href` option. It is necessary when your project will be deployed to a non-root folder. See more details below.
-
-5. Your project should be available at `https://<username>.github.io/<repositoryname>`.  
-   Learn more about GitHub pages on the [official website](https://pages.github.com/).
-   
 <!-- CONTACT -->
 
 ## Contact
